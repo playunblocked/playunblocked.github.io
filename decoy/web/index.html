@@ -1,0 +1,492 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title id="page-title">Artificial intelligence - Wikipedia</title><link id="page-favicon" rel="icon" type="image/x-icon" href="https://en.wikipedia.org/static/favicon/wikipedia.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #ffffff;
+      color: #202124;
+    }
+
+    /* MAIN VIEWPORT (SINGLE UNIFIED SCROLLBAR FOR BOTH WEBSITE & GAME) */
+    .viewport {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #ffffff;
+      position: relative;
+    }
+
+    /* WEBSITE CONTENT WRAPPER (FULL HEIGHT, NO INNER SCROLLBAR) */
+    .web-content-section {
+      height: 2000px;
+      background: #ffffff;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .web-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+      display: block;
+      overflow: hidden;
+    }
+
+    /* FULL HEIGHT GAME SECTION WITH STICKY GUIDANCE & CONTROL BAR */
+    .web-game-container {
+      width: 100%;
+      min-height: 100vh;
+      background: #0b0f19;
+      display: flex;
+      flex-direction: column;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .web-game-container:fullscreen {
+      height: 100vh !important;
+      overflow-y: auto !important;
+    }
+
+    /* TOP GUIDANCE & CONTROL BAR ABOVE GAME IFRAME */
+    .web-game-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 44px;
+      background: #1e293b;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .game-bar-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #94a3b8;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .bar-url-input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f8fafc;
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-size: 12px;
+      width: 240px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .bar-url-input:focus {
+      border-color: #38bdf8;
+    }
+
+    /* WIDE CLICKABLE RETURN ZONE (STRETCHES UP TO GAME-CTRLS) */
+    .game-escape-zone {
+      flex: 1;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+      min-width: 0;
+    }
+
+    .game-escape-zone:hover {
+      background: rgba(15, 157, 88, 0.12);
+      border-color: #22c55e;
+      border-style: dashed;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.18);
+    }
+
+    .game-escape-zone:active {
+      transform: scale(0.997);
+    }
+
+    .zone-escape-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #94a3b8;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+
+    .game-escape-zone:hover .zone-escape-hint {
+      color: #86efac;
+    }
+
+    .game-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .game-action-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .game-action-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .web-game-iframe {
+      width: 100%;
+      min-height: 100vh;
+      height: 1400px;
+      border: none;
+      background: #0b0f19;
+      display: block;
+      overflow: hidden;
+    }
+
+    /* TOAST NOTIFICATION */
+    .web-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1f1f1f;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      opacity: 0;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
+    }
+
+    .web-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+
+
+<script>window.__isStaticSite=true;</script></head> <body> <!-- MAIN SCROLLABLE VIEWPORT (SINGLE UNIFIED SCROLLBAR) --> <main class="viewport" id="web-viewport"> <!-- SECTION 1: LIVE WEBSITE (FULL HEIGHT, NO INNER SCROLLBAR) --> <section class="web-content-section" id="web-section"> <iframe id="web-frame" class="web-frame" scrolling="no" src="/api/web-proxy?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FArtificial_intelligence"></iframe> </section> <!-- SECTION 2: FULL HEIGHT GAME SECTION (NO INNER SCROLLBAR, UNIFIED SCROLL) --> <section class="web-game-container" id="web-game-section"> <div class="web-game-bar"> <!-- WEBSITE URL CHANGER --> <div class="game-bar-hint"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"> <circle cx="12" cy="12" r="10"></circle> <line x1="2" y1="12" x2="22" y2="12"></line> <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path> </svg> <input type="url" id="bar-url-input" class="bar-url-input" placeholder="https://en.wikipedia.org/..." value="https://en.wikipedia.org/wiki/Artificial_intelligence"> <button type="button" class="game-action-btn" id="btn-bar-load-url" title="Change disguised website URL"> <span>Change URL</span> </button> </div> <!-- WIDE CLICKABLE RETURN ZONE (MATCHES PDF MODE) --> <div class="game-escape-zone" id="btn-escape-zone-web" title="Switching tabs auto-returns to Website • Or click here"> <span class="zone-escape-hint"> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="18 15 12 9 6 15"></polyline></svg> <span>Switching tabs auto-returns to Website • Or click here</span> </span> </div> <div class="game-ctrls"> <button type="button" class="game-action-btn" id="btn-reload-game" title="Reload Game"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg> <span>Reload</span> </button> <button type="button" class="game-action-btn" id="btn-fullscreen-game" title="Toggle Fullscreen"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg> <span>Fullscreen</span> </button> </div> </div> <iframe id="stealth-web-game-iframe" class="web-game-iframe" scrolling="no" src="/" allow="autoplay; fullscreen; gamepad; focus-without-user-activation *" allowfullscreen>
+      </iframe> </section> </main> <!-- TOAST FEEDBACK NOTIFICATION --> <div class="web-toast" id="web-toast"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> <span id="toast-message">Website updated.</span> </div> <script>
+    const viewport = document.getElementById('web-viewport');
+    const webSection = document.getElementById('web-section');
+    const webFrame = document.getElementById('web-frame');
+    const gameSection = document.getElementById('web-game-section');
+    const gameIframe = document.getElementById('stealth-web-game-iframe');
+    const btnEscapeZoneWeb = document.getElementById('btn-escape-zone-web');
+    const btnReloadGame = document.getElementById('btn-reload-game');
+    const btnFullscreenGame = document.getElementById('btn-fullscreen-game');
+    const barUrlInput = document.getElementById('bar-url-input');
+    const btnBarLoadUrl = document.getElementById('btn-bar-load-url');
+    const pageTitle = document.getElementById('page-title');
+    const pageFavicon = document.getElementById('page-favicon');
+    const toast = document.getElementById('web-toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    // Track whether we should stay locked to the game section during initial website height expansion
+    const urlParams = new URLSearchParams(window.location.search);
+    let stayLockedToGame = urlParams.get('launch') === 'game' || 
+                           urlParams.get('game') === '1' || 
+                           window.location.hash === '#game';
+
+    function showToast(msg) {
+      if (!toast || !toastMessage) return;
+      toastMessage.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+
+    // Emergency return to top function
+    function escapeToWebTop() {
+      stayLockedToGame = false;
+      viewport?.scrollTo({ top: 0, behavior: 'instant' });
+      try {
+        if (window.location.search || window.location.hash) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      } catch (err) {}
+    }
+
+    btnEscapeZoneWeb?.addEventListener('click', escapeToWebTop);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        escapeToWebTop();
+      }
+    });
+
+    // Listen to unified scroll & meta messages from proxied website iframe
+    window.addEventListener('message', (e) => {
+      const data = e.data;
+      if (!data || typeof data !== 'object') return;
+
+      if (data.type === 'tapwap-web-wheel') {
+        stayLockedToGame = false;
+        if (viewport) {
+          viewport.scrollTop += data.deltaY || 0;
+        }
+      } else if (data.type === 'tapwap-web-meta') {
+        if (data.height && webSection) {
+          const oldGameTop = gameSection ? gameSection.offsetTop : 0;
+          const wasInGameArea = stayLockedToGame || (viewport && viewport.scrollTop >= oldGameTop - 80);
+          const offsetInsideGame = viewport ? Math.max(0, viewport.scrollTop - oldGameTop) : 0;
+
+          webSection.style.height = `${data.height}px`;
+
+          if (wasInGameArea && gameSection && viewport) {
+            viewport.scrollTop = gameSection.offsetTop + offsetInsideGame;
+          }
+        }
+        if (data.title) {
+          document.title = data.title;
+          if (pageTitle) pageTitle.textContent = data.title;
+          try {
+            if (window.top && window.top !== window) {
+              window.top.document.title = data.title;
+            }
+          } catch (err) {}
+        }
+      } else if (data.type === 'tapwap-web-navigate' && data.url) {
+        loadWebsite(data.url);
+      }
+    });
+
+    // Make Game Iframe 100% full-height & forward wheel events so user NEVER has to click to scroll
+    let gameResizeObserver = null;
+    function setupUnifiedGameIframe() {
+      try {
+        const gameWin = gameIframe?.contentWindow;
+        const gameDoc = gameIframe?.contentDocument || gameWin?.document;
+        if (!gameWin || !gameDoc) return;
+
+        // 1. Inject style to disable inner scrollbar inside game iframe
+        if (!gameDoc.getElementById('tapwap-unified-game-scroll-style') && gameDoc.head) {
+          const styleEl = gameDoc.createElement('style');
+          styleEl.id = 'tapwap-unified-game-scroll-style';
+          styleEl.textContent = `
+            html, body {
+              overflow-x: hidden !important;
+              overflow-y: hidden !important;
+              height: auto !important;
+            }
+            ::-webkit-scrollbar {
+              display: none !important;
+              width: 0 !important;
+              height: 0 !important;
+            }
+          `;
+          gameDoc.head.appendChild(styleEl);
+        }
+
+        // 2. Sync gameIframe height with its full content scrollHeight
+        const updateGameHeight = () => {
+          try {
+            const docEl = gameDoc.documentElement;
+            const bodyEl = gameDoc.body;
+            const h = Math.max(
+              bodyEl ? bodyEl.scrollHeight : 0,
+              docEl ? docEl.scrollHeight : 0,
+              window.innerHeight
+            );
+            if (gameIframe) {
+              gameIframe.style.height = `${h}px`;
+            }
+          } catch (err) {}
+        };
+
+        updateGameHeight();
+        setTimeout(updateGameHeight, 250);
+        setTimeout(updateGameHeight, 800);
+
+        if (typeof ResizeObserver !== 'undefined') {
+          if (gameResizeObserver) {
+            try { gameResizeObserver.disconnect(); } catch (_) {}
+          }
+          gameResizeObserver = new ResizeObserver(updateGameHeight);
+          if (gameDoc.documentElement) gameResizeObserver.observe(gameDoc.documentElement);
+          if (gameDoc.body) gameResizeObserver.observe(gameDoc.body);
+        }
+
+        // 3. Forward wheel events directly to parent viewport without needing click/focus
+        if (!gameWin.__tapwapWheelBound) {
+          gameWin.__tapwapWheelBound = true;
+          gameWin.addEventListener('wheel', (e) => {
+            stayLockedToGame = false;
+            e.preventDefault();
+            if (document.fullscreenElement === gameSection) {
+              gameSection.scrollTop += e.deltaY;
+            } else if (viewport) {
+              viewport.scrollTop += e.deltaY;
+            }
+          }, { passive: false });
+
+          // Re-apply when navigating inside game iframe via Astro ClientRouter
+          gameDoc.addEventListener('astro:page-load', () => {
+            setupUnifiedGameIframe();
+            if (viewport && gameSection && viewport.scrollTop > gameSection.offsetTop) {
+              viewport.scrollTop = gameSection.offsetTop;
+            }
+          });
+        }
+      } catch (err) {}
+    }
+
+    gameIframe?.addEventListener('load', setupUnifiedGameIframe);
+    if (gameIframe?.contentDocument?.readyState === 'complete' || gameIframe?.contentDocument?.readyState === 'interactive') {
+      setupUnifiedGameIframe();
+    }
+
+    // Navigate to URL via same-origin proxy (eliminates nested scrollbar & X-Frame-Options)
+    function loadWebsite(url, customTitle, customIcon) {
+      if (!url) return;
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+      }
+      if (barUrlInput) barUrlInput.value = url;
+      localStorage.setItem('tapwap_stealth_web_url', url);
+
+      let domain = '';
+      try {
+        domain = new URL(url).hostname;
+      } catch (_) {}
+
+      const title = customTitle || (domain ? `${domain.replace('www.', '')} - Research` : 'Web Documentation');
+      document.title = title;
+      if (pageTitle) pageTitle.textContent = title;
+
+      try {
+        if (window.top && window.top !== window) {
+          window.top.document.title = title;
+        }
+      } catch (err) {}
+
+      const faviconUrl = customIcon || `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+      if (pageFavicon) pageFavicon.href = faviconUrl;
+
+      const proxyUrl = '/api/web-proxy?url=' + encodeURIComponent(url);
+      if (webFrame && webFrame.getAttribute('src') !== proxyUrl) {
+        webFrame.src = proxyUrl;
+      }
+    }
+
+    btnBarLoadUrl?.addEventListener('click', () => {
+      const val = barUrlInput?.value.trim();
+      if (val) {
+        loadWebsite(val);
+        showToast(`Disguise website updated to ${val}`);
+      }
+    });
+
+    barUrlInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = barUrlInput.value.trim();
+        if (val) {
+          loadWebsite(val);
+          showToast(`Disguise website updated to ${val}`);
+        }
+      }
+    });
+
+    // Jump to game section
+    function jumpToGame() {
+      if (gameSection && viewport) {
+        viewport.scrollTop = gameSection.offsetTop;
+      }
+    }
+
+    const customUrl = urlParams.get('url');
+    const customGame = urlParams.get('game');
+    if (customGame && customGame !== '1' && gameIframe) {
+      gameIframe.src = customGame;
+    }
+
+    // Load initial URL
+    if (customUrl) {
+      loadWebsite(customUrl);
+    } else {
+      const savedUrl = localStorage.getItem('tapwap_stealth_web_url');
+      if (savedUrl) {
+        loadWebsite(savedUrl);
+      }
+    }
+
+    if (stayLockedToGame) {
+      jumpToGame();
+      requestAnimationFrame(jumpToGame);
+      setTimeout(jumpToGame, 50);
+      window.addEventListener('load', jumpToGame);
+    }
+
+    btnReloadGame?.addEventListener('click', () => {
+      if (gameIframe) {
+        const cur = gameIframe.src;
+        gameIframe.src = 'about:blank';
+        setTimeout(() => {
+          gameIframe.src = cur;
+        }, 80);
+        showToast('Game workspace reloaded.');
+      }
+    });
+
+    btnFullscreenGame?.addEventListener('click', () => {
+      if (!gameSection) return;
+      if (!document.fullscreenElement) {
+        gameSection.requestFullscreen?.().catch(() => {});
+      } else {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    });
+  </script> </body> </html>
