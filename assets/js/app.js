@@ -1070,7 +1070,6 @@ async function loadGameHistoryFromDB() {
 
 var isCheckingAuth = false;
 async function checkAuthStatus(force = false) {
-    // Only fetch /api/auth/me and /api/user/game-history ONCE per session (not on every page click)
     if (window.__tapwapAuthChecked && !force) {
         if (window.currentUser) {
             updateUIForLoggedInUser(window.currentUser);
@@ -1080,20 +1079,69 @@ async function checkAuthStatus(force = false) {
     }
     if (isCheckingAuth) return;
     isCheckingAuth = true;
+
+    // Detect if running on static host (GitHub Pages, etc.)
+    const isStaticHost = window.location.hostname.includes('github.io') || 
+                         window.location.protocol === 'file:' ||
+                         window.__isStaticSite === true;
+
     try {
-        const response = await fetch('/api/auth/me');
-        const data = await response.json();
+        let authenticated = false;
+        let user = null;
+
+        if (isStaticHost) {
+            // Default logged in for static non-database site!
+            user = JSON.parse(localStorage.getItem('currentUser') || 'null') || {
+                id: 1,
+                name: 'Player',
+                email: 'player@tapwap.com',
+                role: 'player',
+                provider: 'local'
+            };
+            authenticated = true;
+        } else {
+            try {
+                const response = await fetch('/api/auth/me');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && data.authenticated && data.user) {
+                        authenticated = true;
+                        user = data.user;
+                    }
+                } else {
+                    // API not found -> static host fallback
+                    user = JSON.parse(localStorage.getItem('currentUser') || 'null') || {
+                        id: 1,
+                        name: 'Player',
+                        email: 'player@tapwap.com',
+                        role: 'player',
+                        provider: 'local'
+                    };
+                    authenticated = true;
+                }
+            } catch (_) {
+                user = JSON.parse(localStorage.getItem('currentUser') || 'null') || {
+                    id: 1,
+                    name: 'Player',
+                    email: 'player@tapwap.com',
+                    role: 'player',
+                    provider: 'local'
+                };
+                authenticated = true;
+            }
+        }
+
         window.__tapwapAuthChecked = true;
         
-        if (data.authenticated && data.user) {
-            // User is logged in
-            console.log('✅ User logged in:', data.user);
-            updateUIForLoggedInUser(data.user);
+        if (authenticated && user) {
+            console.log('✅ User logged in:', user);
+            updateUIForLoggedInUser(user);
             
-            // Sync game history with database once on initial session load
-            await syncGameHistory();
+            // Sync game history with database only if backend API is available
+            if (!isStaticHost) {
+                await syncGameHistory().catch(() => {});
+            }
             
-            // Update account panel data immediately
             populateAccountPanel();
         } else {
             window.currentUser = null;
@@ -1111,7 +1159,13 @@ function updateUIForLoggedInUser(user) {
     const loginBtns = document.querySelectorAll('#btn-mobile-login, #btn-login, #btn-login-lg');
     loginBtns.forEach(btn => {
         btn.setAttribute('data-logged-in', 'true');
-        btn.setAttribute('title', user.name);
+        btn.setAttribute('title', user.name || 'Your Account');
+        
+        // Toggle mobile icon: hide guest, show avatar
+        const guestIcon = btn.querySelector('.login-icon-guest');
+        const userIcon = btn.querySelector('.login-icon-user');
+        if (guestIcon) guestIcon.style.display = 'none';
+        if (userIcon) userIcon.style.display = 'block';
     });
     
     // Store user data globally for account panel
@@ -1174,8 +1228,12 @@ function populateAccountPanel() {
     // Update subtitle with provider
     const subtitle = document.getElementById('account-subtitle');
     if (subtitle) {
-        const providerName = user.provider === 'google' ? 'Google' : (user.provider === 'microsoft' ? 'Microsoft' : 'Apple');
-        subtitle.textContent = `You are logged in with ${providerName}${user.role === 'administrator' ? ' (Admin)' : ''}`;
+        if (user.provider === 'local' || user.provider === 'guest' || !user.provider) {
+            subtitle.textContent = `Welcome back, ${user.name || 'Player'}!`;
+        } else {
+            const providerName = user.provider === 'google' ? 'Google' : (user.provider === 'microsoft' ? 'Microsoft' : 'Apple');
+            subtitle.textContent = `You are logged in with ${providerName}${user.role === 'administrator' ? ' (Admin)' : ''}`;
+        }
     }
     
     // Add admin link if user is administrator
