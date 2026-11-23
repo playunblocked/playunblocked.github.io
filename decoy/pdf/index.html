@@ -1,0 +1,1562 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zero_to_One_Notes.pdf - Chrome PDF Viewer</title><link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_pdf_x16.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"><!-- PDF.js from Cloudflare CDN for 100% Client-Side In-Memory PDF Rendering --><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><style>*, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --pdf-bg: #323639;              /* Native Chrome PDF dark viewport background */
+      --pdf-topbar-bg: #1f1f1f;        /* Native Chrome PDF top toolbar */
+      --pdf-sidebar-bg: #282828;       /* Native Chrome PDF thumbnail sidebar */
+      --pdf-border-dark: #141414;
+      --pdf-text-light: #f1f3f4;
+      --pdf-text-muted: #9aa0a6;
+      --pdf-blue: #8ab4f8;             /* Chrome active blue */
+      --pdf-divider: rgba(255, 255, 255, 0.16);
+      --zoom-factor: 1;                /* Global zoom multiplier */
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background-color: var(--pdf-bg);
+      color: var(--pdf-text-light);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TOP TOOLBAR (EXACT MATCH FOR CHROME PDF VIEWER) */
+    .pdf-top-bar {
+      position: relative;
+      height: 48px;
+      background-color: var(--pdf-topbar-bg);
+      border-bottom: 1px solid var(--pdf-border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    /* LEFT: NATURAL FLOW (NO FLEX:1 STRETCHING) */
+    .pdf-top-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      z-index: 2;
+    }
+
+    .toolbar-icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--pdf-text-light);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .toolbar-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .toolbar-icon-btn:active {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    .toolbar-icon-btn.active {
+      color: var(--pdf-blue);
+    }
+
+    .pdf-title-container {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .pdf-title-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--pdf-text-light);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 240px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      outline: none;
+      cursor: pointer;
+    }
+    .pdf-title-text:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .pdf-title-text:focus {
+      background: #141414;
+      border-color: var(--pdf-blue);
+      cursor: text;
+    }
+
+    /* CENTER CONTROLS: EXACT ABSOLUTE 50% CENTER */
+    .pdf-top-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 1;
+    }
+
+    .page-nav-box {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      color: var(--pdf-text-muted);
+    }
+
+    .page-input {
+      width: 40px;
+      height: 25px;
+      background: #2a2a2a;
+      border: 1px solid #4a4a4a;
+      border-radius: 3px;
+      color: #ffffff;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .page-input:focus {
+      border-color: var(--pdf-blue);
+      background: #1a1a1a;
+    }
+    .page-input::-webkit-outer-spin-button,
+    .page-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .page-total {
+      color: var(--pdf-text-muted);
+      font-size: 13px;
+      margin-right: 4px;
+    }
+
+    .toolbar-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--pdf-divider);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .zoom-group {
+      display: flex;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .zoom-text {
+      font-size: 13px;
+      min-width: 48px;
+      text-align: center;
+      color: var(--pdf-text-light);
+      cursor: pointer;
+      padding: 3px 4px;
+      border-radius: 4px;
+      user-select: none;
+    }
+    .zoom-text:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* RIGHT ACTIONS */
+    .pdf-top-right {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      z-index: 2;
+    }
+
+    /* MAIN CONTAINER: SIDEBAR + VIEWPORT */
+    .pdf-main-layout {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+      position: relative;
+    }
+
+    /* LEFT THUMBNAIL SIDEBAR */
+    .pdf-sidebar {
+      width: 190px;
+      background: var(--pdf-sidebar-bg);
+      border-right: 1px solid var(--pdf-border-dark);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: width 0.18s ease;
+      z-index: 50;
+      overflow: hidden;
+      position: relative;
+    }
+    .pdf-sidebar.collapsed {
+      width: 0;
+      border-right: none;
+    }
+
+    /* SIDEBAR TAB HEADER */
+    .sidebar-header-tabs {
+      height: 44px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--pdf-text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+    }
+    .sidebar-tab-btn:hover {
+      color: var(--pdf-text-light);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .sidebar-tab-btn.active {
+      color: var(--pdf-blue);
+      background: rgba(138, 180, 248, 0.15);
+    }
+
+    .sidebar-thumbnails-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 10px 40px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+    .sidebar-thumbnails-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .sidebar-thumbnails-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .sidebar-thumbnails-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    .thumbnail-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      width: 120px;
+    }
+
+    .thumbnail-card {
+      width: 110px;
+      height: 145px;
+      background: #ffffff;
+      border-radius: 2px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      border: 2px solid transparent;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .thumbnail-item:hover .thumbnail-card {
+      border-color: rgba(138, 180, 248, 0.6);
+      transform: translateY(-1px);
+    }
+    .thumbnail-item.active .thumbnail-card {
+      border-color: var(--pdf-blue);
+      box-shadow: 0 0 0 1px var(--pdf-blue), 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .thumbnail-preview-sim {
+      width: 100%;
+      height: 100%;
+      padding: 7px 6px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      user-select: none;
+      pointer-events: none;
+      overflow: hidden;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      font-size: 4px;
+      line-height: 1.25;
+      color: #334155;
+      box-sizing: border-box;
+    }
+
+    .mini-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 0.5px solid #e2e8f0;
+      padding-bottom: 2px;
+      margin-bottom: 3px;
+      font-size: 3.8px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      font-weight: 500;
+    }
+
+    .mini-tag {
+      font-size: 3.5px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.5px;
+    }
+
+    .mini-title {
+      font-size: 6px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.15;
+      margin-bottom: 2px;
+      font-family: 'Merriweather', Georgia, serif;
+    }
+
+    .mini-subtitle {
+      font-size: 4px;
+      color: #475569;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .mini-author {
+      font-size: 3.8px;
+      color: #64748b;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .mini-p {
+      font-size: 3.8px;
+      line-height: 1.25;
+      color: #475569;
+      margin-bottom: 3px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .mini-quote-box {
+      border-left: 1.5px solid #0f172a;
+      padding: 2px 4px;
+      background: #f8fafc;
+      font-size: 3.6px;
+      font-style: italic;
+      color: #334155;
+      margin: 3px 0;
+      line-height: 1.2;
+    }
+
+    .mini-callout {
+      background: #f1f5f9;
+      border-left: 1.5px solid #64748b;
+      padding: 2px 3px;
+      font-size: 3.5px;
+      margin: 2px 0;
+      line-height: 1.2;
+    }
+
+    .mini-section-label {
+      font-size: 3.4px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-top: 3px;
+      margin-bottom: 1px;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 3.3px;
+      margin: 2px 0;
+    }
+    .mini-table th, .mini-table td {
+      border: 0.5px solid #cbd5e1;
+      padding: 1px 2px;
+      text-align: left;
+    }
+    .mini-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .mini-chart-box {
+      margin-top: 3px;
+      padding: 3px;
+      background: #f8fafc;
+      border: 0.5px solid #e2e8f0;
+      border-radius: 2px;
+    }
+    .mini-chart-title {
+      font-size: 3.5px;
+      font-weight: 700;
+      color: #334155;
+      text-align: center;
+      margin-bottom: 3px;
+    }
+    .mini-chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 38px;
+      border-left: 1px solid #94a3b8;
+      border-bottom: 1px solid #94a3b8;
+      padding: 0 4px 1px 4px;
+      gap: 6px;
+    }
+    .mini-bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      height: 100%;
+      justify-content: flex-end;
+      gap: 1px;
+    }
+    .mini-bar-fill {
+      width: 14px;
+      background: #64748b;
+      border-radius: 1px 1px 0 0;
+    }
+    .mini-bar-fill.accent {
+      background: #2563eb;
+    }
+    .mini-bar-label {
+      font-size: 3px;
+      color: #475569;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .mini-step-seq {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: 3px 0;
+    }
+    .mini-step-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 3.4px;
+      color: #334155;
+    }
+    .mini-step-num {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .mini-milestone-bar {
+      margin-top: 3px;
+      padding: 2px;
+      background: #dbeafe;
+      border-left: 1.5px solid #2563eb;
+      font-size: 3.2px;
+      font-weight: 600;
+      color: #1e40af;
+    }
+
+    .mini-matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.5px;
+      margin: 3px 0;
+      height: 48px;
+    }
+    .mini-quadrant {
+      background: #f8fafc;
+      border: 0.5px solid #cbd5e1;
+      padding: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 1px;
+    }
+    .mini-quadrant.active-quad {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+    }
+    .quad-title {
+      font-weight: 700;
+      font-size: 3.4px;
+      color: #0f172a;
+    }
+    .quad-sub {
+      font-size: 3px;
+      color: #64748b;
+    }
+
+    .mini-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      margin: 2px 0;
+      font-size: 3.4px;
+      color: #1e293b;
+    }
+    .mini-checklist div {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .mini-checklist span {
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .mini-bullet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      font-size: 3.3px;
+      color: #475569;
+      margin-top: 2px;
+    }
+
+    .mini-footer {
+      display: flex;
+      justify-content: space-between;
+      border-top: 0.5px solid #e2e8f0;
+      padding-top: 2px;
+      margin-top: auto;
+      font-size: 3.5px;
+      color: #94a3b8;
+    }
+
+    .thumbnail-number {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--pdf-text-muted);
+      transition: color 0.15s;
+    }
+    .thumbnail-item.active .thumbnail-number {
+      color: var(--pdf-blue);
+      font-weight: 700;
+    }
+
+    /* SPLITTER PILL HANDLE ON SIDEBAR BORDER */
+    .sidebar-splitter-pill {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) translateX(50%);
+      width: 5px;
+      height: 34px;
+      background: #6e7377;
+      border-radius: 3px;
+      z-index: 60;
+      pointer-events: none;
+    }
+
+    /* CENTER SCROLLABLE VIEWPORT */
+    .pdf-viewport {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 0 0 0;
+      position: relative;
+      scroll-behavior: smooth;
+      background-color: var(--pdf-bg);
+    }
+    .pdf-viewport::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+    .pdf-viewport::-webkit-scrollbar-track {
+      background: #2b2e30;
+    }
+    .pdf-viewport::-webkit-scrollbar-thumb {
+      background: #5a5f63;
+      border: 2px solid #2b2e30;
+      border-radius: 6px;
+    }
+    .pdf-viewport::-webkit-scrollbar-thumb:hover {
+      background: #73797e;
+    }
+
+    /* ZERO-OVERLAP ARCHITECTURE: SLOTS EXTEND IN NORMAL DOCUMENT FLOW */
+    #default-doc-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .pdf-page-slot {
+      width: calc(820px * var(--zoom-factor, 1));
+      height: calc(1080px * var(--zoom-factor, 1));
+      margin: 0 auto 24px auto;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pdf-page {
+      width: 820px;
+      height: 1080px;
+      background: #ffffff;
+      color: #1a1a1a;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(0, 0, 0, 0.25);
+      padding: 68px 76px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+      transform: scale(var(--zoom-factor, 1));
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 15px;
+      line-height: 1.82;
+      user-select: text;
+      overflow: hidden;
+    }
+
+    .pdf-page-header {
+      font-family: 'Roboto', sans-serif;
+      font-size: 11px;
+      color: #888888;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pdf-page-footer {
+      position: absolute;
+      bottom: 32px;
+      left: 76px;
+      right: 76px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 11px;
+      color: #888888;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #eaeaea;
+      padding-top: 10px;
+    }
+
+    .pdf-chapter-tag {
+      font-family: 'Roboto', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .pdf-title-h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 18px;
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+    }
+
+    .pdf-subheading {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 22px;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .pdf-p {
+      margin-bottom: 16px;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .pdf-quote-box {
+      border-left: 3px solid #0f172a;
+      padding: 10px 18px;
+      margin: 18px 0;
+      background: #f8fafc;
+      font-style: italic;
+      color: #334155;
+    }
+
+    .pdf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+    }
+    .pdf-table th, .pdf-table td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .pdf-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .pdf-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .pdf-chart-container {
+      margin: 22px 0;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-family: 'Roboto', sans-serif;
+    }
+    .pdf-chart-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .pdf-chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 130px;
+      border-bottom: 2px solid #94a3b8;
+      border-left: 2px solid #94a3b8;
+      padding: 0 10px;
+      gap: 12px;
+    }
+    .pdf-bar-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      flex: 1;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .pdf-bar {
+      width: 100%;
+      max-width: 42px;
+      background: #475569;
+      border-radius: 2px 2px 0 0;
+    }
+    .pdf-bar.accent {
+      background: #2563eb;
+    }
+    .pdf-bar-val {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .pdf-bar-label {
+      font-size: 11px;
+      color: #475569;
+      margin-top: 5px;
+    }
+
+    /* DYNAMIC CONTAINER FOR UPLOADED LOCAL PDFS (HI-DPI CANVAS) */
+    #dynamic-pdf-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding-bottom: 20px;
+    }
+
+    .canvas-page-wrapper {
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(0, 0, 0, 0.25);
+      background: #ffffff;
+      margin-bottom: 24px !important;  /* Never stick pages together! */
+      display: block;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .canvas-page-wrapper canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* FULL VIEWPORT GAME SECTION WITH GUIDANCE & CONTROL BAR */
+    .pdf-game-container {
+      width: 100%;
+      height: 100vh;
+      min-height: 100vh;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      flex-shrink: 0;
+      margin-top: 10px;
+    }
+
+    /* TOP GUIDANCE & CONTROL BAR ABOVE GAME IFRAME */
+    .pdf-game-bar {
+      height: 44px;
+      background: #1e293b;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .game-bar-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #94a3b8;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* WIDE CLICKABLE RETURN ZONE (STRETCHES UP TO GAME-CTRLS) */
+    .game-escape-zone {
+      flex: 1;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+      min-width: 0;
+    }
+    .game-escape-zone:hover {
+      background: rgba(15, 157, 88, 0.12);
+      border-color: #22c55e;
+      border-style: dashed;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.18);
+    }
+    .game-escape-zone:active {
+      transform: scale(0.997);
+    }
+
+    .zone-escape-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #94a3b8;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+    .game-escape-zone:hover .zone-escape-hint {
+      color: #86efac;
+    }
+
+    .game-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .game-action-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .game-action-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .pdf-game-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #0b0f19;
+      display: block;
+      flex: 1;
+    }
+
+    /* TOAST NOTIFICATION */
+    .pdf-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1f1f1f;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      z-index: 10000;
+      opacity: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .pdf-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 900px) {
+      .pdf-sidebar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.5);
+      }
+      .pdf-page-slot {
+        width: 100%;
+      }
+      .pdf-top-center {
+        display: none;
+      }
+    }</style>
+
+
+
+<script type="module" src="/src/pages/decoy/pdf.astro?astro&type=style&index=0&lang.css"></script></head> <body> <!-- HIDDEN CLIENT-SIDE FILE INPUT (NO SERVER UPLOAD) --> <input type="file" id="pdf-file-picker" accept="application/pdf, .pdf" style="display:none;"> <!-- TOP TOOLBAR (EXACT NATIVE CHROME PDF VIEWER) --> <header class="pdf-top-bar" role="toolbar" aria-label="PDF Viewer Controls"> <!-- LEFT: COMPACT HAMBURGER + TITLE --> <div class="pdf-top-left"> <button type="button" class="toolbar-icon-btn active" id="btn-toggle-sidebar" title="Toggle thumbnail drawer"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> <div class="pdf-title-container"> <span class="pdf-title-text" id="pdf-doc-title" contenteditable="true" spellcheck="false" title="Click to rename document">Zero_to_One_Notes.pdf</span> </div> </div> <!-- CENTER: DEAD-CENTER POSITIONING (PAGE, ZOOM, TOOLS) --> <div class="pdf-top-center"> <!-- PAGE COUNTER: [ 1 ] / 10 --> <div class="page-nav-box"> <input type="number" id="current-page-input" class="page-input" value="1" min="1" max="10" aria-label="Page number"> <span class="page-total">/ <span id="total-pages-count">10</span></span> </div> <div class="toolbar-divider"></div> <!-- ZOOM CONTROLS: - 100% + --> <div class="zoom-group"> <button type="button" class="toolbar-icon-btn" id="btn-zoom-out" title="Zoom out"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"> <line x1="5" y1="12" x2="19" y2="12"></line> </svg> </button> <span class="zoom-text" id="zoom-level-text" title="Reset zoom">100%</span> <button type="button" class="toolbar-icon-btn" id="btn-zoom-in" title="Zoom in"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"> <line x1="12" y1="5" x2="12" y2="19"></line> <line x1="5" y1="12" x2="19" y2="12"></line> </svg> </button> </div> <div class="toolbar-divider"></div> <!-- FIT TOOLS --> <button type="button" class="toolbar-icon-btn" id="btn-fit-width" title="Fit to width"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="5" width="20" height="14" rx="2"></rect> <polyline points="7 12 4 12 4 9"></polyline> <polyline points="17 12 20 12 20 15"></polyline> </svg> </button> <!-- ROTATE TOOL --> <button type="button" class="toolbar-icon-btn" id="btn-rotate" title="Rotate clockwise"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path> </svg> </button> <div class="toolbar-divider"></div> <!-- TEXT TOOL (Tt) --> <button type="button" class="toolbar-icon-btn active" id="btn-select-tool" title="Text selection (Tt)"> <span style="font-size:14px; font-weight:700; font-family:sans-serif; letter-spacing:-0.5px;">Tt</span> </button> <!-- ANNOTATION / DRAW PEN TOOL --> <button type="button" class="toolbar-icon-btn" id="btn-pen-tool" title="Draw annotation"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 19l7-7 3 3-7 7-3-3z"></path> <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path> <path d="M2 2l7.586 7.586"></path> <circle cx="11" cy="11" r="2"></circle> </svg> </button> <!-- UNDO / REDO --> <button type="button" class="toolbar-icon-btn" id="btn-undo" title="Undo"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline points="9 14 4 9 9 4"></polyline> <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path> </svg> </button> <button type="button" class="toolbar-icon-btn" id="btn-redo" title="Redo"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline points="15 14 20 9 15 4"></polyline> <path d="M4 20v-7a4 4 0 0 1 4-4h12"></path> </svg> </button> </div> <!-- RIGHT: OPEN FILE, PRINT, DOWNLOAD, MORE --> <div class="pdf-top-right"> <!-- CLIENT-SIDE LOCAL PDF UPLOAD BUTTON --> <button type="button" class="toolbar-icon-btn" id="btn-open-pdf" title="Open local PDF file (Client-side memory only, zero server uploads)"> <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path> <polyline points="12 11 12 17"></polyline> <polyline points="9 14 12 11 15 14"></polyline> </svg> </button> <button type="button" class="toolbar-icon-btn" id="btn-print-pdf" title="Print document (Ctrl+P)"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 6 2 18 2 18 9"></polyline> <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path> <rect x="6" y="14" width="12" height="8"></rect> </svg> </button> <button type="button" class="toolbar-icon-btn" id="btn-download-pdf" title="Download PDF"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path> <polyline points="7 10 12 15 17 10"></polyline> <line x1="12" y1="15" x2="12" y2="3"></line> </svg> </button> <!-- MORE OPTIONS (THREE VERTICAL DOTS) --> <button type="button" class="toolbar-icon-btn" id="btn-more-options" title="More actions"> <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"> <circle cx="12" cy="5" r="2"></circle> <circle cx="12" cy="12" r="2"></circle> <circle cx="12" cy="19" r="2"></circle> </svg> </button> </div> </header> <!-- MAIN LAYOUT: SIDEBAR + SCROLLABLE PDF CONTENT --> <div class="pdf-main-layout"> <!-- LEFT THUMBNAIL DRAWER (10 DISTINCT CORRESPONDING PAGES) --> <aside class="pdf-sidebar" id="pdf-sidebar"> <div class="sidebar-header-tabs"> <button type="button" class="sidebar-tab-btn active" title="Page Thumbnails"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="3" y="3" width="7" height="7"></rect> <rect x="14" y="3" width="7" height="7"></rect> <rect x="14" y="14" width="7" height="7"></rect> <rect x="3" y="14" width="7" height="7"></rect> </svg> </button> <button type="button" class="sidebar-tab-btn" title="Document Outline / Bookmarks"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="8" y1="6" x2="21" y2="6"></line> <line x1="8" y1="12" x2="21" y2="12"></line> <line x1="8" y1="18" x2="21" y2="18"></line> <line x1="3" y1="6" x2="3.01" y2="6"></line> <line x1="3" y1="12" x2="3.01" y2="12"></line> <line x1="3" y1="18" x2="3.01" y2="18"></line> </svg> </button> </div> <div class="sidebar-thumbnails-list" id="thumbnail-list"> <!-- THUMBNAIL 1 (PAGE 1: TITLE & EXECUTIVE ABSTRACT) --> <div class="thumbnail-item active" data-page="1"> <div class="thumbnail-card" style="border-color: #8ab4f8;"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>ZERO TO ONE</span> <span>STANFORD</span> </div> <div class="mini-tag">EXECUTIVE SUMMARY</div> <div class="mini-title" style="font-size: 6.5px;">ZERO TO ONE</div> <div class="mini-subtitle">Notes on Startups, or How to Build the Future</div> <div class="mini-author">Peter Thiel with Blake Masters</div> <div class="mini-p" style="margin-top: 2px;">
+Every moment in business happens only once. The next Bill Gates will not build an operating system.
+</div> <div class="mini-quote-box">
+"Unless they invest in creating new things, corporate enterprises will fail..."
+</div> <div class="mini-p">
+This executive briefing outlines the core economic theorems: 0 to 1, creative monopoly...
+</div> <div class="mini-footer"> <span>Page 1 of 10</span> <span>Peter Thiel</span> </div> </div> </div> <span class="thumbnail-number" style="color: #8ab4f8; font-weight:700;">1</span> </div> <!-- THUMBNAIL 2 (PAGE 2: CHAPTER 1 - PROGRESS MATRIX) --> <div class="thumbnail-item" data-page="2"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 1: PROGRESS</span> <span>ZERO TO ONE</span> </div> <div class="mini-tag">MACROECONOMIC HORIZONS</div> <div class="mini-title">The Challenge of the Future</div> <div class="mini-callout"> <strong>Contrarian:</strong> "What truth do few people agree with you on?"
+</div> <div class="mini-section-label">PROGRESS MATRIX: 1 TO N VS 0 TO 1</div> <table class="mini-table"> <thead> <tr> <th>Dimension</th> <th>1 to N</th> <th>0 to 1</th> </tr> </thead> <tbody> <tr> <td>Vector</td> <td>Globalization</td> <td>Technology</td> </tr> <tr> <td>Mechanism</td> <td>Replication</td> <td>Invention</td> </tr> <tr> <td>Limit</td> <td>Scarcity</td> <td>Abundance</td> </tr> </tbody> </table> <div class="mini-footer"> <span>Page 2 of 10</span> <span>Chapter 1</span> </div> </div> </div> <span class="thumbnail-number">2</span> </div> <!-- THUMBNAIL 3 (PAGE 3: CHAPTER 2 - PARTY LIKE IT'S 1999 & FOUR DOGMAS) --> <div class="thumbnail-item" data-page="3"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 2: 1999</span> <span>DOT-COM CRASH</span> </div> <div class="mini-tag">SILICON VALLEY HISTORY</div> <div class="mini-title">Party Like It's 1999</div> <div class="mini-p">
+The March 2000 crash taught entrepreneurs four mistaken dogmas that still govern today:
+</div> <table class="mini-table" style="margin-top: 2px;"> <thead> <tr> <th>90s Dogma</th> <th>Contrarian Truth</th> </tr> </thead> <tbody> <tr> <td>1. Incremental advances</td> <td>Risk boldness over triviality</td> </tr> <tr> <td>2. Stay lean & flexible</td> <td>Bad plan better than no plan</td> </tr> <tr> <td>3. Improve on competition</td> <td>Competition destroys profit</td> </tr> <tr> <td>4. Focus on product only</td> <td>Sales matters as much as product</td> </tr> </tbody> </table> <div class="mini-footer"> <span>Page 3 of 10</span> <span>Chapter 2</span> </div> </div> </div> <span class="thumbnail-number">3</span> </div> <!-- THUMBNAIL 4 (PAGE 4: CHAPTER 3 - ALL HAPPY COMPANIES ARE DIFFERENT) --> <div class="thumbnail-item" data-page="4"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 3: MONOPOLY</span> <span>ZERO TO ONE</span> </div> <div class="mini-tag">COMPETITIVE DYNAMICS</div> <div class="mini-title">All Happy Companies Are Different</div> <div class="mini-quote-box">
+"All happy families are alike; each unhappy family is unhappy in its own way. Business is opposite..."
+</div> <div class="mini-section-label">AIRLINES VS. GOOGLE (2012)</div> <table class="mini-table"> <thead> <tr> <th>Metric</th> <th>US Airlines</th> <th>Google Inc.</th> </tr> </thead> <tbody> <tr> <td>Revenue</td> <td>$160 Billion</td> <td>$50 Billion</td> </tr> <tr> <td>Profit Margin</td> <td>0.2%</td> <td>21.0%</td> </tr> <tr> <td>Structure</td> <td>Perfect Comp.</td> <td>Monopoly</td> </tr> </tbody> </table> <div class="mini-footer"> <span>Page 4 of 10</span> <span>Chapter 3</span> </div> </div> </div> <span class="thumbnail-number">4</span> </div> <!-- THUMBNAIL 5 (PAGE 5: CHAPTER 4 - THE IDEOLOGY OF COMPETITION) --> <div class="thumbnail-item" data-page="5"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 4: COMPETITION</span> <span>CASE STUDY</span> </div> <div class="mini-tag">CONFLICT & VALUE DESTRUCTION</div> <div class="mini-title">The Ideology of Competition</div> <div class="mini-p">
+Marx vs. Shakespeare on conflict: Rivalries blind founders to profit.
+</div> <div style="margin: 3px 0; padding: 3px; background: #f8fafc; border: 0.5px solid #cbd5e1; border-radius: 1px;"> <div style="font-weight: 700; color: #1e293b; margin-bottom: 1.5px; font-size: 3.6px;">PayPal vs. X.com (1999-2000)</div> <div style="font-size: 3.2px; color: #475569;">Musk & Thiel merged 50/50 to avoid mutual annihilation before the crash.</div> </div> <div class="mini-bullet-list"> <div>&bull; Total war destroys equity</div> <div>&bull; Pride clouds rational economics</div> <div>&bull; Mergers build defensive moats</div> </div> <div class="mini-footer"> <span>Page 5 of 10</span> <span>Chapter 4</span> </div> </div> </div> <span class="thumbnail-number">5</span> </div> <!-- THUMBNAIL 6 (PAGE 6: CHAPTER 5 - LAST MOVER ADVANTAGE & BAR CHART) --> <div class="thumbnail-item" data-page="6"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 5: LAST MOVER</span> <span>DEFENSIBILITY</span> </div> <div class="mini-tag">STRUCTURAL MOATS</div> <div class="mini-title">Last Mover Advantage</div> <div class="mini-p">
+Four traits: 10x Tech, Network Effects, Economies of Scale, Branding.
+</div> <div class="mini-chart-box"> <div class="mini-chart-title">Figure 5.1: Economic Value Captured</div> <div class="mini-chart-bars"> <div class="mini-bar-col"> <div class="mini-bar-fill accent" style="height: 38px;"></div> <span class="mini-bar-label">Monopoly (85%)</span> </div> <div class="mini-bar-col"> <div class="mini-bar-fill" style="height: 12px;"></div> <span class="mini-bar-label">Commodity (15%)</span> </div> </div> </div> <div class="mini-footer"> <span>Page 6 of 10</span> <span>Chapter 5</span> </div> </div> </div> <span class="thumbnail-number">6</span> </div> <!-- THUMBNAIL 7 (PAGE 7: CHAPTER 6 - SEQUENCING & MARKET SIZING) --> <div class="thumbnail-item" data-page="7"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 6: SEQUENCING</span> <span>ZERO TO ONE</span> </div> <div class="mini-tag">GO-TO-MARKET EXECUTION</div> <div class="mini-title">You Are Not a Lottery Ticket</div> <div class="mini-p">
+Monopolize a small niche first, then expand outward sequentially.
+</div> <div class="mini-step-seq"> <div class="mini-step-item"> <span class="mini-step-num">1</span> <span>Small Target (eBay PowerSellers)</span> </div> <div class="mini-step-item"> <span class="mini-step-num">2</span> <span>Adjacent Markets (Auction Buyers)</span> </div> <div class="mini-step-item"> <span class="mini-step-num">3</span> <span>Broad Consumer & Web Payments</span> </div> </div> <div class="mini-milestone-bar"> <span>78% Niche Penetration Achieved</span> </div> <div class="mini-footer"> <span>Page 7 of 10</span> <span>Chapter 6</span> </div> </div> </div> <span class="thumbnail-number">7</span> </div> <!-- THUMBNAIL 8 (PAGE 8: CHAPTER 7 - THE 4 QUADRANTS OF THE FUTURE) --> <div class="thumbnail-item" data-page="8"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 7: MATRIX</span> <span>THE FUTURE</span> </div> <div class="mini-tag">PHILOSOPHY OF PROGRESS</div> <div class="mini-title">The Four Views of the Future</div> <div class="mini-matrix-grid"> <div class="mini-quadrant active-quad"> <span class="quad-title">Definite Optimist</span> <span class="quad-sub">USA 1950-70</span> </div> <div class="mini-quadrant"> <span class="quad-title">Indefinite Optimist</span> <span class="quad-sub">USA 1982-Now</span> </div> <div class="mini-quadrant"> <span class="quad-title">Definite Pessimist</span> <span class="quad-sub">China Today</span> </div> <div class="mini-quadrant"> <span class="quad-title">Indefinite Pessimist</span> <span class="quad-sub">Europe Today</span> </div> </div> <div class="mini-p" style="margin-top: 2px;">
+Startups succeed only under definite optimism: planning a specific great future.
+</div> <div class="mini-footer"> <span>Page 8 of 10</span> <span>Chapter 7</span> </div> </div> </div> <span class="thumbnail-number">8</span> </div> <!-- THUMBNAIL 9 (PAGE 9: CHAPTER 8 - SECRETS & THE POWER LAW) --> <div class="thumbnail-item" data-page="9"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 8: POWER LAW</span> <span>VENTURE CAPITAL</span> </div> <div class="mini-tag">INVESTMENT MATHEMATICS</div> <div class="mini-title">Secrets & Venture Returns</div> <div class="mini-p">
+Returns follow a power law, not a normal bell curve distribution.
+</div> <table class="mini-table"> <thead> <tr> <th>Tier</th> <th>% Fund Return</th> <th>Outcome</th> </tr> </thead> <tbody> <tr style="background: #e0f2fe;"> <td>Fund Maker (1)</td> <td>70% - 90%</td> <td>Returns fund 5x-10x</td> </tr> <tr> <td>Solid (2-3)</td> <td>10% - 25%</td> <td>Modest 2x-3x</td> </tr> <tr> <td>Failures (15)</td> <td>&lt; 5%</td> <td>Total loss</td> </tr> </tbody> </table> <div class="mini-footer"> <span>Page 9 of 10</span> <span>Chapter 8</span> </div> </div> </div> <span class="thumbnail-number">9</span> </div> <!-- THUMBNAIL 10 (PAGE 10: CHAPTER 9 - THE SEVEN QUESTIONS CHECKLIST) --> <div class="thumbnail-item" data-page="10"> <div class="thumbnail-card"> <div class="thumbnail-preview-sim"> <div class="mini-header"> <span>CH. 9: CAPSTONE</span> <span>CHECKLIST</span> </div> <div class="mini-tag">CAPSTONE SYNTHESIS</div> <div class="mini-title" style="font-size: 5.8px;">The Seven Questions</div> <div class="mini-checklist"> <div><span>1.</span> Engineering (10x better?)</div> <div><span>2.</span> Timing (Is now right time?)</div> <div><span>3.</span> Monopoly (Niche share?)</div> <div><span>4.</span> People (The right team?)</div> <div><span>5.</span> Distribution (Delivery plan?)</div> <div><span>6.</span> Durability (Defensible in 10y?)</div> <div><span>7.</span> Secret (Unique insight?)</div> </div> <div class="mini-p" style="margin-top: 2px;">
+Answer all 7 = Definite monopoly.
+</div> <div class="mini-footer"> <span>Page 10 of 10</span> <span>Bibliography</span> </div> </div> </div> <span class="thumbnail-number">10</span> </div> </div> <!-- SPLITTER PILL HANDLE --> <div class="sidebar-splitter-pill"></div> </aside> <!-- CENTER SCROLLABLE DOCUMENT VIEWPORT --> <main class="pdf-viewport" id="pdf-viewport"> <!-- DYNAMIC CONTAINER FOR UPLOADED LOCAL PDF PAGES (HI-DPI SHARP CANVAS) --> <div id="dynamic-pdf-container"></div> <!-- DEFAULT SAMPLE DOCUMENT (10 COMPLETE AUTHENTIC PAGES) --> <div id="default-doc-container"> <!-- PAGE 1: TITLE & EXECUTIVE ABSTRACT --> <div class="pdf-page-slot" data-page-num="1"> <article class="pdf-page" id="page-1"> <div class="pdf-page-header"> <span>Zero to One | Executive Edition</span> <span>Monopoly Architecture</span> </div> <div class="pdf-chapter-tag">Executive Summary & Treatise</div> <h1 class="pdf-title-h1" style="font-size: 27px; margin-bottom: 12px;">ZERO TO ONE: Notes on Startups</h1> <p style="font-size: 14.5px; color: #475569; font-style: italic; margin-bottom: 24px;">
+A Structural Inquiry into Vertical Progress, Creative Monopoly, and Definitive Optimism
+</p> <p class="pdf-p">
+Every momentous occasion in human enterprise happens only once. The next Bill Gates will not build an operating system. The next Larry Page or Sergey Brin won't make a search engine. And the next Mark Zuckerberg won't create a social network. If you are copying these individuals, you are learning nothing from them.
+</p> <p class="pdf-p">
+Of course, it's easier to copy a model than to invent something new. Doing what someone else already knows how to do takes the world from 1 to <em>n</em>, adding more of something familiar. But every time we create something completely new, we go from <strong>0 to 1</strong>. The act of creation is singular, as is the moment of creation, and the result is something fresh and strange.
+</p> <div class="pdf-quote-box">
+"Unless they invest in the difficult task of creating new things, corporate and institutional enterprises will inevitably fail, regardless of how high their present corporate profits happen to be."
+</div> <p class="pdf-p">
+This executive briefing outlines the core economic theorems underlying defensible startups: the dynamics of technology versus globalization, the structural mechanics of monopolistic cash flows, and the systematic evasion of commoditized competitive traps.
+</p> <div class="pdf-page-footer"> <span>Page 1 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 2: CHAPTER 1 - ZERO TO ONE VS 1 TO N --> <div class="pdf-page-slot" data-page-num="2"> <article class="pdf-page" id="page-2"> <div class="pdf-page-header"> <span>Chapter 1: The Frontier of Progress</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Macroeconomic Horizons</div> <h1 class="pdf-title-h1">The Challenge of the Future</h1> <p class="pdf-p">
+When we think about the future, we hope for a future of progress. That progress can take one of two forms. Horizontal or extensive progress means copying things that work—going from 1 to <em>n</em>. Horizontal progress is easy to visualize because we already know what it looks like. Vertical or intensive progress means doing new things—going from 0 to 1. Vertical progress is harder to visualize because it requires doing something that has never been done.
+</p> <p class="pdf-p">
+At a macro level, the single word for horizontal progress is <em>globalization</em>: taking things that work in one territory and making them work everywhere. China is the quintessential example: its 20-year plan has been to become what the West already is. The single word for vertical progress is <em>technology</em>.
+</p> <table class="pdf-table"> <thead> <tr> <th>Dimension</th> <th>Horizontal Progress (1 to N)</th> <th>Vertical Progress (0 to 1)</th> </tr> </thead> <tbody> <tr> <td><strong>Primary Vector</strong></td> <td>Extensive (Globalization)</td> <td>Intensive (Technology)</td> </tr> <tr> <td><strong>Core Mechanism</strong></td> <td>Arbitrage & Scale Replication</td> <td>Invention & Paradigm Shift</td> </tr> <tr> <td><strong>Economic Limit</strong></td> <td>Resource Scarcity & Pollution</td> <td>Infinitely Scalable Abundance</td> </tr> <tr> <td><strong>Historical Exemplar</strong></td> <td>19th-Century Colonial Trade</td> <td>Silicon Valley Semiconductor Boom</td> </tr> </tbody> </table> <p class="pdf-p">
+Our contrarian premise is that without technological progress, globalization will simply hasten environmental and resource catastrophe across developing continents.
+</p> <div class="pdf-page-footer"> <span>Page 2 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 3: CHAPTER 2 - LESSONS OF THE DOT-COM CRASH --> <div class="pdf-page-slot" data-page-num="3"> <article class="pdf-page" id="page-3"> <div class="pdf-page-header"> <span>Chapter 2: Market Psychology</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Historical Precedents</div> <h1 class="pdf-title-h1">Party Like It's 1999: The Trauma of the Crash</h1> <p class="pdf-p">
+The late 1990s dot-com bubble was characterized by pure speculative mania. When the NASDAQ crashed from 5,048 in March 2000 down to 1,114 in October 2002, an entire generation of entrepreneurs, venture capitalists, and institutional investors was psychologically traumatized.
+</p> <p class="pdf-p">
+Entrepreneurs who stayed in Silicon Valley learned four big lessons from the crash that still govern business thinking today. But these lessons are fundamentally flawed:
+</p> <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:16px; margin:18px 0; font-family:'Roboto',sans-serif; font-size:13px; line-height:1.6;"> <p style="margin-bottom:8px;"><strong>1. Make incremental advances:</strong> Anyone who claims they will do something grand is suspected of hubris. Small, cautious steps are considered prudent.</p> <p style="margin-bottom:8px;"><strong>2. Stay lean and flexible:</strong> All companies must be lean, which is code for unplanned. Try things out, iterate, treat entrepreneurship as agnostic experimentation.</p> <p style="margin-bottom:8px;"><strong>3. Improve on the competition:</strong> Don't try to create a new market prematurely. The only way to know you have a real business is to start with an already existing customer base.</p> <p style="margin:0;"><strong>4. Focus on product, not sales:</strong> If your product requires advertising or salespeople to sell it, it's not good enough; technology should speak for itself.</p> </div> <p class="pdf-p">
+Yet the opposite principles are far closer to the truth: bold moves outperform trivial incrementalism, a flawed plan is vastly superior to no plan at all, competitive markets systematically eliminate margins, and sales matters every bit as much as code.
+</p> <div class="pdf-page-footer"> <span>Page 3 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 4: CHAPTER 3 - ALL HAPPY COMPANIES ARE DIFFERENT --> <div class="pdf-page-slot" data-page-num="4"> <article class="pdf-page" id="page-4"> <div class="pdf-page-header"> <span>Chapter 3: Microeconomics & Monopoly</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Microeconomic Foundations</div> <h1 class="pdf-title-h1">All Happy Companies Are Different</h1> <p class="pdf-p">
+Tolstoy opens <em>Anna Karenina</em> by observing: "All happy families are alike; each unhappy family is unhappy in its own way." Business is the exact opposite. All happy companies are different: each one earns a monopoly by solving a unique problem. All failed companies are the same: they failed to escape competition.
+</p> <h2 class="pdf-subheading">The Fallacy of Perfect Competition</h2> <p class="pdf-p">
+Economists model perfect competition as the ideal market state because it represents the consumer surplus maximization theorem. Under perfect competition, firms produce identical goods at prices equal to marginal cost. In the long run, no company makes an economic profit.
+</p> <p class="pdf-p">
+The opposite of perfect competition is <strong>monopoly</strong>. While a competitive firm must sell at the market price, a monopoly owns its market, so it can set its own prices. Since it has no competition, it produces at the quantity and price combination that maximizes its profits.
+</p> <div class="pdf-quote-box">
+"Monopolists lie to protect themselves. They know that bragging about their monopoly invites audits, lawsuits, and political regulation. Therefore they pretend to operate in hyper-competitive markets."
+</div> <p class="pdf-p">
+Google rarely frames itself as a monopoly search engine owning 90% of global queries. Instead, it describes itself as a player in the universal advertising market ($500B) or consumer technology ($2T), making its dominance appear modest and vulnerable.
+</p> <div class="pdf-page-footer"> <span>Page 4 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 5: CHAPTER 4 - THE IDEOLOGY OF COMPETITION --> <div class="pdf-page-slot" data-page-num="5"> <article class="pdf-page" id="page-5"> <div class="pdf-page-header"> <span>Chapter 4: Behavioral Dynamics</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Competitive Pathology</div> <h1 class="pdf-title-h1">The Ideology of Competition</h1> <p class="pdf-p">
+Competition is an ideology—the ideology—that pervades our society and distorts our thinking. We preach competition, internalize its necessity, and enact its commandments; and as a result, we trap ourselves within it—even though the more we compete, the less we gain.
+</p> <p class="pdf-p">
+Why do people compete? Marx and Shakespeare provide two opposite answers. According to Marx, people fight because they are different. Proletariat and bourgeoisie fight because they have conflicting interests. According to Shakespeare, by contrast, all combatants look more or less alike. The Montagues and Capulets had no meaningful differences; they simply hated each other because they were rivals.
+</p> <div class="pdf-quote-box">
+"In business, people fight over things that don't matter because they can't distinguish real value from rivalry."
+</div> <h2 class="pdf-subheading">Case Study: The PayPal and X.com Merger</h2> <p class="pdf-p">
+In late 1999, Confinity (creators of PayPal) and Elon Musk's X.com were in a vicious war for dominance in email payments. Both companies were burning tens of millions of dollars giving away cash referral bonuses to users. We worked 100-hour weeks not to improve our product, but to beat X.com.
+</p> <p class="pdf-p">
+In February 2000, we realized that the coming dot-com crash would wipe out both companies if we kept burning cash fighting each other. We called a truce, negotiated a 50/50 merger, and created a single combined monopoly that survived the subsequent crash and was sold to eBay for $1.5 billion.
+</p> <div class="pdf-page-footer"> <span>Page 5 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 6: CHAPTER 5 - FOUR CHARACTERISTICS OF MONOPOLY (SCREENSHOT MATCH) --> <div class="pdf-page-slot" data-page-num="6"> <article class="pdf-page" id="page-6"> <div class="pdf-page-header"> <span>Chapter 5: Last Mover Advantage</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Part II: Monopoly Mechanics</div> <h1 class="pdf-title-h1">The Mechanics of Monopoly</h1> <p class="pdf-p">
+What does a company with large cash flows far into the future look like? Every monopoly is unique, but they usually combine some combination of four key characteristics: proprietary technology, network effects, economies of scale, and branding.
+</p> <p class="pdf-p">
+This doesn't mean that every monopoly has all four. But examining each characteristic helps explain why monopolies endure while commodity businesses struggle in cutthroat price wars.
+</p> <h2 class="pdf-subheading">1. Proprietary Technology: The 10x Rule</h2> <p class="pdf-p">
+Proprietary technology is the most substantive advantage a company can have because it makes your product difficult or impossible to replicate. As a good rule of thumb, proprietary technology must be at least <strong>10 times better</strong> than its closest substitute in some important dimension to lead to a real monopolistic advantage.
+</p> <!-- 10X PERFORMANCE CHART --> <div class="pdf-chart-container"> <div class="pdf-chart-title">Figure 5.1: Comparative Advantage Required for Monopolistic Dominance</div> <div class="pdf-chart-bars"> <div class="pdf-bar-group"> <span class="pdf-bar-val">1.2x</span> <div class="pdf-bar" style="height: 18%;"></div> <span class="pdf-bar-label">Incremental</span> </div> <div class="pdf-bar-group"> <span class="pdf-bar-val">2.5x</span> <div class="pdf-bar" style="height: 35%;"></div> <span class="pdf-bar-label">Noticeable</span> </div> <div class="pdf-bar-group"> <span class="pdf-bar-val">5.0x</span> <div class="pdf-bar" style="height: 60%;"></div> <span class="pdf-bar-label">Compelling</span> </div> <div class="pdf-bar-group"> <span class="pdf-bar-val">10.0x+</span> <div class="pdf-bar accent" style="height: 100%;"></div> <span class="pdf-bar-label">Monopolistic</span> </div> </div> </div> <p class="pdf-p">
+Amazon made its first 10x improvement transparently: they offered at least 10 times as many books as any retail Barnes & Noble bookstore, without needing to warehouse them upfront.
+</p> <div class="pdf-page-footer"> <span>Page 6 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 7: CHAPTER 5 CONTINUED - MOATS & SEQUENCING --> <div class="pdf-page-slot" data-page-num="7"> <article class="pdf-page" id="page-7"> <div class="pdf-page-header"> <span>Chapter 5: Competitive Moats</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Scaling Sequences</div> <h1 class="pdf-title-h1">Network Effects, Scale, and Sequencing</h1> <p class="pdf-p"> <strong>Network effects</strong> make a product more useful as more people use it. But paradoxically, unless your product is valuable to its first users when the network is tiny, network effects will never materialize. Facebook started exclusively at Harvard, capturing 60% of students in two weeks before expanding to other Ivy League campuses.
+</p> <p class="pdf-p"> <strong>Economies of scale</strong> protect software businesses because the marginal cost of reproducing software is zero. Once Microsoft developed Windows, writing a copy to CD-ROM cost pennies, allowing it to capture enormous operating margins across global PC hardware vendors.
+</p> <h2 class="pdf-subheading">Market Sequencing: Start Small and Monopolize</h2> <p class="pdf-p">
+Every startup is small at the start. Every monopoly dominates a large share of its market. Therefore, every startup should start with a very small market and dominate it quickly.
+</p> <div class="pdf-quote-box">
+"The perfect target market for a startup is a small group of particular people concentrated together and served by few or no competitors."
+</div> <p class="pdf-p">
+It is always easier to dominate a small market than a large one. If you think your initial market might be too big, it almost certainly is. Once you dominate a niche, you systematically expand into adjacent, slightly broader markets, exactly as Amazon expanded from books into CDs, software, and enterprise electronics.
+</p> <div class="pdf-page-footer"> <span>Page 7 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 8: CHAPTER 6 - DEFINITE VS INDEFINITE OPTIMISM --> <div class="pdf-page-slot" data-page-num="8"> <article class="pdf-page" id="page-8"> <div class="pdf-page-header"> <span>Chapter 6: Philosophy of Destiny</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Strategic Mindsets</div> <h1 class="pdf-title-h1">You Are Not a Lottery Ticket</h1> <p class="pdf-p">
+The most contentious question in business is whether success comes from luck or design. If success were primarily a matter of luck, serial entrepreneurs like Steve Jobs, Elon Musk, or Jack Dorsey wouldn't exist. You can chart how people view the future along two axes: whether they are optimistic or pessimistic, and whether they view the future as definite or indefinite.
+</p> <table class="pdf-table"> <thead> <tr> <th>Attitude</th> <th>Definite (Knowable Plans)</th> <th>Indefinite (Random & Uncertain)</th> </tr> </thead> <tbody> <tr> <td><strong>Optimistic</strong></td> <td> <strong>Definite Optimism:</strong><br>
+The future will be better if you plan and work to make it so (1950s USA, Empire State Building, Apollo 11).
+</td> <td> <strong>Indefinite Optimism:</strong><br>
+The future will be better, but we don't know how, so hedge and diversify (Modern Silicon Valley finance).
+</td> </tr> <tr> <td><strong>Pessimistic</strong></td> <td> <strong>Definite Pessimism:</strong><br>
+The future is knowable, but bleak, so prepare for decline (Contemporary China saving cash for demographic winter).
+</td> <td> <strong>Indefinite Pessimism:</strong><br>
+The future is dark and unpredictable, so consume now (Contemporary Europe stagnation).
+</td> </tr> </tbody> </table> <p class="pdf-p">
+Indefinite optimism is unsustainable: how can the future get better if no one plans for it? A startup is the largest endeavor over which you can have definite mastery. You can have agency not just over your life, but over a small, essential part of the world.
+</p> <div class="pdf-page-footer"> <span>Page 8 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 9: CHAPTER 7 - THE POWER LAW OF VENTURE CAPITAL --> <div class="pdf-page-slot" data-page-num="9"> <article class="pdf-page" id="page-9"> <div class="pdf-page-header"> <span>Chapter 7: Capital Allocation</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Venture Returns</div> <h1 class="pdf-title-h1">Follow the Money: The Power Law</h1> <p class="pdf-p">
+Most people understand that effort and reward are not always correlated, but few realize how extreme the distribution really is. We are taught to expect normal distributions—bell curves—where most values cluster around the mean.
+</p> <p class="pdf-p">
+In venture capital, returns obey a <strong>Power Law</strong> (Pareto distribution): a small handful of companies radically outperform all others combined. The biggest secret in venture capital is that the best investment in a successful fund equals or outperforms the entire rest of the fund combined.
+</p> <table class="pdf-table"> <thead> <tr> <th>Portfolio Asset</th> <th>Investment</th> <th>Multiple</th> <th>Return Value</th> <th>Share of Fund</th> </tr> </thead> <tbody> <tr> <td><strong>Company A (Monopolist Outlier)</strong></td> <td>$5.0M</td> <td><strong>68.0x</strong></td> <td>$340.0M</td> <td><strong>77.2%</strong></td> </tr> <tr> <td><strong>Company B (Solid Exit)</strong></td> <td>$5.0M</td> <td>12.0x</td> <td>$60.0M</td> <td>13.6%</td> </tr> <tr> <td><strong>Company C (Modest Return)</strong></td> <td>$5.0M</td> <td>4.0x</td> <td>$20.0M</td> <td>4.5%</td> </tr> <tr> <td><strong>Companies D through J (7 Failures)</strong></td> <td>$35.0M</td> <td>0.6x</td> <td>$21.0M</td> <td>4.7%</td> </tr> </tbody> </table> <p class="pdf-p">
+This rule applies far beyond investing. You cannot diversify your own life by keeping ten career options open simultaneously. Focus resolutely on the few things you are uniquely equipped to dominate.
+</p> <div class="pdf-page-footer"> <span>Page 9 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> <!-- PAGE 10: CHAPTER 8 - THE SEVEN QUESTIONS --> <div class="pdf-page-slot" data-page-num="10"> <article class="pdf-page" id="page-10"> <div class="pdf-page-header"> <span>Chapter 8: Strategic Execution</span> <span>Zero to One</span> </div> <div class="pdf-chapter-tag">Master Framework</div> <h1 class="pdf-title-h1">The Seven Critical Questions</h1> <p class="pdf-p">
+Every business plan must address seven fundamental questions. If you don't have great answers to all seven, you will face extraordinary friction and likely failure:
+</p> <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:14px 18px; margin:16px 0; font-family:'Roboto',sans-serif; font-size:13px; line-height:1.65;"> <p style="margin-bottom:6px;"><strong>1. The Engineering Question:</strong> Can you create breakthrough technology instead of incremental improvements (at least 10x better)?</p> <p style="margin-bottom:6px;"><strong>2. The Timing Question:</strong> Is now the right time to start your particular business?</p> <p style="margin-bottom:6px;"><strong>3. The Monopoly Question:</strong> Are you starting with a big share of a small market?</p> <p style="margin-bottom:6px;"><strong>4. The People Question:</strong> Do you have the right team?</p> <p style="margin-bottom:6px;"><strong>5. The Distribution Question:</strong> Do you have a way to not just create, but deliver your product?</p> <p style="margin-bottom:6px;"><strong>6. The Durability Question:</strong> Will your market position be defensible 10 and 20 years into the future?</p> <p style="margin:0;"><strong>7. The Secret Question:</strong> Have you identified a unique opportunity that others don't see?</p> </div> <p class="pdf-p">
+Tesla answered all seven questions positively: it developed proprietary battery powertrains, timed the government cleantech loan guarantees, dominated the tiny high-end sports car niche (Roadster), assembled world-class engineers, built its own direct dealership network, established an enduring brand moat, and understood that green tech was a fashion statement rather than an environmental sacrifice.
+</p> <div class="pdf-page-footer"> <span>Page 10 of 10</span> <span>Peter Thiel with Blake Masters</span> </div> </article> </div> </div> <!-- FULL VIEWPORT GAME SECTION WITH GUIDANCE & CONTROL BAR --> <section class="pdf-game-container" id="pdf-game-section"> <div class="pdf-game-bar"> <!-- USAGE INSTRUCTION (SEPARATE FROM RETURN ZONE) --> <div class="game-bar-hint"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path> <polyline points="17 8 12 3 7 8"></polyline> <line x1="12" y1="3" x2="12" y2="15"></line> </svg> <span>Upload your own PDF file (via Open in top toolbar)</span> </div> <!-- WIDE CLICKABLE RETURN ZONE (STRETCHES UP TO GAME-CTRLS) --> <div class="game-escape-zone" id="btn-escape-zone-pdf" title="Switching tabs auto-returns to Page 1 • Or click here"> <span class="zone-escape-hint"> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="18 15 12 9 6 15"></polyline></svg> <span>Switching tabs auto-returns to Page 1 • Or click here</span> </span> </div> <div class="game-ctrls"> <button type="button" class="game-action-btn" id="btn-bar-upload-pdf" title="Open local PDF file (Client-side memory only, zero server uploads)"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path> <polyline points="17 8 12 3 7 8"></polyline> <line x1="12" y1="3" x2="12" y2="15"></line> </svg> <span>Upload PDF</span> </button> <button type="button" class="game-action-btn" id="btn-reload-game" title="Reload Game"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg> <span>Reload</span> </button> <button type="button" class="game-action-btn" id="btn-fullscreen-game" title="Toggle Fullscreen"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg> <span>Fullscreen</span> </button> </div> </div> <iframe id="stealth-pdf-game-iframe" class="pdf-game-iframe" src="/" allow="autoplay; fullscreen; gamepad; focus-without-user-activation *" allowfullscreen>
+        </iframe> </section> </main> </div> <!-- TOAST FEEDBACK NOTIFICATION --> <div class="pdf-toast" id="pdf-toast"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> <span id="toast-message">Local PDF loaded in memory (0 bytes sent to server).</span> </div> <script>
+    // -------------------------------------------------------------
+    // STATE & DOM REFS
+    // -------------------------------------------------------------
+    const sidebar = document.getElementById('pdf-sidebar');
+    const btnToggleSidebar = document.getElementById('btn-toggle-sidebar');
+    const viewport = document.getElementById('pdf-viewport');
+    const docTitle = document.getElementById('pdf-doc-title');
+    const pageInput = document.getElementById('current-page-input');
+    const totalPagesSpan = document.getElementById('total-pages-count');
+    const zoomText = document.getElementById('zoom-level-text');
+    const btnZoomIn = document.getElementById('btn-zoom-in');
+    const btnZoomOut = document.getElementById('btn-zoom-out');
+    const btnFitWidth = document.getElementById('btn-fit-width');
+    const btnRotate = document.getElementById('btn-rotate');
+    const btnOpenPdf = document.getElementById('btn-open-pdf');
+    const filePicker = document.getElementById('pdf-file-picker');
+    const btnPrint = document.getElementById('btn-print-pdf');
+    const btnDownload = document.getElementById('btn-download-pdf');
+    const toast = document.getElementById('pdf-toast');
+    const toastMessage = document.getElementById('toast-message');
+    const dynamicContainer = document.getElementById('dynamic-pdf-container');
+    const defaultContainer = document.getElementById('default-doc-container');
+    const thumbnailList = document.getElementById('thumbnail-list');
+    const gameSection = document.getElementById('pdf-game-section');
+    const gameIframe = document.getElementById('stealth-pdf-game-iframe');
+    const btnReloadGame = document.getElementById('btn-reload-game');
+    const btnFullscreenGame = document.getElementById('btn-fullscreen-game');
+    const btnEscapeZonePdf = document.getElementById('btn-escape-zone-pdf');
+    const btnBarUploadPdf = document.getElementById('btn-bar-upload-pdf');
+
+    let currentZoom = 100;
+    let currentRotation = 0;
+    let totalPages = 10;
+    let isCustomPdfLoaded = false;
+    let customPdfDoc = null;
+
+    // Toast helper
+    function showToast(msg) {
+      if (!toast || !toastMessage) return;
+      toastMessage.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+
+    // -------------------------------------------------------------
+    // SYNC DOCUMENT TITLE WITH BROWSER TAB
+    // -------------------------------------------------------------
+    function syncDocumentTitle(title) {
+      const cleanTitle = (title || '').trim() || 'Untitled_Document.pdf';
+      const formattedTitle = cleanTitle.endsWith('.pdf') ? cleanTitle : `${cleanTitle}.pdf`;
+      document.title = `${formattedTitle} - Chrome PDF Viewer`;
+
+      try {
+        if (window.top && window.top !== window) {
+          window.top.document.title = `${formattedTitle} - Chrome PDF Viewer`;
+        }
+      } catch (err) {}
+    }
+
+    if (docTitle) {
+      docTitle.addEventListener('blur', () => syncDocumentTitle(docTitle.textContent));
+      docTitle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          docTitle.blur();
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // SIDEBAR TOGGLE
+    // -------------------------------------------------------------
+    btnToggleSidebar?.addEventListener('click', () => {
+      sidebar?.classList.toggle('collapsed');
+      btnToggleSidebar?.classList.toggle('active');
+    });
+
+    // -------------------------------------------------------------
+    // ZOOM & ROTATION CONTROLS (ZERO OVERLAP SYSTEM)
+    // -------------------------------------------------------------
+    function applyTransform() {
+      if (zoomText) zoomText.textContent = `${currentZoom}%`;
+      const factor = currentZoom / 100;
+
+      // Update CSS Variable for default pages (slots expand in flow, NEVER overlap!)
+      document.documentElement.style.setProperty('--zoom-factor', factor);
+
+      // Re-render uploaded PDF canvases at exact native resolution
+      if (isCustomPdfLoaded && customPdfDoc) {
+        renderCustomPdfPages(customPdfDoc);
+      }
+    }
+
+    btnZoomIn?.addEventListener('click', () => {
+      if (currentZoom < 250) {
+        currentZoom = Math.min(250, currentZoom + 15);
+        applyTransform();
+      }
+    });
+
+    btnZoomOut?.addEventListener('click', () => {
+      if (currentZoom > 50) {
+        currentZoom = Math.max(50, currentZoom - 15);
+        applyTransform();
+      }
+    });
+
+    zoomText?.addEventListener('click', () => {
+      currentZoom = 100;
+      applyTransform();
+    });
+
+    btnRotate?.addEventListener('click', () => {
+      currentRotation = (currentRotation + 90) % 360;
+      applyTransform();
+    });
+
+    btnFitWidth?.addEventListener('click', () => {
+      const viewportWidth = viewport.clientWidth - 48;
+      const pageWidth = 820;
+      currentZoom = Math.round((viewportWidth / pageWidth) * 100);
+      if (currentZoom < 50) currentZoom = 50;
+      if (currentZoom > 200) currentZoom = 200;
+      applyTransform();
+      showToast(`Fit width: ${currentZoom}%`);
+    });
+
+    // -------------------------------------------------------------
+    // SCROLL & PAGE NUMBER TRACKING
+    // -------------------------------------------------------------
+    function updateActivePageIndicator() {
+      const pageElements = document.querySelectorAll('.pdf-page-slot, .canvas-page-wrapper');
+      let currentVisible = 1;
+
+      pageElements.forEach(page => {
+        const rect = page.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.1) {
+          const num = parseInt(page.dataset.pageNum, 10);
+          if (!isNaN(num)) currentVisible = num;
+        }
+      });
+
+      if (pageInput && document.activeElement !== pageInput) {
+        pageInput.value = currentVisible;
+      }
+
+      // Update sidebar thumbnails active state
+      document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+        const p = parseInt(thumb.dataset.page, 10);
+        if (p === currentVisible) {
+          thumb.classList.add('active');
+          const card = thumb.querySelector('.thumbnail-card');
+          if (card) card.style.borderColor = '#8ab4f8';
+          const num = thumb.querySelector('.thumbnail-number');
+          if (num) { num.style.color = '#8ab4f8'; num.style.fontWeight = '700'; }
+        } else {
+          thumb.classList.remove('active');
+          const card = thumb.querySelector('.thumbnail-card');
+          if (card) card.style.borderColor = 'transparent';
+          const num = thumb.querySelector('.thumbnail-number');
+          if (num) { num.style.color = 'var(--pdf-text-muted)'; num.style.fontWeight = '500'; }
+        }
+      });
+    }
+
+    viewport?.addEventListener('scroll', updateActivePageIndicator, { passive: true });
+
+    // Jump to page on input
+    pageInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const targetNum = parseInt(pageInput.value, 10);
+        if (!isNaN(targetNum)) {
+          jumpToPage(targetNum);
+        }
+      }
+    });
+
+    function jumpToPage(num) {
+      const targetEl = document.querySelector(`[data-page-num="${num}"]`);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Thumbnail click delegation
+    thumbnailList?.addEventListener('click', (e) => {
+      const thumb = e.target.closest('.thumbnail-item');
+      if (!thumb) return;
+
+      const pNum = parseInt(thumb.dataset.page, 10);
+      if (!isNaN(pNum)) {
+        jumpToPage(pNum);
+      }
+    });
+
+    // -------------------------------------------------------------
+    // HI-DPI SHARP CLIENT-SIDE PDF RENDERING (100% IN-MEMORY, ZERO OVERLAP)
+    // -------------------------------------------------------------
+    async function renderCustomPdfPages(pdfDoc) {
+      if (!pdfDoc || !dynamicContainer) return;
+      dynamicContainer.innerHTML = '';
+
+      // High-DPI scale (ensure at least DPR 2 for pin-sharp text)
+      const dpr = Math.max(window.devicePixelRatio || 1, 2);
+      const targetCssWidth = Math.round(820 * (currentZoom / 100));
+
+      for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+        const page = await pdfDoc.getPage(pageNum);
+        const unscaledVp = page.getViewport({ scale: 1.0, rotation: currentRotation });
+        const scale = targetCssWidth / unscaledVp.width;
+        const cssWidth = Math.round(unscaledVp.width * scale);
+        const cssHeight = Math.round(unscaledVp.height * scale);
+
+        const renderVp = page.getViewport({ scale: scale * dpr, rotation: currentRotation });
+
+        // Page wrapper with strict 24px bottom margin
+        const pageWrapper = document.createElement('div');
+        pageWrapper.className = 'canvas-page-wrapper';
+        pageWrapper.dataset.pageNum = pageNum;
+        pageWrapper.id = `pdf-canvas-page-${pageNum}`;
+        pageWrapper.style.width = `${cssWidth}px`;
+        pageWrapper.style.height = `${cssHeight}px`;
+        pageWrapper.style.margin = '0 auto 24px auto';
+        pageWrapper.style.backgroundColor = '#ffffff';
+
+        // Sharp high-res canvas
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.floor(renderVp.width);
+        canvas.height = Math.floor(renderVp.height);
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.display = 'block';
+
+        const ctx = canvas.getContext('2d', { alpha: false });
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        await page.render({
+          canvasContext: ctx,
+          viewport: renderVp
+        }).promise;
+
+        pageWrapper.appendChild(canvas);
+        dynamicContainer.appendChild(pageWrapper);
+      }
+    }
+
+    btnOpenPdf?.addEventListener('click', () => {
+      filePicker?.click();
+    });
+
+    filePicker?.addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+        showToast('Please select a valid PDF file.');
+        return;
+      }
+
+      // 1. Update Title and Browser Tab
+      if (docTitle) docTitle.textContent = file.name;
+      syncDocumentTitle(file.name);
+
+      // 2. Read file 100% in-memory (0 server requests)
+      try {
+        showToast('Rendering local PDF in memory...');
+        const arrayBuffer = await file.arrayBuffer();
+
+        if (window.pdfjsLib) {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          
+          const loadingTask = window.pdfjsLib.getDocument({ data: arrayBuffer });
+          const pdfDoc = await loadingTask.promise;
+          customPdfDoc = pdfDoc;
+          isCustomPdfLoaded = true;
+
+          totalPages = pdfDoc.numPages;
+          if (totalPagesSpan) totalPagesSpan.textContent = totalPages;
+          if (pageInput) {
+            pageInput.max = totalPages;
+            pageInput.value = 1;
+          }
+
+          // Switch from default template to dynamic canvas pages
+          if (defaultContainer) defaultContainer.style.display = 'none';
+          dynamicContainer.style.display = 'flex';
+
+          // Rebuild sidebar thumbnails
+          if (thumbnailList) {
+            thumbnailList.innerHTML = '';
+          }
+
+          // Render thumbnails for sidebar
+          for (let p = 1; p <= Math.min(totalPages, 50); p++) {
+            const page = await pdfDoc.getPage(p);
+            const thumbItem = document.createElement('div');
+            thumbItem.className = `thumbnail-item ${p === 1 ? 'active' : ''}`;
+            thumbItem.dataset.page = p;
+
+            const thumbCard = document.createElement('div');
+            thumbCard.className = 'thumbnail-card';
+            if (p === 1) thumbCard.style.borderColor = '#8ab4f8';
+
+            const unscaled = page.getViewport({ scale: 1.0 });
+            const thumbScale = 110 / unscaled.width;
+            const thumbVp = page.getViewport({ scale: thumbScale * 1.5 });
+
+            const thumbCanvas = document.createElement('canvas');
+            thumbCanvas.width = Math.floor(thumbVp.width);
+            thumbCanvas.height = Math.floor(thumbVp.height);
+            thumbCanvas.style.width = '100%';
+            thumbCanvas.style.height = '100%';
+            thumbCanvas.style.display = 'block';
+
+            const tCtx = thumbCanvas.getContext('2d', { alpha: false });
+            await page.render({ canvasContext: tCtx, viewport: thumbVp }).promise;
+
+            thumbCard.appendChild(thumbCanvas);
+
+            const numSpan = document.createElement('span');
+            numSpan.className = 'thumbnail-number';
+            numSpan.textContent = p;
+
+            thumbItem.appendChild(thumbCard);
+            thumbItem.appendChild(numSpan);
+            thumbnailList?.appendChild(thumbItem);
+          }
+
+          // Render crystal-sharp pages
+          await renderCustomPdfPages(pdfDoc);
+
+          // Scroll to top
+          viewport?.scrollTo({ top: 0, behavior: 'instant' });
+          showToast(`Opened "${file.name}" in memory (0 bytes sent to server).`);
+
+        } else {
+          // Fallback if CDN blocked
+          const objectUrl = URL.createObjectURL(file);
+          if (defaultContainer) defaultContainer.style.display = 'none';
+          if (dynamicContainer) {
+            dynamicContainer.innerHTML = `
+              <embed src="${objectUrl}" type="application/pdf" width="820px" height="1100px" style="box-shadow:0 2px 10px rgba(0,0,0,0.45); margin-bottom:24px;" />
+            `;
+            dynamicContainer.style.display = 'flex';
+          }
+          showToast(`Opened "${file.name}" locally via browser.`);
+        }
+      } catch (err) {
+        console.error('Local PDF rendering error:', err);
+        showToast('Error reading PDF file locally.');
+      }
+    });
+
+    // -------------------------------------------------------------
+    // PRINT & DOWNLOAD
+    // -------------------------------------------------------------
+    btnPrint?.addEventListener('click', () => {
+      window.print();
+    });
+
+    btnDownload?.addEventListener('click', () => {
+      const fileName = docTitle?.textContent.trim() || 'Document.pdf';
+      showToast(`Downloading "${fileName}"...`);
+      const blob = new Blob([`Zero to One: Notes on Startups (Executive Edition - 10 Pages)\nDocument: ${fileName}\nExported from Chrome PDF Viewer`], { type: 'application/pdf' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fileName.endsWith('.pdf') ? fileName : `${fileName}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    // -------------------------------------------------------------
+    // GAME VIEW INTEGRATION (FULL VIEWPORT, ZERO BORDERS)
+    // -------------------------------------------------------------
+    function jumpToGame() {
+      if (gameSection) {
+        if (viewport) {
+          viewport.scrollTop = gameSection.offsetTop;
+        }
+        try {
+          gameSection.scrollIntoView({ behavior: 'instant', block: 'start' });
+        } catch (e) {}
+        try {
+          gameIframe?.focus();
+        } catch (e) {}
+      }
+    }
+
+    // Check query params for custom initial game URL or launch game mode (?launch=game)
+    const urlParams = new URLSearchParams(window.location.search);
+    const customGame = urlParams.get('game');
+    if (customGame && customGame !== '1' && gameIframe) {
+      gameIframe.src = customGame;
+    }
+
+    const shouldLaunchGame = urlParams.get('launch') === 'game' || 
+                             urlParams.get('game') === '1' || 
+                             window.location.hash === '#game';
+
+    if (shouldLaunchGame) {
+      jumpToGame();
+      requestAnimationFrame(jumpToGame);
+      setTimeout(jumpToGame, 30);
+      window.addEventListener('load', jumpToGame);
+    }
+
+    btnBarUploadPdf?.addEventListener('click', () => {
+      filePicker?.click();
+    });
+
+    btnReloadGame?.addEventListener('click', () => {
+      if (gameIframe) {
+        const cur = gameIframe.src;
+        gameIframe.src = 'about:blank';
+        setTimeout(() => {
+          gameIframe.src = cur;
+        }, 80);
+        showToast('Simulation engine reloaded.');
+      }
+    });
+
+    btnFullscreenGame?.addEventListener('click', () => {
+      if (!gameSection) return;
+      if (!document.fullscreenElement) {
+        gameSection.requestFullscreen?.().catch(() => {});
+      } else {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    });
+
+    btnEscapeZonePdf?.addEventListener('click', escapeToPdfTop);
+
+    // Emergency return to top function
+    // Auto-return to PDF page 1 when switching tabs or minimizing window
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        escapeToPdfTop();
+      }
+    });
+
+    function escapeToPdfTop() {
+      viewport?.scrollTo({ top: 0, behavior: 'instant' });
+      const firstPage = document.querySelector('.pdf-page-slot, .canvas-page-wrapper');
+      if (firstPage) {
+        firstPage.focus?.();
+      }
+
+      try {
+        if (window.location.search || window.location.hash) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      } catch (err) {}
+    }
+
+  </script> </body> </html>

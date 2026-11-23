@@ -1,0 +1,683 @@
+/* ===== MOBILE STYLES (≤768px) ===== */
+
+/* ===== MOBILE HEADER ===== */
+.mobile-header {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* Ẩn header tile desktop */
+    .header-tile { display: none; }
+    .header-placeholder { display: none; }
+
+    /* Hiện mobile header */
+    .mobile-header {
+        display: flex;
+        justify-content: center;
+        padding: 12px 0 8px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: transparent;
+    }
+
+    .mobile-header-pill {
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 16px;
+        padding: 6px 8px 6px 14px;
+        gap: 0;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        max-width: 90%;
+        width: auto;
+        transition: box-shadow 0.2s;
+    }
+
+    .mobile-header-logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        flex-shrink: 0;
+        padding: 4px 6px 4px 0;
+        transition: opacity 0.2s;
+    }
+    
+    .mobile-header-logo:active {
+        opacity: 0.7;
+    }
+
+    .mobile-header-logo .tapwap-logo {
+        height: 30px;
+        width: auto;
+        max-width: 70px;
+        object-fit: contain;
+        display: block;
+    }
+
+    .mobile-header-logo .tapwap-logo-fallback {
+        display: none !important;
+        font-size: 20px;
+        font-weight: 900;
+        color: #1a2e6c;
+        letter-spacing: -1px;
+    }
+
+    .mobile-header-divider {
+        width: 1.5px;
+        background: #e8e8e8;
+        align-self: stretch;
+        margin: 6px 6px;
+        flex-shrink: 0;
+    }
+
+    .mobile-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .mobile-header-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s, transform 0.1s;
+        flex-shrink: 0;
+        position: relative;
+    }
+    .search-input{
+        width:100%;
+    }
+
+    .mobile-header-btn:active {
+        background: #f0fffe;
+        transform: scale(0.92);
+    }
+
+    /* Login button states */
+    #btn-mobile-login {
+        position: relative;
+    }
+
+    #btn-mobile-login .notif-dot {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 10px;
+        height: 10px;
+        background: #ff8a9b;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
+
+    /* Change icon color based on login state */
+    #btn-mobile-login[data-logged-in="true"] svg path {
+        fill: #ec4899; /* Pink color when logged in */
+    }
+
+    #btn-mobile-login[data-logged-in="false"] svg path {
+        fill: #64748b; /* Gray color when logged out */
+    }
+    
+    /* Always show guest icon, hide user icon */
+    .login-icon-user {
+        display: none !important;
+    }
+
+    /* Play Again Banner */
+    .play-again-banner {
+        display: block;
+        padding: 12px ;
+        animation: slideDown 0.3s ease-out;
+        position: relative;
+        z-index: 2;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .play-again-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: white;
+        border-radius: 16px;
+        padding: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .play-again-content:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .play-again-thumbnail {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: #f0f0f0;
+    }
+
+    .play-again-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .play-again-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .play-again-label {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #00a8ff;
+    }
+
+    .play-again-label svg {
+        flex-shrink: 0;
+    }
+
+    .play-again-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .play-again-btn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #00a8ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 168, 255, 0.3);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .play-again-btn:active {
+        transform: scale(0.95);
+        box-shadow: 0 2px 6px rgba(0, 168, 255, 0.4);
+    }
+
+    .play-again-btn svg {
+        margin-left: 2px;
+    }
+
+    /* Mosaic wrapper */
+    .mosaic-wrapper {
+        padding: 8px 0 32px;
+    }
+
+    /* Mosaic grid mobile - 3 rows (9 ô) với padding 12px */
+    .mosaic-grid {
+        gap: 8px;
+        padding: 12px;
+        grid-auto-rows: calc((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols));
+        max-height: calc(
+            ((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols)) * 3 + 8px * 2 + 12px
+        );
+        overflow: hidden;
+    }
+    
+    /* Game page - show all games (no height limit) */
+    .game-iframe-tile ~ .mosaic-grid,
+    .mosaic-grid:has(.game-iframe-tile) {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Category page - show all games + infinite scroll */
+    .mosaic-grid:has(.category-tile-header) {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Bottom mosaic section - show all games (no height limit) */
+    .mosaic-wrapper-bottom .mosaic-grid {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    /* Show More Button */
+    .mosaic-show-more {
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    .show-more-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .show-more-btn:active {
+        transform: scale(0.95);
+    }
+
+    .show-more-circle {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        transition: box-shadow 0.2s;
+    }
+
+    .show-more-btn:active .show-more-circle {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .show-more-circle svg {
+        color: #1a9be6;
+    }
+
+    .show-more-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    /* Game tile */
+    .game-tile:active {
+        transform: scale(0.97);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    
+    .game-tile:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Label nhỏ hơn trên mobile */
+    .game-tile-label,
+    .cat-tile-label {
+        top: 6px;
+        left: -5px;
+        height: 24px;
+        width: 24px;
+    }
+
+    .game-tile-label::before,
+    .cat-tile-label::before {
+        bottom: -3px;
+        width: 3px;
+        height: 3px;
+    }
+
+    .game-tile-label::after,
+    .cat-tile-label::after {
+        bottom: -6px;
+        width: 5px;
+        height: 6px;
+    }
+
+    .game-tile-label__container img,
+    .cat-tile-label__container img {
+        width: 16px;
+        height: 16px;
+    }
+
+    
+    .tile-name {
+        font-size: 9px;
+    }
+    
+    .tile-large .tile-name {
+        font-size: 11px;
+    }
+
+    /* Sidebar full width */
+    .sidebar {
+        width: 100%;
+        --sidebar-w: 100%;
+    }
+    
+    .sidebar-inner {
+        padding: 20px 12px 12px;
+    }
+    
+    .search-box{
+        max-width: 100%;
+    }
+
+
+    /* Popular grid: dùng công thức CHÍNH XÁC giống mosaic grid mobile */
+    .recently-grid,
+    .popular-grid {
+        grid-template-columns: repeat(var(--cols), calc((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols)));
+        gap: 8px;
+    }
+    
+    .recently-grid {
+        grid-template-rows: repeat(1, calc((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols)));
+    }
+    
+    .popular-grid {
+        grid-template-rows: repeat(2, calc((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols)));
+    }
+
+    /* Categories */
+    .categories-section { 
+        padding: 0; 
+        gap: 0; 
+    }
+
+    .category-block {
+        padding: 16px 0;
+        padding-left: 0 !important;
+    }
+
+    .category-header {
+        margin-bottom: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .category-title { 
+        font-size: 24px;
+    }
+    
+    .category-icon { 
+        font-size: 18px; 
+    }
+
+    .category-games {
+        grid-template-rows: repeat(1, calc((100vw - 2*var(--pad) - (var(--cols) - 1)*8px) / var(--cols)));
+        grid-auto-rows: 0; /* Prevent additional rows from being created */
+        overflow-y: hidden; /* Hide any overflow vertically */
+        gap: 8px;
+        padding-left: 16px;
+        padding-top:0;
+        padding-bottom:0;
+    }
+    
+    /* Force all items to stay in single row */
+    .category-games .cat-game-tile,
+    .category-games .category-show-more {
+        grid-row: 1 !important; /* Force all items to row 1 only */
+    }
+    
+    /* Force all game tiles to be 1x1 on mobile */
+    .category-games .cat-game-tile {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+    }
+    
+    /* Show more button - 1x1 on mobile (single row) */
+    .category-show-more {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+    }
+
+    /* Ô 2x2 thu về 1x1 */
+    .cat-tile-large {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+    }
+
+    /* Category tile active state */
+    .cat-game-tile:active {
+        transform: scale(0.97);
+        box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+    }
+    
+    .cat-game-tile:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Page Content & Footer */
+    .page-content,
+    .footer { 
+        padding: 20px; 
+    }
+    
+    .footer { 
+        margin-bottom: 10px; 
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 28px;
+    }
+    
+    .footer-links {
+        gap: 24px;
+        margin-left: 0;
+    }
+    
+    /* Giảm font size */
+    .about-heading { 
+        font-size: 22px; 
+    }
+    
+    .about-subheading { 
+        font-size: 15px; 
+    }
+    
+    .about-inner p { 
+        font-size: 13px; 
+    }
+    .category-block.odd{
+        padding-top:32px;
+        padding-bottom:32px;
+    }
+
+    .category-block.even::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: var(--cat-bg);
+        transform: rotate(-1.5deg);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .category-block.even::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: var(--cat-bg);
+        transform: rotate(1.5deg);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+}
+
+/* Tablet 769px - 1023px */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .mobile-header { 
+        display: none; 
+    }
+}
+
+
+/* ===== PLAY AGAIN BANNER (Mobile Only) ===== */
+.play-again-banner {
+    display: block;
+    padding: 12px;
+    animation: slideDown 0.3s ease-out;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.play-again-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.play-again-content:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.play-again-thumbnail {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #f0f0f0;
+}
+
+.play-again-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.play-again-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.play-again-label {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #00a8ff;
+}
+
+.play-again-label svg {
+    flex-shrink: 0;
+}
+
+.play-again-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.play-again-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #00a8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 168, 255, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.play-again-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 6px rgba(0, 168, 255, 0.4);
+}
+
+.play-again-btn svg {
+    margin-left: 2px;
+}
+
+/* Hide on desktop */
+@media (min-width: 769px) {
+    .play-again-banner {
+        display: none !important;
+    }
+}
+
+
+/* Category icon in mobile category header */
+@media (max-width: 768px) {
+    .category-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 800;
+    }
+    
+    .category-title .category-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .category-title .category-icon svg {
+        width: 24px;
+        height: 24px;
+        display: block;
+        stroke: currentColor;
+        stroke-width: 3;
+    }
+}

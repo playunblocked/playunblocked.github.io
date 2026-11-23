@@ -1,0 +1,258 @@
+/* ===== DESKTOP STYLES (≥769px) ===== */
+body::before {
+    opacity: 0.1;
+}
+
+/* Ẩn mobile header trên desktop */
+.mobile-header {
+    display: none !important;
+}
+
+/* Ẩn play again banner trên desktop */
+.play-again-banner {
+    display: none !important;
+}
+
+
+/* Ẩn show more button trên desktop */
+.mosaic-show-more {
+    display: none !important;
+}
+
+/* ===== HEADER TILE (fixed) ===== */
+.header-tile {
+    position: fixed;
+    top: var(--pad);
+    left: var(--pad);
+    background: white;
+    border-radius: var(--radius);
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    width: calc((100vw - 2*var(--pad) - (var(--cols) - 1)*15px) / var(--cols));
+    height: calc((100vw - 2*var(--pad) - (var(--cols) - 1)*15px) / var(--cols));
+}
+
+.header-placeholder {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* ≥ 1920px: header 2×1 */
+@media (min-width: 1920px) {
+    .header-tile {
+        width: calc((100vw - 2*var(--pad) - (var(--cols) - 1)*15px) / var(--cols) * 2 + 15px);
+        height: calc((100vw - 2*var(--pad) - (var(--cols) - 1)*15px) / var(--cols));
+    }
+
+    .header-placeholder {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+}
+
+/* Layout dọc: dùng khi < 1920px */
+.header-vertical {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.header-horizontal {
+    display: none;
+}
+
+@media (min-width: 1920px) {
+    .header-vertical {
+        display: none;
+    }
+
+    .header-horizontal {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Logo area */
+.header-logo-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 0.15s;
+    overflow: hidden;
+    text-decoration: none;
+    min-height: 0;
+}
+
+.header-logo-area:hover {
+    background: #f5f5f5;
+}
+
+.tapwap-logo {
+    width: auto;
+    max-width: 80%;
+    max-height: 40px;
+    object-fit: contain;
+    display: block;
+}
+
+.tapwap-logo-fallback {
+    display: none !important;
+    font-size: 22px;
+    font-weight: 900;
+    color: #1a2e6c;
+    letter-spacing: -1px;
+}
+
+/* Hàng dưới (layout dọc): login + search ngang */
+.header-bottom-row {
+    display: flex;
+    flex-direction: row;
+    flex: 4;
+    flex-shrink: 0;
+    border-top: 1.5px solid #eee;
+}
+
+/* Logo trong layout dọc */
+.header-vertical .header-logo-area {
+    flex: 5;
+}
+
+/* Logo + Category Name container */
+.header-logo-category {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-category-name {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a2e;
+    white-space: nowrap;
+}
+
+/* Cột phải (layout ngang ≥1920): login + search dọc */
+.header-right-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    flex-shrink: 0;
+}
+
+/* Trong layout ngang, logo chiếm flex:2, right-col chiếm flex:1 */
+.header-horizontal .header-logo-area {
+    flex: 3;
+}
+
+.header-horizontal .header-right-col {
+    flex: 1;
+    width: auto;
+}
+
+/* Dividers */
+.header-divider-v {
+    width: 1.5px;
+    background: #eee;
+    flex-shrink: 0;
+    align-self: stretch;
+}
+
+.header-divider-h {
+    height: 1.5px;
+    background: #eee;
+    flex-shrink: 0;
+}
+
+/* Action buttons */
+.header-action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.header-action-btn:hover {
+    background: #f0fffe;
+}
+
+.header-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notif-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 9px;
+    height: 9px;
+    background: #ff4d6a;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Game tile hover */
+.game-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    z-index: 10;
+}
+
+.game-tile:hover .tile-overlay {
+    opacity: 1;
+}
+
+/* 3×3 tile có font size lớn hơn */
+.tile-3x3 .tile-name {
+    font-size: 18px;
+}
+
+/* Category tile hover */
+.cat-game-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    position: relative;
+}
+
+/* Tablet (768px - 1279px): điều chỉnh layout */
+@media (min-width: 768px) and (max-width: 1279px) {
+    .category-games {
+        gap: 12px;
+    }
+
+    .mosaic-grid {
+        gap: 12px;
+    }
+
+    .page-content {
+        margin: 16px 16px 28px;
+        padding: 28px 32px;
+    }
+
+    .footer {
+        margin: 16px 16px 0;
+        padding: 28px 32px;
+    }
+}
+
+/* Auth card: center và giới hạn width trên desktop */
+.auth-card {
+    max-width: 450px;
+    margin: 0 auto;
+}

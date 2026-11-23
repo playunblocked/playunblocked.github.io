@@ -1,0 +1,1215 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Research Assignment - Google Docs</title><link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"><style>*, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --docs-chrome-height: 126px;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #f8fafd;
+      color: #202124;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* GOOGLE DOCS TOP BAR */
+    .docs-chrome {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #ffffff;
+      border-bottom: 1px solid #dadce0;
+      box-shadow: 0 1px 2px rgba(60,64,67,0.06);
+    }
+
+    .docs-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px 4px 16px;
+      gap: 12px;
+    }
+
+    .docs-left-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .docs-icon-wrap {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .docs-title-and-menu {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .docs-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .docs-doc-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #1f1f1f;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 2px 6px;
+      outline: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 420px;
+      cursor: text;
+    }
+    .docs-doc-title:focus {
+      background: #ffffff;
+      border-color: #1a73e8;
+    }
+
+    .docs-meta-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #5f6368;
+    }
+    .docs-meta-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5f6368;
+    }
+    .docs-meta-btn:hover {
+      background: #f1f3f4;
+    }
+
+    .docs-saved-status {
+      font-size: 12px;
+      color: #5f6368;
+      margin-left: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .docs-menubar {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .docs-menu-item {
+      font-size: 13.5px;
+      color: #3c4043;
+      padding: 3px 7px;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .docs-menu-item:hover {
+      background: #f1f3f4;
+    }
+
+    .docs-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .docs-share-btn {
+      background: #c2e7ff;
+      color: #001d35;
+      border: none;
+      border-radius: 24px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .docs-share-btn:hover {
+      background: #b3def7;
+    }
+
+    .docs-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #1a73e8;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* TOOLBAR ROW */
+    .docs-toolbar-strip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 16px;
+      background: #edf2fa;
+      border-radius: 24px;
+      margin: 4px 16px 8px 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .docs-toolbar-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tool-btn {
+      background: transparent;
+      border: none;
+      border-radius: 4px;
+      padding: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444746;
+      font-size: 12.5px;
+    }
+    .tool-btn:hover {
+      background: #dfe3eb;
+    }
+
+    .tool-divider {
+      width: 1px;
+      height: 18px;
+      background: #c7c7c7;
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .tool-dropdown {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #1f1f1f;
+      cursor: pointer;
+    }
+    .tool-dropdown:hover {
+      background: #dfe3eb;
+    }
+
+    /* RULER */
+    .docs-ruler {
+      height: 18px;
+      background: #f8fafd;
+      border-bottom: 1px solid #e1e3e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .docs-ruler-track {
+      width: 816px;
+      height: 100%;
+      background: #ffffff;
+      border-left: 1px solid #dadce0;
+      border-right: 1px solid #dadce0;
+      position: relative;
+    }
+
+    /* DOCUMENT WORKSPACE */
+    .docs-workspace {
+      padding: 24px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* A4 PAGE CONTAINER */
+    .docs-page {
+      width: 816px;
+      height: 1056px;
+      min-height: 1056px;
+      max-height: 1056px;
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      box-shadow: 0 1px 3px 1px rgba(60,64,67,0.15);
+      border-radius: 2px;
+      padding: 72px 84px;
+      position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* EDITABLE ESSAY TEXT */
+    .docs-editor {
+      outline: none;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #1f1f1f;
+      min-height: 860px;
+      font-family: Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .docs-editor h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .docs-editor h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 22px 0 10px 0;
+    }
+
+    .docs-editor p {
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    .docs-editor ul, .docs-editor ol {
+      margin: 10px 0 14px 28px;
+    }
+
+    .docs-editor li {
+      margin-bottom: 6px;
+    }
+
+    /* GOOGLE SHEETS TABLES & RICH ELEMENTS */
+    .docs-editor table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.4;
+      border: 1px solid #d0d7de;
+    }
+
+    .docs-editor th, .docs-editor td {
+      border: 1px solid #d0d7de;
+      padding: 6px 10px;
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    .docs-editor th {
+      background-color: #f1f3f4;
+      font-weight: 600;
+    }
+
+    .docs-editor img {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      margin: 10px 0;
+      border-radius: 3px;
+    }
+
+    .docs-editor blockquote {
+      border-left: 3px solid #dadce0;
+      padding-left: 14px;
+      color: #5f6368;
+      margin: 12px 0;
+      font-style: italic;
+    }
+
+    .page-footer-note {
+      position: absolute;
+      bottom: 24px;
+      right: 48px;
+      font-size: 11px;
+      color: #70757a;
+      user-select: none;
+    }
+
+    /* PAGE DIVIDER */
+    .page-break-indicator {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: min(96vw, 1600px);
+      color: #70757a;
+      font-size: 12px;
+      user-select: none;
+    }
+    .page-break-line {
+      flex: 1;
+      height: 1px;
+      border-top: 1px dashed #c4c7c5;
+    }
+
+    /* FINAL SECTION: FULL-WIDTH GAME PORTAL */
+    .docs-game-section {
+      width: 100%;
+      margin: 20px 0 0 0;
+      background: #0b0f19;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      scroll-margin-top: var(--docs-chrome-height, 126px);
+    }
+
+    /* TOP GUIDANCE & CONTROL BAR ABOVE GAME IFRAME */
+    .docs-game-bar {
+      height: 44px;
+      background: #1e293b;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      gap: 12px;
+      user-select: none;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .game-bar-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #94a3b8;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* WIDE CLICKABLE RETURN ZONE (STRETCHES UP TO GAME-CTRLS) */
+    .game-escape-zone {
+      flex: 1;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+      min-width: 0;
+    }
+    .game-escape-zone:hover {
+      background: rgba(15, 157, 88, 0.12);
+      border-color: #22c55e;
+      border-style: dashed;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.18);
+    }
+    .game-escape-zone:active {
+      transform: scale(0.997);
+    }
+
+    .zone-escape-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #94a3b8;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+    .game-escape-zone:hover .zone-escape-hint {
+      color: #86efac;
+    }
+
+    .game-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .game-action-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .game-action-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* GAME IFRAME FULL VIEWPORT CONTAINER (FULL WIDTH, NO PAGE BORDER) */
+    .game-iframe-wrapper {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - var(--docs-chrome-height, 126px) - 44px);
+      min-height: 560px;
+      background: #0b0f19;
+      border-radius: 0;
+      overflow: hidden;
+      border: none;
+      box-shadow: none;
+    }
+
+    .game-iframe-element {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ADD PAGE BUTTON ROW */
+    .add-page-action-row {
+      display: flex;
+      justify-content: center;
+      margin: 8px 0 16px 0;
+      width: 100%;
+    }
+
+    .btn-add-page {
+      background: #ffffff;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a73e8;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .btn-add-page:hover {
+      background: #f0f7ff;
+      border-color: #1a73e8;
+    }
+
+    @media (max-width: 860px) {
+      .docs-page, .page-break-indicator, .docs-ruler-track {
+        width: 100%;
+      }
+      .docs-page {
+        padding: 36px 24px;
+        min-height: auto;
+      }
+      .game-iframe-wrapper {
+        height: calc(100vh - var(--docs-chrome-height, 126px) - 44px);
+        min-height: 480px;
+      }
+      .docs-menubar {
+        display: none;
+      }
+    }</style>
+
+
+
+<script type="module" src="/src/pages/decoy/docs.astro?astro&type=style&index=0&lang.css"></script></head> <body> <!-- GOOGLE DOCS TOP BROWSER CHROME --> <header class="docs-chrome"> <div class="docs-top-row"> <div class="docs-left-meta"> <!-- Google Docs Blue Document SVG Icon --> <a href="/" class="docs-icon-wrap" title="TapWap Home"> <svg width="40" height="40" viewBox="0 0 40 40" fill="none"> <rect width="40" height="40" rx="8" fill="#ffffff"></rect> <path d="M26 10H14C12.8954 10 12 10.8954 12 12V28C12 29.1046 12.8954 30 14 30H26C27.1046 30 28 29.1046 28 28V12C28 10.8954 27.1046 10 26 10Z" fill="#2684fc"></path> <path d="M22 10L28 16H22V10Z" fill="#a1c9fc"></path> <rect x="15" y="18" width="10" height="2" rx="1" fill="#ffffff"></rect> <rect x="15" y="22" width="10" height="2" rx="1" fill="#ffffff"></rect> <rect x="15" y="26" width="6" height="2" rx="1" fill="#ffffff"></rect> </svg> </a> <div class="docs-title-and-menu"> <div class="docs-title-row"> <span class="docs-doc-title" contenteditable="true" spellcheck="false" id="doc-title">World History Research Paper - Term 1</span> <div class="docs-meta-icons"> <button type="button" class="docs-meta-btn" title="Star document"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon> </svg> </button> <button type="button" class="docs-meta-btn" title="Move"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path> </svg> </button> <span class="docs-saved-status"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"> <path d="M20 6L9 17l-5-5"></path> </svg>
+Saved to Drive
+</span> </div> </div> <div class="docs-menubar"> <span class="docs-menu-item">File</span> <span class="docs-menu-item">Edit</span> <span class="docs-menu-item">View</span> <span class="docs-menu-item">Insert</span> <span class="docs-menu-item">Format</span> <span class="docs-menu-item">Tools</span> <span class="docs-menu-item">Extensions</span> <span class="docs-menu-item">Help</span> </div> </div> </div> <div class="docs-right-actions"> <button type="button" class="docs-meta-btn" title="Open comment history"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path> </svg> </button> <button type="button" class="docs-share-btn"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"> <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"></rect> <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2" fill="none"></path> </svg> <span>Share</span> </button> <div class="docs-user-avatar" title="Google Account: Student">S</div> </div> </div> <!-- GOOGLE DOCS TOOLBAR --> <div class="docs-toolbar-strip"> <button type="button" class="tool-btn" title="Undo (Ctrl+Z)"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg> </button> <button type="button" class="tool-btn" title="Redo (Ctrl+Y)"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"></path><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path></svg> </button> <button type="button" class="tool-btn" title="Print (Ctrl+P)"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg> </button> <div class="tool-divider"></div> <div class="tool-dropdown"><span>100%</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"></path></svg></div> <div class="tool-divider"></div> <div class="tool-dropdown"><span>Normal text</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"></path></svg></div> <div class="tool-divider"></div> <div class="tool-dropdown" style="font-family: Arial;"><span>Arial</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"></path></svg></div> <div class="tool-divider"></div> <div class="tool-dropdown"><span>11</span> <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"></path></svg></div> <div class="tool-divider"></div> <button type="button" class="tool-btn" style="font-weight: 800; font-family: serif; font-size: 14px;">B</button> <button type="button" class="tool-btn" style="font-style: italic; font-family: serif; font-size: 14px;">I</button> <button type="button" class="tool-btn" style="text-decoration: underline; font-size: 14px;">U</button> <div class="tool-divider"></div> <button type="button" class="tool-btn" title="Align Left"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg> </button> <button type="button" class="tool-btn" title="Line Spacing"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg> </button> <button type="button" class="tool-btn" title="Numbered List"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"></line><line x1="10" y1="12" x2="21" y2="12"></line><line x1="10" y1="18" x2="21" y2="18"></line><path d="M4 6h1v4"></path><path d="M4 10h2"></path><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path></svg> </button> </div> <!-- RULER --> <div class="docs-ruler" aria-hidden="true"> <div class="docs-ruler-track" id="docs-ruler-track"> <svg width="816" height="18" viewBox="0 0 816 18" xmlns="http://www.w3.org/2000/svg" style="display:block; width:100%; height:100%; user-select:none;"> <!-- Shaded Left and Right Margins --> <rect x="0" y="0" width="84" height="18" fill="#e8eaed"></rect> <rect x="84" y="0" width="648" height="18" fill="#ffffff"></rect> <rect x="732" y="0" width="84" height="18" fill="#e8eaed"></rect> <!-- Margin Boundary Dividers --> <line x1="84" y1="0" x2="84" y2="18" stroke="#dadce0" stroke-width="1"></line> <line x1="732" y1="0" x2="732" y2="18" stroke="#dadce0" stroke-width="1"></line> <!-- Tick Marks & Inch Numbers -->  <line x1="12" y1="13.5" x2="12" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="24" y1="15" x2="24" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="36" y1="12" x2="36" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="48" y1="15" x2="48" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="60" y1="13.5" x2="60" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="72" y1="15" x2="72" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="96" y1="15" x2="96" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="108" y1="13.5" x2="108" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="120" y1="15" x2="120" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="132" y1="12" x2="132" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="144" y1="15" x2="144" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="156" y1="13.5" x2="156" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="168" y1="15" x2="168" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="180" y1="11" x2="180" y2="18" stroke="#444746" stroke-width="1"></line> <text x="180" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#444746" text-anchor="middle" dominant-baseline="central"> 1 </text> <line x1="192" y1="15" x2="192" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="204" y1="13.5" x2="204" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="216" y1="15" x2="216" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="228" y1="12" x2="228" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="240" y1="15" x2="240" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="252" y1="13.5" x2="252" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="264" y1="15" x2="264" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="276" y1="11" x2="276" y2="18" stroke="#444746" stroke-width="1"></line> <text x="276" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#444746" text-anchor="middle" dominant-baseline="central"> 2 </text> <line x1="288" y1="15" x2="288" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="300" y1="13.5" x2="300" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="312" y1="15" x2="312" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="324" y1="12" x2="324" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="336" y1="15" x2="336" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="348" y1="13.5" x2="348" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="360" y1="15" x2="360" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="372" y1="11" x2="372" y2="18" stroke="#444746" stroke-width="1"></line> <text x="372" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#444746" text-anchor="middle" dominant-baseline="central"> 3 </text> <line x1="384" y1="15" x2="384" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="396" y1="13.5" x2="396" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="408" y1="15" x2="408" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="420" y1="12" x2="420" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="432" y1="15" x2="432" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="444" y1="13.5" x2="444" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="456" y1="15" x2="456" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="468" y1="11" x2="468" y2="18" stroke="#444746" stroke-width="1"></line> <text x="468" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#444746" text-anchor="middle" dominant-baseline="central"> 4 </text> <line x1="480" y1="15" x2="480" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="492" y1="13.5" x2="492" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="504" y1="15" x2="504" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="516" y1="12" x2="516" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="528" y1="15" x2="528" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="540" y1="13.5" x2="540" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="552" y1="15" x2="552" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="564" y1="11" x2="564" y2="18" stroke="#444746" stroke-width="1"></line> <text x="564" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#444746" text-anchor="middle" dominant-baseline="central"> 5 </text> <line x1="576" y1="15" x2="576" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="588" y1="13.5" x2="588" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="600" y1="15" x2="600" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="612" y1="12" x2="612" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="624" y1="15" x2="624" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="636" y1="13.5" x2="636" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="648" y1="15" x2="648" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="660" y1="11" x2="660" y2="18" stroke="#444746" stroke-width="1"></line> <text x="660" y="6" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" fill="#444746" text-anchor="middle" dominant-baseline="central"> 6 </text> <line x1="672" y1="15" x2="672" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="684" y1="13.5" x2="684" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="696" y1="15" x2="696" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="708" y1="12" x2="708" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="720" y1="15" x2="720" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="744" y1="15" x2="744" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="756" y1="12" x2="756" y2="18" stroke="#747775" stroke-width="1"></line>  <line x1="768" y1="15" x2="768" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="780" y1="13.5" x2="780" y2="18" stroke="#8e918f" stroke-width="0.85"></line>  <line x1="792" y1="15" x2="792" y2="18" stroke="#c0c4c9" stroke-width="0.75"></line>  <line x1="804" y1="12" x2="804" y2="18" stroke="#747775" stroke-width="1"></line>  <!-- Blue Margin Indent Markers --> <rect x="79" y="0" width="10" height="3" fill="#1a73e8" rx="0.5"></rect> <polygon points="79,3.5 89,3.5 84,8.5" fill="#1a73e8"></polygon> <polygon points="727,0 737,0 732,5" fill="#1a73e8"></polygon> </svg> </div> </div> </header> <!-- MAIN DOCUMENT CANVAS --> <main class="docs-workspace"> <!-- DOCUMENT PAGES CONTAINER (MULTIPLE EDITABLE PAGES) --> <div id="document-pages-container" style="display: flex; flex-direction: column; align-items: center; gap: 32px; width: 100%;"> <!-- PAGE 1: EDITABLE ESSAY TEXT --> <article class="docs-page" id="page-1"> <div class="docs-editor" contenteditable="true" spellcheck="true" id="essay-editor"> <h1>The Socio-Economic Impacts of the Industrial Revolution in Western Europe</h1> <p><strong>Course:</strong> Advanced European History & Political Economy<br> <strong>Topic:</strong> Agrarian Mechanization, Urban Density, and Early Labor Organization (1780–1850)</p> <h2>1. Introduction and Technological Foundations</h2> <p>
+The transition from predominantly agrarian economies to mechanized industrial production transformed Western Europe in unprecedented ways during the late eighteenth and early nineteenth centuries. Pioneered by improvements in atmospheric steam engines, metallurgical breakthroughs in pig iron smelting, and the mechanization of textile weaving, traditional artisanal crafts were rapidly replaced by centralized factory systems.
+</p> <h2>2. Agrarian Transformations and Enclosure Legislation</h2> <p>
+As parliamentary enclosure acts systematically consolidated open fields and restricted traditional common grazing lands, the rural agricultural workforce underwent profound structural reorganization. Displaced tenant farmers and rural laborers were progressively severed from customary subsistence farming, generating an immense labor surplus that catalyzed rapid migration toward nascent manufacturing districts.
+</p> <p> <em>[Click anywhere on this page to edit, write, or format your notes...]</em> </p> </div> <div class="page-footer-note">Page 1 of 2</div> </article> <!-- PAGE DIVIDER 1 --> <div class="page-break-indicator"> <div class="page-break-line"></div> <span>Page Break</span> <div class="page-break-line"></div> </div> <!-- PAGE 2: EDITABLE ESSAY TEXT --> <article class="docs-page" id="page-2"> <div class="docs-editor" contenteditable="true" spellcheck="true"> <h2>3. Urban Demographic Shifts and Municipal Challenges</h2> <p>
+Between 1801 and 1851, the urban population of Great Britain surged exponentially, putting tremendous strain on municipal infrastructure, sanitation, and potable water distribution. Industrial settlements such as Manchester, Birmingham, and the Ruhr Valley experienced unprecedented demographic density without proportional public health administration.
+</p> <h2>4. Parliamentary Inquiries and the Factory Acts (1833–1847)</h2> <p>
+Early investigative commissions revealed perilous working conditions, twelve-to-fourteen-hour shifts for juvenile workers, and inadequate safety safeguards around high-velocity belt-driven machinery. Over subsequent decades, successive Factory Acts progressively regulated working hours and instituted baseline educational standards for youthful apprentices.
+</p> <h2>5. Conclusion and Long-term Historical Legacy</h2> <p>
+Ultimately, industrialization altered not merely the mechanics of material production, but the fundamental social contract between labor, capital, and the state, giving rise to modern labor unions and standardized regulatory frameworks.
+</p> </div> <div class="page-footer-note">Page 2 of 2</div> </article> </div> <!-- ACTION ROW TO ADD MORE DOCUMENT PAGES --> <div class="add-page-action-row"> <button type="button" class="btn-add-page" id="btn-add-page"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"> <line x1="12" y1="5" x2="12" y2="19"></line> <line x1="5" y1="12" x2="19" y2="12"></line> </svg> <span>Add Document Page</span> </button> </div> <!-- FINAL SECTION: FULL-WIDTH GAME PORTAL --> <section class="docs-game-section" id="game-section"> <!-- TOP GUIDANCE & CONTROL BAR ABOVE GAME IFRAME --> <div class="docs-game-bar"> <!-- USAGE INSTRUCTION (SEPARATE FROM RETURN ZONE) --> <div class="game-bar-hint"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"> <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="16" y1="13" x2="8" y2="13"></line> <line x1="16" y1="17" x2="8" y2="17"></line> <polyline points="10 9 9 9 8 9"></polyline> </svg> <span>You can edit or paste your own document text</span> </div> <!-- WIDE CLICKABLE RETURN ZONE (STRETCHES UP TO GAME-CTRLS) --> <div class="game-escape-zone" id="btn-escape-zone-docs" title="Switching tabs auto-returns to Page 1 • Or click here"> <span class="zone-escape-hint"> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="18 15 12 9 6 15"></polyline></svg> <span>Switching tabs auto-returns to Page 1 • Or click here</span> </span> </div> <div class="game-ctrls"> <button type="button" class="game-action-btn" id="btn-reload-game" title="Reload Game"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg> <span>Reload</span> </button> <button type="button" class="game-action-btn" id="btn-fullscreen-game" title="Toggle Fullscreen"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg> <span>Fullscreen</span> </button> </div> </div> <!-- FULL VIEWPORT GAME CONTAINER --> <div class="game-iframe-wrapper" id="game-container"> <iframe id="stealth-game-iframe" class="game-iframe-element" src="/" allow="autoplay; fullscreen; gamepad; focus-without-user-activation *" allowfullscreen>
+        </iframe> </div> </section> </main> <script>
+    // -------------------------------------------------------------
+    // SYNC DOC TITLE TO BROWSER TAB TITLE
+    // -------------------------------------------------------------
+    const docTitleInput = document.getElementById('doc-title');
+
+    function syncTabTitle(newTitle) {
+      const cleanTitle = (newTitle || '').trim() || 'Untitled document';
+      const fullTitle = `${cleanTitle} - Google Docs`;
+      document.title = fullTitle;
+
+      try {
+        if (window.top && window.top !== window) {
+          window.top.document.title = fullTitle;
+        }
+      } catch (e) {}
+
+      try {
+        localStorage.setItem('tapwap_decoy_doc_title', cleanTitle);
+      } catch (e) {}
+    }
+
+    try {
+      const savedDocTitle = localStorage.getItem('tapwap_decoy_doc_title');
+      if (savedDocTitle && docTitleInput) {
+        docTitleInput.textContent = savedDocTitle;
+        syncTabTitle(savedDocTitle);
+      }
+    } catch (e) {}
+
+    if (docTitleInput) {
+      docTitleInput.addEventListener('input', () => {
+        syncTabTitle(docTitleInput.textContent);
+      });
+
+      docTitleInput.addEventListener('blur', () => {
+        syncTabTitle(docTitleInput.textContent);
+      });
+
+      docTitleInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          docTitleInput.blur();
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // EMERGENCY RETURN TO PAGE 1 (STEALTH ESCAPE - INSTANT JUMP)
+    // -------------------------------------------------------------
+    function escapeToPageOne() {
+      // Jump instantly to top of Page 1 (no smooth animation)
+      window.scrollTo(0, 0);
+      try {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } catch (err) {}
+
+      // Focus the cursor in the essay editor immediately
+      const editor = document.getElementById('essay-editor');
+      if (editor) {
+        editor.focus();
+      }
+    }
+
+    // -------------------------------------------------------------
+    // DYNAMIC MULTI-PAGE MANAGEMENT
+    // -------------------------------------------------------------
+    function updatePageNumbers() {
+      const pages = document.querySelectorAll('.docs-page');
+      const total = pages.length;
+      pages.forEach((page, idx) => {
+        const note = page.querySelector('.page-footer-note');
+        if (note) {
+          note.textContent = `Page ${idx + 1} of ${total}`;
+        }
+      });
+    }
+
+    updatePageNumbers();
+
+    document.getElementById('btn-add-page')?.addEventListener('click', () => {
+      const container = document.getElementById('document-pages-container');
+      if (!container) return;
+
+      const pageCount = document.querySelectorAll('.docs-page').length + 1;
+
+      const divider = document.createElement('div');
+      divider.className = 'page-break-indicator';
+      divider.innerHTML = '<div class="page-break-line"></div><span>Page Break</span><div class="page-break-line"></div>';
+
+      const newPage = document.createElement('article');
+      newPage.className = 'docs-page';
+      newPage.id = `page-${pageCount}`;
+      newPage.innerHTML = `
+        <div class="docs-editor" contenteditable="true" spellcheck="true">
+          <h2>Section ${pageCount}. Supplementary Research Notes</h2>
+          <p>Add additional research notes, primary source citations, or analytical notes here...</p>
+        </div>
+        <div class="page-footer-note"></div>
+      `;
+
+      container.appendChild(divider);
+      container.appendChild(newPage);
+      updatePageNumbers();
+
+      newPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        const editor = newPage.querySelector('.docs-editor');
+        editor?.focus();
+      }, 350);
+    });
+
+    // -------------------------------------------------------------
+    // AUTOMATIC PAGINATION ON PASTE & LONG CONTENT
+    // -------------------------------------------------------------
+    const MAX_PAGE_CONTENT_HEIGHT = 870;
+
+    function isChildOverflowing(child, editor) {
+      const edRect = editor.getBoundingClientRect();
+      const chRect = child.getBoundingClientRect();
+      return (chRect.bottom - edRect.top) > MAX_PAGE_CONTENT_HEIGHT;
+    }
+
+    function paginateAllPages(triggerScroll = false) {
+      const container = document.getElementById('document-pages-container');
+      if (!container) return;
+
+      let pages = Array.from(container.querySelectorAll('.docs-page'));
+      let pageIndex = 0;
+      let safetyCounter = 0;
+      let lastCreatedPage = null;
+      const MAX_SAFETY_LOOPS = 200;
+
+      while (pageIndex < pages.length && safetyCounter < MAX_SAFETY_LOOPS) {
+        safetyCounter++;
+        const currentPage = pages[pageIndex];
+        const editor = currentPage.querySelector('.docs-editor');
+
+        if (!editor || editor.children.length === 0) {
+          pageIndex++;
+          continue;
+        }
+
+        // 1. Unwrap any generic container wrappers (e.g. <div>, <section>, <google-sheets-html-origin>)
+        // so that individual paragraphs and tables can be paginated child-by-child!
+        let hasWrappers = true;
+        let unwrapGuard = 0;
+        while (hasWrappers && unwrapGuard++ < 10) {
+          hasWrappers = false;
+          Array.from(editor.children).forEach(child => {
+            if (/^(DIV|SECTION|ARTICLE|GOOGLE-SHEETS-HTML-ORIGIN)$/i.test(child.tagName)) {
+              if (child.querySelector('p, table, h1, h2, h3, h4, h5, h6, ul, ol, div')) {
+                while (child.firstChild) {
+                  editor.insertBefore(child.firstChild, child);
+                }
+                child.remove();
+                hasWrappers = true;
+              }
+            }
+          });
+        }
+
+        const overflowingNodes = [];
+
+        // Check if multiple children exist and pop the ones that overflow past 870px
+        while (editor.children.length > 1) {
+          const last = editor.lastElementChild;
+          if (isChildOverflowing(last, editor)) {
+            overflowingNodes.unshift(last);
+            last.remove();
+          } else {
+            break;
+          }
+        }
+
+        // If only 1 child remains and it alone overflows past 870px
+        if (editor.children.length === 1) {
+          const only = editor.firstElementChild;
+          if (only && isChildOverflowing(only, editor)) {
+            if (only.tagName === 'TABLE') {
+              // Split table rows across pages
+              const rows = Array.from(only.querySelectorAll('tr'));
+              if (rows.length > 2) {
+                const overflowRows = [];
+                while (rows.length > 1 && isChildOverflowing(only, editor)) {
+                  const lastRow = rows.pop();
+                  overflowRows.unshift(lastRow);
+                  lastRow.remove();
+                }
+                if (overflowRows.length > 0) {
+                  const nextTable = document.createElement('table');
+                  nextTable.className = only.className || '';
+                  if (only.getAttribute('style')) nextTable.setAttribute('style', only.getAttribute('style'));
+
+                  // Clone the table header row if one exists so continuation pages also have headers
+                  const theadRow = only.querySelector('thead tr') || (rows[0]?.querySelector('th') ? rows[0] : null);
+                  if (theadRow) {
+                    const thead = document.createElement('thead');
+                    thead.appendChild(theadRow.cloneNode(true));
+                    nextTable.appendChild(thead);
+                  }
+
+                  const tbody = document.createElement('tbody');
+                  overflowRows.forEach(r => tbody.appendChild(r));
+                  nextTable.appendChild(tbody);
+                  overflowingNodes.unshift(nextTable);
+                }
+              }
+            } else if (only.tagName === 'UL' || only.tagName === 'OL') {
+              // Split list items across pages
+              const items = Array.from(only.querySelectorAll('li'));
+              if (items.length > 1) {
+                const overflowItems = [];
+                while (items.length > 1 && isChildOverflowing(only, editor)) {
+                  const lastLi = items.pop();
+                  overflowItems.unshift(lastLi);
+                  lastLi.remove();
+                }
+                if (overflowItems.length > 0) {
+                  const nextList = document.createElement(only.tagName.toLowerCase());
+                  overflowItems.forEach(li => nextList.appendChild(li));
+                  overflowingNodes.unshift(nextList);
+                }
+              }
+            } else if (only.children.length > 0 && !/^(P|H1|H2|H3|H4|H5|H6)$/i.test(only.tagName)) {
+              // If it's a div or block container with children, unwrap it
+              while (only.firstChild) {
+                editor.insertBefore(only.firstChild, only);
+              }
+              only.remove();
+              continue;
+            } else {
+              // Split text by words for P, DIV, BLOCKQUOTE, etc.
+              const words = (only.textContent || '').split(/\s+/).filter(Boolean);
+              if (words.length > 3) {
+                let lo = 1, hi = words.length, best = 1;
+                while (lo <= hi) {
+                  const mid = Math.floor((lo + hi) / 2);
+                  only.textContent = words.slice(0, mid).join(' ');
+                  if (!isChildOverflowing(only, editor)) {
+                    best = mid;
+                    lo = mid + 1;
+                  } else {
+                    hi = mid - 1;
+                  }
+                }
+                only.textContent = words.slice(0, best).join(' ');
+                const restTag = /^(P|DIV|BLOCKQUOTE)$/i.test(only.tagName) ? only.tagName.toLowerCase() : 'p';
+                const rest = document.createElement(restTag);
+                rest.textContent = words.slice(best).join(' ');
+                overflowingNodes.unshift(rest);
+              }
+            }
+          }
+        }
+
+        // If nodes overflowed, move them to the next page
+        if (overflowingNodes.length > 0) {
+          let nextPage = pages[pageIndex + 1];
+          if (!nextPage) {
+            const divider = document.createElement('div');
+            divider.className = 'page-break-indicator';
+            divider.innerHTML = '<div class="page-break-line"></div><span>Page Break</span><div class="page-break-line"></div>';
+
+            nextPage = document.createElement('article');
+            nextPage.className = 'docs-page';
+            nextPage.id = `page-${pages.length + 1}`;
+            nextPage.innerHTML = `
+              <div class="docs-editor" contenteditable="true" spellcheck="true"></div>
+              <div class="page-footer-note"></div>
+            `;
+
+            container.appendChild(divider);
+            container.appendChild(nextPage);
+            pages = Array.from(container.querySelectorAll('.docs-page'));
+            lastCreatedPage = nextPage;
+          }
+
+          const nextEditor = nextPage.querySelector('.docs-editor');
+          if (nextEditor) {
+            for (let j = overflowingNodes.length - 1; j >= 0; j--) {
+              nextEditor.prepend(overflowingNodes[j]);
+            }
+          }
+        }
+
+        pageIndex++;
+      }
+
+      // Clean up any trailing empty pages (always keep Page 1)
+      pages = Array.from(container.querySelectorAll('.docs-page'));
+      while (pages.length > 1) {
+        const lastP = pages[pages.length - 1];
+        const lastEd = lastP.querySelector('.docs-editor');
+        if (!lastEd || !lastEd.textContent.trim()) {
+          const prev = lastP.previousElementSibling;
+          if (prev && prev.classList.contains('page-break-indicator')) prev.remove();
+          lastP.remove();
+          pages.pop();
+        } else {
+          break;
+        }
+      }
+
+      updatePageNumbers();
+
+      // Automatically jump (smooth scroll & focus) to the continuation page if new pages were created
+      if (triggerScroll && lastCreatedPage) {
+        lastCreatedPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const lastEd = lastCreatedPage.querySelector('.docs-editor');
+        if (lastEd) {
+          setTimeout(() => {
+            lastEd.focus();
+            const sel = window.getSelection();
+            if (sel) {
+              const range = document.createRange();
+              range.selectNodeContents(lastEd.lastElementChild || lastEd);
+              range.collapse(false);
+              sel.removeAllRanges();
+              sel.addRange(range);
+            }
+          }, 300);
+        }
+      }
+    }
+
+    // Delegate paste and input events across all pages in the container
+    const docPagesContainer = document.getElementById('document-pages-container');
+    let allSelected = false;
+
+    function getEditors() {
+      return Array.from(document.querySelectorAll('#document-pages-container .docs-editor'));
+    }
+
+    function selectionSpansPages() {
+      const sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return false;
+      const a = sel.anchorNode && (sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentElement)?.closest('.docs-editor');
+      const f = sel.focusNode && (sel.focusNode.nodeType === 1 ? sel.focusNode : sel.focusNode.parentElement)?.closest('.docs-editor');
+      return !!(a && f && a !== f);
+    }
+
+    function clearAllPages() {
+      const container = document.getElementById('document-pages-container');
+      if (!container) return;
+      const pages = Array.from(container.querySelectorAll('.docs-page'));
+      // Remove all pages after page 1
+      for (let i = 1; i < pages.length; i++) {
+        const p = pages[i];
+        const prev = p.previousElementSibling;
+        if (prev && prev.classList.contains('page-break-indicator')) prev.remove();
+        p.remove();
+      }
+      const page1Editor = pages[0]?.querySelector('.docs-editor');
+      if (page1Editor) {
+        page1Editor.innerHTML = '<p><br></p>';
+        page1Editor.focus();
+        const range = document.createRange();
+        range.selectNodeContents(page1Editor.firstChild || page1Editor);
+        range.collapse(true);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      allSelected = false;
+      updatePageNumbers();
+    }
+
+    if (docPagesContainer) {
+      // Ctrl+A selects the content of all pages
+      docPagesContainer.addEventListener('keydown', (e) => {
+        const isCmd = e.ctrlKey || e.metaKey;
+        if (isCmd && e.key.toLowerCase() === 'a') {
+          e.preventDefault();
+          const eds = getEditors();
+          if (eds.length > 0) {
+            const first = eds[0];
+            const last = eds[eds.length - 1];
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            const range = document.createRange();
+            range.setStart(first, 0);
+            range.setEnd(last, last.childNodes.length);
+            sel.addRange(range);
+            allSelected = true;
+          }
+          return;
+        }
+
+        if (allSelected || selectionSpansPages()) {
+          if (e.key === 'Backspace' || e.key === 'Delete') {
+            e.preventDefault();
+            clearAllPages();
+            return;
+          }
+          if (!isCmd && e.key.length === 1) {
+            clearAllPages();
+            return;
+          }
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            clearAllPages();
+            return;
+          }
+        }
+      });
+
+      docPagesContainer.addEventListener('mousedown', () => {
+        allSelected = false;
+      });
+
+      docPagesContainer.addEventListener('cut', (e) => {
+        if (allSelected || selectionSpansPages()) {
+          e.preventDefault();
+          const text = window.getSelection().toString();
+          if (e.clipboardData) e.clipboardData.setData('text/plain', text);
+          clearAllPages();
+        }
+      });
+
+      // Paste with Rich Format (Google Sheets tables, Google Docs styles, images) or plain text
+      docPagesContainer.addEventListener('paste', (e) => {
+        const rawHtml = e.clipboardData ? e.clipboardData.getData('text/html') : '';
+        const rawText = e.clipboardData ? e.clipboardData.getData('text/plain') : '';
+        if (!rawHtml && !rawText) return;
+        e.preventDefault();
+
+        if (allSelected || selectionSpansPages()) {
+          clearAllPages();
+        }
+
+        const activeEditor = document.activeElement?.closest('.docs-editor') || getEditors()[0];
+        if (!activeEditor) return;
+
+        let contentToInsert = '';
+
+        // Check if clipboard contains rich HTML (Google Sheets table, images, or styled elements)
+        if (rawHtml && (rawHtml.includes('<table') || rawHtml.includes('<img') || rawHtml.includes('<p') || rawHtml.includes('<div') || rawHtml.includes('<span') || rawHtml.includes('<ul') || rawHtml.includes('<ol') || rawHtml.includes('<b') || rawHtml.includes('<strong') || rawHtml.includes('<i') || rawHtml.includes('<h') || rawHtml.includes('<td') || rawHtml.includes('<tr'))) {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(rawHtml, 'text/html');
+
+          // Strip unsafe scripts, metas, links
+          doc.querySelectorAll('script, meta, link, base').forEach(el => el.remove());
+
+          // Clean Google Sheets and standard tables
+          doc.querySelectorAll('table').forEach(tbl => {
+            tbl.style.maxWidth = '100%';
+            tbl.style.borderCollapse = 'collapse';
+            tbl.style.margin = '14px 0';
+          });
+
+          // Responsive images
+          doc.querySelectorAll('img').forEach(img => {
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.borderRadius = '3px';
+          });
+
+          // Unwrap top-level wrapper if it only wraps the content
+          let body = doc.body;
+          while (body.children.length === 1 && /^(DIV|SPAN|SECTION|GOOGLE-SHEETS-HTML-ORIGIN)$/i.test(body.firstElementChild.tagName) && body.firstElementChild.tagName !== 'TABLE') {
+            const single = body.firstElementChild;
+            const frag = document.createDocumentFragment();
+            while (single.firstChild) frag.appendChild(single.firstChild);
+            single.replaceWith(frag);
+          }
+
+          contentToInsert = body.innerHTML;
+        } else if (rawText && rawText.includes('\t') && rawText.includes('\n')) {
+          // If rawHtml wasn't present or was stripped on large clipboard, but plain text has tabs + newlines (TSV from Google Sheets / Excel):
+          // Convert TSV into a rich Google Sheets styled table!
+          const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const lines = rawText.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n').filter(r => r.trim());
+          if (lines.length > 0) {
+            const tableHtml = ['<table style="width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px;">'];
+            lines.forEach((line, rIdx) => {
+              const cells = line.split('\t');
+              const tag = rIdx === 0 ? 'th' : 'td';
+              const bg = rIdx === 0 ? 'background-color: #f1f3f4; font-weight: 600;' : (rIdx % 2 === 1 ? 'background-color: #ffffff;' : 'background-color: #fbfbfb;');
+              tableHtml.push('<tr>');
+              cells.forEach(cell => {
+                tableHtml.push(`<${tag} style="border: 1px solid #d0d7de; padding: 6px 10px; ${bg}">${esc(cell.trim())}</${tag}>`);
+              });
+              tableHtml.push('</tr>');
+            });
+            tableHtml.push('</table>');
+            contentToInsert = tableHtml.join('');
+          }
+        } else if (rawText) {
+          // Plain text fallback: convert newlines into <p>
+          const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const lines = rawText.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+          contentToInsert = lines
+            .map(l => l.trim() ? `<p>${esc(l)}</p>` : '<p><br></p>')
+            .join('');
+        }
+
+        if (contentToInsert) {
+          if (!activeEditor.textContent.trim()) {
+            activeEditor.innerHTML = contentToInsert;
+          } else {
+            // Use Range API for unlimited payload size (execCommand insertHTML truncates large HTML)
+            const sel = window.getSelection();
+            if (sel && sel.rangeCount > 0) {
+              const range = sel.getRangeAt(0);
+              range.deleteContents();
+              const temp = document.createElement('div');
+              temp.innerHTML = contentToInsert;
+              const frag = document.createDocumentFragment();
+              let node;
+              while ((node = temp.firstChild)) {
+                frag.appendChild(node);
+              }
+              range.insertNode(frag);
+            } else {
+              activeEditor.innerHTML = contentToInsert;
+            }
+          }
+        }
+
+        allSelected = false;
+
+        // Trigger pagination immediately with auto-scroll jump to continuation page
+        setTimeout(() => paginateAllPages(true), 40);
+        setTimeout(() => paginateAllPages(false), 200);
+      });
+
+      let inputDebounceTimer = null;
+      docPagesContainer.addEventListener('input', () => {
+        clearTimeout(inputDebounceTimer);
+        inputDebounceTimer = setTimeout(() => paginateAllPages(true), 100);
+      });
+    }
+
+    // -------------------------------------------------------------
+    // GAME SELECTOR & IFRAME CONTROLS
+    // -------------------------------------------------------------
+    const gameSelector = document.getElementById('game-selector');
+    const gameIframe = document.getElementById('stealth-game-iframe');
+    const btnReload = document.getElementById('btn-reload-game');
+    const btnFullscreen = document.getElementById('btn-fullscreen-game');
+    const btnEscapeZoneDocs = document.getElementById('btn-escape-zone-docs');
+    const gameContainer = document.getElementById('game-container');
+
+    // Check query params for custom initial game URL (e.g. /decoy/docs?game=/game/slope)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialGame = urlParams.get('game');
+    if (initialGame && gameIframe) {
+      gameIframe.src = initialGame;
+      if (gameSelector) {
+        gameSelector.value = initialGame;
+      }
+    }
+
+    gameSelector?.addEventListener('change', (e) => {
+      const targetSrc = e.target.value;
+      if (gameIframe && targetSrc) {
+        gameIframe.src = targetSrc;
+      }
+    });
+
+    btnReload?.addEventListener('click', () => {
+      if (gameIframe) {
+        const currentSrc = gameIframe.src;
+        gameIframe.src = 'about:blank';
+        setTimeout(() => {
+          gameIframe.src = currentSrc;
+        }, 80);
+      }
+    });
+
+    btnFullscreen?.addEventListener('click', () => {
+      if (!gameContainer) return;
+      if (!document.fullscreenElement) {
+        gameContainer.requestFullscreen?.().catch(() => {});
+      } else {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    });
+
+    btnEscapeZoneDocs?.addEventListener('click', escapeToDocTop);
+
+    // -------------------------------------------------------------
+    // LAUNCH GAME MODE (AUTO-SCROLL TO GAME IF REQUESTED)
+    // -------------------------------------------------------------
+    const shouldLaunchDocGame = urlParams.get('launch') === 'game' || 
+                                urlParams.get('game') === '1' || 
+                                window.location.hash === '#game';
+
+    function getDocsChromeHeight() {
+      const docsChrome = document.querySelector('.docs-chrome');
+      if (docsChrome) {
+        const h = Math.round(docsChrome.getBoundingClientRect().height);
+        if (h > 0) {
+          document.documentElement.style.setProperty('--docs-chrome-height', `${h}px`);
+          return h;
+        }
+      }
+      return 126;
+    }
+
+    function jumpToDocGame() {
+      const gameSection = document.getElementById('game-section');
+      if (gameSection) {
+        const chromeHeight = getDocsChromeHeight();
+        const targetTop = window.scrollY + gameSection.getBoundingClientRect().top - chromeHeight;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'instant' });
+        try {
+          gameIframe?.focus();
+        } catch (e) {}
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      getDocsChromeHeight();
+    });
+
+    if (shouldLaunchDocGame) {
+      getDocsChromeHeight();
+      jumpToDocGame();
+      requestAnimationFrame(jumpToDocGame);
+      setTimeout(jumpToDocGame, 60);
+      setTimeout(jumpToDocGame, 200);
+      setTimeout(jumpToDocGame, 500);
+      window.addEventListener('load', jumpToDocGame);
+    }
+
+    // Emergency return to top function
+    // Auto-return to document top when switching tabs or minimizing window
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        escapeToDocTop();
+      }
+    });
+
+    function escapeToDocTop() {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      const editor = document.getElementById('essay-editor');
+      if (editor) {
+        editor.focus();
+      }
+      try {
+        if (window.location.search || window.location.hash) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      } catch (err) {}
+    }
+  </script> </body> </html>
