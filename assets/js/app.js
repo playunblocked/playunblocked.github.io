@@ -374,10 +374,31 @@ if (!window.__tapwapAppBound) {
 function ensureCdnUrl(url, type = 'image') {
     if (!url) return '';
     
+    // Clean accidental duplicate /games/games/
+    url = url.replace(/\/games\/games\//g, '/games/');
+
+    // Strip host if localhost:4321 was embedded in data
+    if (url.includes('localhost:4321/games/')) {
+        url = url.replace(/https?:\/\/localhost:4321\/games\//, '/games/');
+    }
+
     // Already has local or full URL
     if (url.startsWith('http://localhost') || url.startsWith('http://127.0.0.1')) {
         return url;
     }
+
+    // If it already starts with /games/, return clean path or relative path
+    if (url.startsWith('/games/')) {
+        return url;
+    }
+
+    // Already has CDN domain or full URL
+    if (url.includes('cdn.tapwap.com') || url.startsWith('http://') || url.startsWith('https://')) {
+        return url;
+    }
+
+    // Strip leading slashes and optional 'games/' prefix so it never duplicates
+    const clean = url.replace(/^\/?(?:games\/)?/, '');
 
     const isLocalDev = typeof window !== 'undefined' && (
         window.location.hostname === 'localhost' || 
@@ -385,21 +406,22 @@ function ensureCdnUrl(url, type = 'image') {
         window.location.hostname.startsWith('192.168.') || 
         window.location.hostname.startsWith('10.') || 
         window.location.hostname.startsWith('172.') || 
-        window.location.port === '4321'
+        window.location.port === '4321' ||
+        window.location.port === '8945'
     );
 
-    if (isLocalDev && url.includes('cdn.tapwap.com')) {
-        return url.replace('https://cdn.tapwap.com/', `${window.location.origin}/`);
+    const isStatic = typeof window !== 'undefined' && (
+        window.location.hostname.includes('github.io') ||
+        window.__isStaticSite === true
+    );
+
+    if (isStatic) {
+        return `/games/${clean}`;
     }
 
-    // Already has CDN domain or full URL
-    if (url.includes('cdn.tapwap.com') || url.startsWith('http://') || url.startsWith('https://')) {
-        return url;
-    }
-    
     // Add CDN / Local prefix
     const CDN_BASE = isLocalDev ? `${window.location.origin}/games/` : 'https://cdn.tapwap.com/games/';
-    return CDN_BASE + url.replace(/^\/+/, '');
+    return CDN_BASE + clean;
 }
 
 // Helper to normalize category IDs to array (first item is primary)
@@ -569,13 +591,18 @@ function prioritizePlayedCategories() {
 
 function savePlayedGame(gameData, playDuration = 0) {
     try {
-        if (!gameData || !gameData.id) return;
+        if (!gameData || (!gameData.id && !gameData.slug)) return;
         let recentGames = JSON.parse(localStorage.getItem('recentlyPlayedGames') || '[]');
         
-        // Check if game already exists by ID
-        const existingIndex = recentGames.findIndex(g => (g.id || g.game_id) === gameData.id);
+        // Check if game already exists by ID or by slug
+        const existingIndex = recentGames.findIndex(g => 
+            (gameData.id && (g.id || g.game_id) === gameData.id) ||
+            (gameData.slug && g.slug && g.slug === gameData.slug)
+        );
         
-        const catIds = normalizeCategoryIds(gameData.category_id);
+        const catIds = normalizeCategoryIds(gameData.category_id || gameData.categories);
+        const gameId = gameData.id || (existingIndex >= 0 ? recentGames[existingIndex].id : Date.now());
+        const gameSlug = gameData.slug || (existingIndex >= 0 ? recentGames[existingIndex].slug : '');
 
         if (existingIndex >= 0) {
             // Update existing game
@@ -590,18 +617,17 @@ function savePlayedGame(gameData, playDuration = 0) {
                 recentGames[existingIndex].category_id = catIds;
             } else if (recentGames[existingIndex].category_id !== undefined) {
                 recentGames[existingIndex].category_id = normalizeCategoryIds(recentGames[existingIndex].category_id);
-            } else {
-                recentGames[existingIndex].category_id = [];
             }
-            delete recentGames[existingIndex].slug;
+            if (gameSlug) recentGames[existingIndex].slug = gameSlug;
             
             // Move to front
             const game = recentGames.splice(existingIndex, 1)[0];
             recentGames.unshift(game);
         } else {
-            // Add new game with id, category_id array, name, image_url, video_url (strictly NO slug)
+            // Add new game with id, slug, category_id array, name, image_url, video_url
             recentGames.unshift({
-                id: gameData.id,
+                id: gameId,
+                slug: gameSlug,
                 category_id: catIds,
                 name: gameData.name,
                 image_url: ensureCdnUrl(gameData.image_url),
@@ -611,31 +637,34 @@ function savePlayedGame(gameData, playDuration = 0) {
             });
         }
         
-        // Clean legacy slug property & normalize category_id on all items
+        // Normalize category_id on all items
         recentGames.forEach(g => {
-            delete g.slug;
             if (g.category_id !== undefined) {
                 g.category_id = normalizeCategoryIds(g.category_id);
             }
         });
         
-        // Keep only last 10 games
-        recentGames = recentGames.slice(0, 10);
+        // Keep only last 15 games
+        recentGames = recentGames.slice(0, 15);
         
         localStorage.setItem('recentlyPlayedGames', JSON.stringify(recentGames));
-        console.log('✅ Saved played game ID:', gameData.id, `(${Math.round(playDuration / 1000)}s)`);
+        console.log('✅ Saved played game:', gameData.name, `(+${Math.round(playDuration / 1000)}s)`);
         
         // Update live user account stats
         try {
-            const currentStats = window.currentUserStats || JSON.parse(localStorage.getItem('userAccountStats') || 'null');
-            if (currentStats) {
-                if (existingIndex < 0) {
-                    currentStats.games_played = (currentStats.games_played || 0) + 1;
-                }
-                currentStats.time_played = (currentStats.time_played || 0) + playDuration;
-                window.currentUserStats = currentStats;
-                localStorage.setItem('userAccountStats', JSON.stringify(currentStats));
+            let currentStats = window.currentUserStats || JSON.parse(localStorage.getItem('userAccountStats') || 'null');
+            if (!currentStats || typeof currentStats !== 'object') {
+                currentStats = {
+                    games_played: recentGames.length,
+                    time_played: 0
+                };
             }
+            if (existingIndex < 0) {
+                currentStats.games_played = Math.max(recentGames.length, (currentStats.games_played || 0) + 1);
+            }
+            currentStats.time_played = (currentStats.time_played || 0) + playDuration;
+            window.currentUserStats = currentStats;
+            localStorage.setItem('userAccountStats', JSON.stringify(currentStats));
         } catch (_) {}
         
         // Sync cookie for SSR
@@ -647,7 +676,9 @@ function savePlayedGame(gameData, playDuration = 0) {
         prioritizePlayedCategories();
         
         // Also save to database if user is logged in
-        saveGamePlayToDB(gameData.id, playDuration);
+        if (gameId) {
+            saveGamePlayToDB(gameId, playDuration);
+        }
     } catch (e) {
         console.error('Error saving played game:', e);
     }
@@ -656,6 +687,12 @@ function savePlayedGame(gameData, playDuration = 0) {
 async function saveGamePlayToDB(gameId, playDuration) {
     try {
         if (!window.currentUser || !gameId) return;
+        const isStaticHost = window.location.hostname.includes('github.io') || 
+                             window.location.protocol === 'file:' ||
+                             window.__isStaticSite === true ||
+                             window.location.port === '8945' ||
+                             window.currentUser.provider === 'local';
+        if (isStaticHost) return;
         
         // Save to database directly using gameId
         await fetch('/api/user/game-history', {
@@ -673,7 +710,7 @@ async function saveGamePlayToDB(gameId, playDuration) {
     }
 }
 
-// Track game play time on game pages (supports Astro ClientRouter transitions)
+// Track game play time on game pages (supports Astro ClientRouter transitions & static pages)
 var currentGameTrackingCleanup = window.currentGameTrackingCleanup || null;
 
 function initGamePlayTracking() {
@@ -682,67 +719,95 @@ function initGamePlayTracking() {
         currentGameTrackingCleanup = null;
     }
 
-    if (!window.location.pathname.startsWith('/game/')) return;
+    if (!window.location.pathname.includes('/game/')) return;
 
     console.log('🎮 Game page detected, starting play tracking...');
-    let playStartTime = Date.now();
     let lastSaveTime = Date.now();
-    let hasSavedOnce = false;
-    
-    // Cache game data from API
     let cachedGameData = null;
     
+    // Extract slug from URL reliably (/game/thumb-fighter, /game/thumb-fighter/, /game/thumb-fighter.html)
+    const pathParts = window.location.pathname.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
+    const gameIdx = pathParts.indexOf('game');
+    const slug = (gameIdx >= 0 && pathParts[gameIdx + 1]) ? pathParts[gameIdx + 1] : (pathParts.pop() || '');
+
     const getGameData = async () => {
-        // Return cached if available
-        if (cachedGameData) {
-            return cachedGameData;
+        if (cachedGameData) return cachedGameData;
+        
+        // 1. Try in-memory / global games index cache
+        if (window.__gamesIndexCache && Array.isArray(window.__gamesIndexCache)) {
+            const found = window.__gamesIndexCache.find(g => g.slug === slug || String(g.id) === slug);
+            if (found) {
+                cachedGameData = {
+                    id: found.id,
+                    slug: found.slug,
+                    name: found.name,
+                    image_url: ensureCdnUrl(found.image_url),
+                    video_url: ensureCdnUrl(found.video_url, 'video') || '',
+                    category_id: normalizeCategoryIds(found.categories)
+                };
+                return cachedGameData;
+            }
         }
-        
-        const slug = window.location.pathname.split('/').pop();
-        
+
+        // 2. Try fetching static games-index.json
         try {
-            // Fetch full game data from API (includes CDN URLs and ID)
+            const res = await fetch('/data/games-index.json');
+            if (res.ok) {
+                const list = await res.json();
+                window.__gamesIndexCache = list;
+                const found = list.find(g => g.slug === slug || String(g.id) === slug);
+                if (found) {
+                    cachedGameData = {
+                        id: found.id,
+                        slug: found.slug,
+                        name: found.name,
+                        image_url: ensureCdnUrl(found.image_url),
+                        video_url: ensureCdnUrl(found.video_url, 'video') || '',
+                        category_id: normalizeCategoryIds(found.categories)
+                    };
+                    return cachedGameData;
+                }
+            }
+        } catch (_) {}
+
+        // 3. Try API fetch (dynamic dev server)
+        try {
             const response = await fetch(`/api/games/${slug}`);
             if (response.ok) {
                 const data = await response.json();
                 if (data.game) {
                     cachedGameData = {
                         id: data.game.id,
+                        slug: data.game.slug || slug,
                         category_id: normalizeCategoryIds(data.game.category_id),
                         name: data.game.name,
                         image_url: data.game.cdn_image_url || ensureCdnUrl(data.game.image_url),
                         video_url: data.game.cdn_video_url || ensureCdnUrl(data.game.video_url, 'video') || ''
                     };
-                    console.log('📊 Game data from API:', cachedGameData);
                     return cachedGameData;
                 }
             }
-        } catch (error) {
-            console.warn('⚠️ Failed to fetch game data from API:', error);
-        }
+        } catch (_) {}
         
-        // Fallback to DOM parsing
-        const gameIdEl = document.querySelector('[data-game-id]');
-        const gameId = gameIdEl ? parseInt(gameIdEl.dataset.gameId) : null;
-        const gameTitle = document.querySelector('.game-info-title, .game-about-title');
+        // 4. Fallback to DOM elements of the game page
+        const mainEl = document.querySelector('main.mosaic-wrapper[data-game-id]');
+        const gameId = mainEl ? parseInt(mainEl.dataset.gameId) : null;
+        const gameTitle = document.querySelector('.game-info-title, .game-about-title, h1.game-about-title');
         const gameImg = document.querySelector('.game-info-icon, .game-about-thumb');
-        const mosaicWrapper = document.querySelector('.mosaic-wrapper');
-        const categoryEl = document.querySelector('[data-category-id]');
-        const categoryIds = normalizeCategoryIds(categoryEl ? categoryEl.dataset.categoryId : null);
+        const categoryIds = normalizeCategoryIds(mainEl ? mainEl.dataset.categoryId : null);
         
-        if (gameTitle && gameId) {
-            const gameData = {
-                id: gameId,
+        if (gameTitle) {
+            cachedGameData = {
+                id: gameId || Date.now(),
+                slug: slug,
                 category_id: categoryIds,
                 name: gameTitle.textContent.trim(),
                 image_url: gameImg ? ensureCdnUrl(gameImg.src) : '',
-                video_url: mosaicWrapper ? ensureCdnUrl(mosaicWrapper.dataset.gameVideo, 'video') : ''
+                video_url: mainEl ? ensureCdnUrl(mainEl.dataset.gameVideo, 'video') : ''
             };
-            console.log('📊 Game data from DOM:', gameData);
-            return gameData;
+            return cachedGameData;
         }
         
-        console.warn('⚠️ Game data not found');
         return null;
     };
     
@@ -751,55 +816,47 @@ function initGamePlayTracking() {
         const duration = now - lastSaveTime;
         const gameData = await getGameData();
         
-        console.log(`⏱️ Attempting to save play time: ${Math.round(duration / 1000)}s`);
-        
-        if (gameData && duration > 0) {
+        if (gameData && duration >= 1000) {
+            console.log(`⏱️ Saving play time: ${Math.round(duration / 1000)}s for ${gameData.name}`);
             savePlayedGame(gameData, duration);
             lastSaveTime = now;
-            hasSavedOnce = true;
         }
     };
-    
-    // Tracking intervals loaded from Site Settings
-    const trackingConfig = window.gameTrackingConfig || {};
-    const quickSaveMs = (trackingConfig.quickSaveSeconds || 5) * 1000;
-    const firstSaveMs = (trackingConfig.firstSaveSeconds || 60) * 1000;
-    const recurringIntervalMs = (trackingConfig.intervalSeconds || 30) * 1000;
 
-    // Save immediately after initial quick interval
-    const timer1 = setTimeout(() => {
-        console.log(`⏰ Quick save after ${quickSaveMs / 1000}s`);
-        saveCurrentPlayTime();
-    }, quickSaveMs);
-    
-    let intervalId = null;
-    const timer2 = setTimeout(() => {
-        console.log(`⏰ First standard save triggered after ${firstSaveMs / 1000}s`);
-        saveCurrentPlayTime();
-        
-        // Then save periodically according to recurringIntervalMs
-        intervalId = setInterval(() => {
-            console.log(`⏰ Interval save triggered (${recurringIntervalMs / 1000}s)`);
-            saveCurrentPlayTime();
-        }, recurringIntervalMs);
-    }, firstSaveMs);
-    
-    // Save when visibility changes (user switches tab)
+    // IMMEDIATELY register game as played (duration 0) on load so it appears right away
+    getGameData().then(gameData => {
+        if (gameData) {
+            savePlayedGame(gameData, 0);
+            markRecentlyPlayedGames();
+        }
+    });
+
+    // Save periodically every 5 seconds
+    const intervalId = setInterval(saveCurrentPlayTime, 5000);
+
+    // Save when visibility changes (user switches tab or locks screen)
     const onVisibilityChange = () => {
-        if (document.hidden && hasSavedOnce) {
+        if (document.hidden) {
             saveCurrentPlayTime();
+        } else {
+            lastSaveTime = Date.now();
         }
     };
     document.addEventListener('visibilitychange', onVisibilityChange);
 
+    // Save on page unload / navigation (both full page and Astro SPA)
+    const onPageLeave = () => {
+        saveCurrentPlayTime();
+    };
+    window.addEventListener('beforeunload', onPageLeave);
+    window.addEventListener('pagehide', onPageLeave);
+
     currentGameTrackingCleanup = () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        if (intervalId) clearInterval(intervalId);
+        clearInterval(intervalId);
         document.removeEventListener('visibilitychange', onVisibilityChange);
-        if (hasSavedOnce) {
-            saveCurrentPlayTime();
-        }
+        window.removeEventListener('beforeunload', onPageLeave);
+        window.removeEventListener('pagehide', onPageLeave);
+        saveCurrentPlayTime();
     };
 }
 
@@ -821,11 +878,14 @@ function markRecentlyPlayedGames() {
     try {
         const recentGames = JSON.parse(localStorage.getItem('recentlyPlayedGames') || '[]');
         const playedIds = new Set(recentGames.map(g => (g.id || g.game_id)).filter(Boolean));
+        const playedSlugs = new Set(recentGames.map(g => g.slug).filter(Boolean));
         
         // Find all game tiles and mark played ones
         document.querySelectorAll('.game-tile, .cat-game-tile').forEach(tile => {
             const tileGameId = tile.dataset.gameId ? parseInt(tile.dataset.gameId) : null;
-            if (tileGameId && playedIds.has(tileGameId)) {
+            const tileSlug = tile.dataset.slug || (tile.getAttribute('href') || '').replace(/^\/game\//, '').replace(/\/$/, '');
+            const isPlayed = (tileGameId && playedIds.has(tileGameId)) || (tileSlug && playedSlugs.has(tileSlug));
+            if (isPlayed) {
                 // Add played marker if not already present
                 if (!tile.querySelector('.game-tile-label')) {
                     const label = document.createElement('div');
@@ -842,7 +902,7 @@ function markRecentlyPlayedGames() {
             }
         });
         
-        console.log(`✅ Marked ${playedIds.size} recently played games`);
+        console.log(`✅ Marked ${playedIds.size || playedSlugs.size} recently played games`);
     } catch (e) {
         console.error('Error marking played games:', e);
     }
@@ -886,10 +946,11 @@ function initRecentlyPlayedSidebar() {
         
         grid.innerHTML = gamesToShow.map(game => `
             <a 
-                href="/game/${game.id}" 
+                href="/game/${game.slug || game.id}" 
                 class="game-tile"
                 title="${game.name}"
                 data-video="${ensureCdnUrl(game.video_url, 'video')}"
+                data-slug="${game.slug || ''}"
                 data-game-id="${game.id}"
             >
                 <div class="game-tile-media">
@@ -1042,9 +1103,10 @@ async function loadGameHistoryFromDB() {
             }
             
             if (data.history) {
-                // Save to localStorage with ID, strictly NO slug
+                // Save to localStorage with ID and slug
                 const dbGames = data.history.map(h => ({
                     id: h.game_id || h.id,
+                    slug: h.slug || '',
                     category_id: normalizeCategoryIds(h.category_id),
                     name: h.name,
                     image_url: ensureCdnUrl(h.image_url),
@@ -1080,10 +1142,11 @@ async function checkAuthStatus(force = false) {
     if (isCheckingAuth) return;
     isCheckingAuth = true;
 
-    // Detect if running on static host (GitHub Pages, etc.)
+    // Detect if running on static host (GitHub Pages, localhost:8945, etc.)
     const isStaticHost = window.location.hostname.includes('github.io') || 
                          window.location.protocol === 'file:' ||
-                         window.__isStaticSite === true;
+                         window.__isStaticSite === true ||
+                         window.location.port === '8945';
 
     try {
         let authenticated = false;
@@ -1276,6 +1339,7 @@ function populateAccountPanel() {
     
     const hours = Math.floor(totalTime / 3600000);
     const minutes = Math.floor((totalTime % 3600000) / 60000);
+    const seconds = Math.floor((totalTime % 60000) / 1000);
     
     // Update stats DOM
     const gamesPlayedEl = document.getElementById('account-games-played');
@@ -1283,11 +1347,11 @@ function populateAccountPanel() {
     if (gamesPlayedEl) gamesPlayedEl.textContent = gamesPlayed;
     if (timePlayedEl) {
         if (hours > 0) {
-            timePlayedEl.textContent = `${hours}h${minutes}m`;
+            timePlayedEl.textContent = `${hours}h ${minutes}m`;
         } else if (minutes > 0) {
             timePlayedEl.textContent = `${minutes}m`;
-        } else if (totalTime > 0) {
-            timePlayedEl.textContent = `< 1m`;
+        } else if (seconds > 0) {
+            timePlayedEl.textContent = `${seconds}s`;
         } else {
             timePlayedEl.textContent = `0m`;
         }
@@ -1301,10 +1365,11 @@ function populateAccountPanel() {
         recentlyPlayedSection.style.display = 'block';
         recentlyPlayedGrid.innerHTML = recentGames.slice(0, 12).map(game => `
             <a 
-                href="/game/${game.id}" 
+                href="/game/${game.slug || game.id}" 
                 class="game-tile"
                 title="${game.name}"
                 data-video="${ensureCdnUrl(game.video_url, 'video')}"
+                data-slug="${game.slug || ''}"
                 data-game-id="${game.id}"
             >
                 <div class="game-tile-media">
@@ -1385,10 +1450,11 @@ function populateAccountPanel() {
             mostPlayedSection.style.display = 'block';
             const gamesHtml = mostPlayed.map(game => `
                 <a 
-                    href="/game/${game.id}" 
+                    href="/game/${game.slug || game.id}" 
                     class="game-tile"
                     title="${game.name}"
                     data-video="${ensureCdnUrl(game.video_url, 'video')}"
+                    data-slug="${game.slug || ''}"
                     data-game-id="${game.id}"
                 >
                     <div class="game-tile-media">

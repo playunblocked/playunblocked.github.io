@@ -117,4 +117,31 @@
       return true;
     }
   };
+
+  // 3. Global PokiSDK & CommercialBreak Fallbacks (Universal Safety Net)
+  function createSafeBreak(name) {
+    return function(fn) {
+      console.log('[Stealth SafeHook] ' + name + ' called');
+      if (typeof fn === 'function') {
+        try { fn(true); } catch(e) {}
+      }
+      return Promise.resolve(true);
+    };
+  }
+  var safeComm = createSafeBreak('commercialBreak');
+  var safeRew = createSafeBreak('rewardedBreak');
+
+  if (typeof window.commercialBreak !== 'function') window.commercialBreak = safeComm;
+  if (typeof window.rewardedBreak !== 'function') window.rewardedBreak = safeRew;
+
+  window.PokiSDK = window.PokiSDK || {};
+  if (!window.PokiSDK.commercialBreak) window.PokiSDK.commercialBreak = safeComm;
+  if (!window.PokiSDK.rewardedBreak) window.PokiSDK.rewardedBreak = safeRew;
+  if (!window.PokiSDK.init) window.PokiSDK.init = function() { return Promise.resolve(); };
+  if (!window.PokiSDK.gameplayStart) window.PokiSDK.gameplayStart = function() {};
+  if (!window.PokiSDK.gameplayStop) window.PokiSDK.gameplayStop = function() {};
+  if (!window.PokiSDK.gameLoadingStart) window.PokiSDK.gameLoadingStart = function() {};
+  if (!window.PokiSDK.gameLoadingFinished) window.PokiSDK.gameLoadingFinished = function() {};
+  if (!window.PokiSDK.displayAd) window.PokiSDK.displayAd = function() { return Promise.resolve(); };
+  if (!window.PokiSDK.destroyAd) window.PokiSDK.destroyAd = function() {};
 })();
