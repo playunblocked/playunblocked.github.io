@@ -2,17 +2,17 @@
 function initApp() {
     // ============ PLAY AGAIN BANNER (Mobile only) ============
     initPlayAgainBanner();
-    
+
     // ============ RECENTLY PLAYED SIDEBAR ============
     initRecentlyPlayedSidebar();
-    
+
     // ============ PRIORITIZE PLAYED CATEGORIES ============
     syncLastPlayedCategoriesCookie();
     prioritizePlayedCategories();
 
     // ============ GAME PLAY TRACKING ============
     initGamePlayTracking();
-    
+
     const overlay = document.getElementById('sidebar-overlay');
     const sidebar = document.getElementById('sidebar');
     const panelSearch = document.getElementById('panel-search');
@@ -40,7 +40,7 @@ function initApp() {
 
     function openSidebarPanel(panel) {
         console.log('Opening sidebar panel:', panel);
-        
+
         // Show/hide panels based on auth status
         if (panel === 'search') {
             panelSearch.style.display = '';
@@ -55,12 +55,12 @@ function initApp() {
             panelLogin.style.display = 'none';
             panelAccount.style.display = '';
         }
-        
+
         // Open sidebar
         sidebar.classList.add('open');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
+
         // Focus search input if search panel
         if (panel === 'search' && searchInput) {
             setTimeout(() => searchInput.focus(), 320);
@@ -82,7 +82,7 @@ function initApp() {
             openSidebarPanel('login');
         });
     });
-    
+
     searchBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -90,7 +90,7 @@ function initApp() {
             openSidebarPanel('search');
         });
     });
-    
+
     if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
     if (closeSidebarLoginBtn) closeSidebarLoginBtn.addEventListener('click', closeSidebar);
     if (closeSidebarAccountBtn) closeSidebarAccountBtn.addEventListener('click', closeSidebar);
@@ -111,7 +111,7 @@ function initApp() {
 
     // Auth tabs
     const authTitle = document.getElementById('auth-title');
-    
+
     if (tabRegister) {
         tabRegister.addEventListener('click', () => {
             tabRegister.classList.add('active');
@@ -131,67 +131,67 @@ function initApp() {
             panelRegister.style.display = 'none';
         });
     }
-    
+
     // OAuth handlers
     document.querySelectorAll('.auth-provider[data-provider]').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
             const provider = btn.dataset.provider;
-            
+
             if (!provider) return;
-            
+
             console.log('OAuth login:', provider);
-            
+
             // Redirect to OAuth endpoint
             window.location.href = `/api/auth/${provider}`;
         });
     });
-    
+
     // Demo login handlers
     document.querySelectorAll('.auth-provider[data-demo]').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
             const provider = btn.dataset.demo;
-            
+
             if (!provider) return;
-            
+
             console.log('🧪 Demo login:', provider);
-            
+
             // Redirect to demo login endpoint
             window.location.href = `/api/auth/demo-login?provider=${provider}`;
         });
     });
-    
+
     // Check if user is already logged in
     checkAuthStatus();
 
     // Search filter
     if (searchInput) {
         let searchTimeout;
-        
+
         searchInput.addEventListener('input', () => {
             const q = searchInput.value.trim().toLowerCase();
             const defaultContent = document.getElementById('search-default-content');
             const resultsSection = document.getElementById('search-results-section');
             const resultsGrid = document.getElementById('search-results-grid');
             const resultsTitle = document.getElementById('search-results-title');
-            
+
             // Clear previous timeout
             clearTimeout(searchTimeout);
-            
+
             if (!q) {
                 // Empty search - show default content
                 defaultContent.style.display = 'block';
                 resultsSection.style.display = 'none';
                 return;
             }
-            
+
             // Hide default content, show loading
             defaultContent.style.display = 'none';
             resultsSection.style.display = 'block';
             resultsTitle.style.display = 'none'; // Hide title
             resultsGrid.innerHTML = '<div class="search-empty-message">Loading...</div>';
-            
+
             // Debounce search
             searchTimeout = setTimeout(async () => {
                 let data = null;
@@ -221,12 +221,12 @@ function initApp() {
                 }
 
                 try {
-                    
+
                     if (data.games && data.games.length > 0) {
                         resultsGrid.innerHTML = data.games.slice(0, 100).map(game => {
                             const imgUrl = ensureCdnUrl(game.cdn_image_url || game.image_url, 'image');
                             const videoUrl = ensureCdnUrl(game.cdn_video_url || game.video_url, 'video') || '';
-                            const gameHref = `/game/${game.id || game.slug}`;
+                            const gameHref = `/game/${game.slug || game.id}`;
                             return `
                             <a 
                                 class="game-tile"
@@ -245,7 +245,7 @@ function initApp() {
                             </a>
                             `;
                         }).join('');
-                        
+
                         // Initialize video lazy loading for search results
                         initGameVideoHover(resultsGrid);
                         window.dispatchEvent(new Event('gamesAdded'));
@@ -373,7 +373,7 @@ if (!window.__tapwapAppBound) {
 // ============ CDN HELPER ============
 function ensureCdnUrl(url, type = 'image') {
     if (!url) return '';
-    
+
     // Clean accidental duplicate /games/games/
     url = url.replace(/\/games\/games\//g, '/games/');
 
@@ -448,10 +448,10 @@ function syncLastPlayedCategoriesCookie() {
 function initPlayAgainBanner() {
     // Only show on mobile
     if (window.innerWidth > 768) return;
-    
+
     const banner = document.getElementById('play-again-banner');
     if (!banner) return;
-    
+
     const lastGame = getLastPlayedGame();
     if (lastGame) {
         displayPlayAgainBanner(lastGame);
@@ -478,24 +478,24 @@ function displayPlayAgainBanner(game) {
     const img = document.getElementById('play-again-img');
     const title = document.getElementById('play-again-title');
     const btn = document.getElementById('play-again-btn');
-    
+
     if (!banner || !img || !title || !btn || !game) return;
-    
+
     img.src = ensureCdnUrl(game.image_url || game.cdn_image_url);
     img.alt = game.name;
     title.textContent = game.name;
-    
-    // Click handler - navigate by game ID
+
+    // Click handler - navigate by game slug
     const playGame = () => {
-        window.location.href = `/game/${game.id}`;
+        window.location.href = `/game/${game.slug || game.id}`;
     };
-    
+
     btn.onclick = playGame;
     banner.onclick = (e) => {
         if (e.target === btn || btn.contains(e.target)) return;
         playGame();
     };
-    
+
     banner.style.display = 'block';
 }
 
@@ -577,13 +577,13 @@ function savePlayedGame(gameData, playDuration = 0) {
     try {
         if (!gameData || (!gameData.id && !gameData.slug)) return;
         let recentGames = JSON.parse(localStorage.getItem('recentlyPlayedGames') || '[]');
-        
+
         // Check if game already exists by ID or by slug
-        const existingIndex = recentGames.findIndex(g => 
+        const existingIndex = recentGames.findIndex(g =>
             (gameData.id && (g.id || g.game_id) === gameData.id) ||
             (gameData.slug && g.slug && g.slug === gameData.slug)
         );
-        
+
         const catIds = normalizeCategoryIds(gameData.category_id || gameData.categories);
         const gameId = gameData.id || (existingIndex >= 0 ? recentGames[existingIndex].id : Date.now());
         const gameSlug = gameData.slug || (existingIndex >= 0 ? recentGames[existingIndex].slug : '');
@@ -603,7 +603,7 @@ function savePlayedGame(gameData, playDuration = 0) {
                 recentGames[existingIndex].category_id = normalizeCategoryIds(recentGames[existingIndex].category_id);
             }
             if (gameSlug) recentGames[existingIndex].slug = gameSlug;
-            
+
             // Move to front
             const game = recentGames.splice(existingIndex, 1)[0];
             recentGames.unshift(game);
@@ -620,20 +620,20 @@ function savePlayedGame(gameData, playDuration = 0) {
                 playDuration: playDuration
             });
         }
-        
+
         // Normalize category_id on all items
         recentGames.forEach(g => {
             if (g.category_id !== undefined) {
                 g.category_id = normalizeCategoryIds(g.category_id);
             }
         });
-        
+
         // Keep only last 15 games
         recentGames = recentGames.slice(0, 15);
-        
+
         localStorage.setItem('recentlyPlayedGames', JSON.stringify(recentGames));
         console.log('✅ Saved played game:', gameData.name, `(+${Math.round(playDuration / 1000)}s)`);
-        
+
         // Update live user account stats
         try {
             let currentStats = window.currentUserStats || JSON.parse(localStorage.getItem('userAccountStats') || 'null');
@@ -649,8 +649,8 @@ function savePlayedGame(gameData, playDuration = 0) {
             currentStats.time_played = (currentStats.time_played || 0) + playDuration;
             window.currentUserStats = currentStats;
             localStorage.setItem('userAccountStats', JSON.stringify(currentStats));
-        } catch (_) {}
-        
+        } catch (_) { }
+
         // Sync cookie for SSR
         if (recentGames.length > 0 && recentGames[0].category_id) {
             setLastPlayedCategoriesCookie(recentGames[0].category_id);
@@ -658,7 +658,7 @@ function savePlayedGame(gameData, playDuration = 0) {
 
         // Reorder categories based on played game
         prioritizePlayedCategories();
-        
+
         // Also save to database if user is logged in
         if (gameId) {
             saveGamePlayToDB(gameId, playDuration);
@@ -671,13 +671,13 @@ function savePlayedGame(gameData, playDuration = 0) {
 async function saveGamePlayToDB(gameId, playDuration) {
     try {
         if (!window.currentUser || !gameId) return;
-        const isStaticHost = window.location.hostname.includes('github.io') || 
-                             window.location.protocol === 'file:' ||
-                             window.__isStaticSite === true ||
-                             window.location.port === '8945' ||
-                             window.currentUser.provider === 'local';
+        const isStaticHost = window.location.hostname.includes('github.io') ||
+            window.location.protocol === 'file:' ||
+            window.__isStaticSite === true ||
+            window.location.port === '8945' ||
+            window.currentUser.provider === 'local';
         if (isStaticHost) return;
-        
+
         // Save to database directly using gameId
         await fetch('/api/user/game-history', {
             method: 'POST',
@@ -687,7 +687,7 @@ async function saveGamePlayToDB(gameId, playDuration) {
                 playDuration: playDuration
             })
         });
-        
+
         console.log('💾 Saved to database for game ID:', gameId);
     } catch (error) {
         console.error('Error saving to database:', error);
@@ -708,7 +708,7 @@ function initGamePlayTracking() {
     console.log('🎮 Game page detected, starting play tracking...');
     let lastSaveTime = Date.now();
     let cachedGameData = null;
-    
+
     // Extract slug from URL reliably (/game/thumb-fighter, /game/thumb-fighter/, /game/thumb-fighter.html)
     const pathParts = window.location.pathname.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
     const gameIdx = pathParts.indexOf('game');
@@ -716,7 +716,7 @@ function initGamePlayTracking() {
 
     const getGameData = async () => {
         if (cachedGameData) return cachedGameData;
-        
+
         // 1. Try in-memory / global games index cache
         if (window.__gamesIndexCache && Array.isArray(window.__gamesIndexCache)) {
             const found = window.__gamesIndexCache.find(g => g.slug === slug || String(g.id) === slug);
@@ -752,7 +752,7 @@ function initGamePlayTracking() {
                     return cachedGameData;
                 }
             }
-        } catch (_) {}
+        } catch (_) { }
 
         // 3. Try API fetch (dynamic dev server)
         try {
@@ -771,15 +771,15 @@ function initGamePlayTracking() {
                     return cachedGameData;
                 }
             }
-        } catch (_) {}
-        
+        } catch (_) { }
+
         // 4. Fallback to DOM elements of the game page
         const mainEl = document.querySelector('main.mosaic-wrapper[data-game-id]');
         const gameId = mainEl ? parseInt(mainEl.dataset.gameId) : null;
         const gameTitle = document.querySelector('.game-info-title, .game-about-title, h1.game-about-title');
         const gameImg = document.querySelector('.game-info-icon, .game-about-thumb');
         const categoryIds = normalizeCategoryIds(mainEl ? mainEl.dataset.categoryId : null);
-        
+
         if (gameTitle) {
             cachedGameData = {
                 id: gameId || Date.now(),
@@ -791,15 +791,15 @@ function initGamePlayTracking() {
             };
             return cachedGameData;
         }
-        
+
         return null;
     };
-    
+
     const saveCurrentPlayTime = async () => {
         const now = Date.now();
         const duration = now - lastSaveTime;
         const gameData = await getGameData();
-        
+
         if (gameData && duration >= 1000) {
             console.log(`⏱️ Saving play time: ${Math.round(duration / 1000)}s for ${gameData.name}`);
             savePlayedGame(gameData, duration);
@@ -863,7 +863,7 @@ function markRecentlyPlayedGames() {
         const recentGames = JSON.parse(localStorage.getItem('recentlyPlayedGames') || '[]');
         const playedIds = new Set(recentGames.map(g => (g.id || g.game_id)).filter(Boolean));
         const playedSlugs = new Set(recentGames.map(g => g.slug).filter(Boolean));
-        
+
         // Find all game tiles and mark played ones
         document.querySelectorAll('.game-tile, .cat-game-tile').forEach(tile => {
             const tileGameId = tile.dataset.gameId ? parseInt(tile.dataset.gameId) : null;
@@ -885,7 +885,7 @@ function markRecentlyPlayedGames() {
                 }
             }
         });
-        
+
         console.log(`✅ Marked ${playedIds.size || playedSlugs.size} recently played games`);
     } catch (e) {
         console.error('Error marking played games:', e);
@@ -900,34 +900,34 @@ function markRecentlyPlayedGames() {
 function initRecentlyPlayedSidebar() {
     const section = document.getElementById('recently-played-section');
     const grid = document.getElementById('recently-grid');
-    
+
     console.log('🎮 Initializing Recently Played Sidebar...');
     console.log('   Section found:', !!section);
     console.log('   Grid found:', !!grid);
-    
+
     if (!section || !grid) {
         console.warn('⚠️ Recently played section or grid not found');
         return;
     }
-    
+
     try {
         const recentGames = JSON.parse(localStorage.getItem('recentlyPlayedGames') || '[]');
         console.log(`   Found ${recentGames.length} recently played games in localStorage`);
-        
+
         if (recentGames.length === 0) {
             // No games played, keep section hidden
             section.style.display = 'none';
             console.log('   No games to display, hiding section');
             return;
         }
-        
+
         // Show section and populate grid
         section.style.display = 'block';
         console.log(`   Displaying ${Math.min(recentGames.length, 17)} games`);
-        
+
         // Take up to 17 games for the grid
         const gamesToShow = recentGames.slice(0, 17);
-        
+
         grid.innerHTML = gamesToShow.map(game => `
             <a 
                 href="/game/${game.slug || game.id}" 
@@ -945,10 +945,10 @@ function initRecentlyPlayedSidebar() {
                 </div>
             </a>
         `).join('');
-        
+
         // Initialize video hover for recently played items
         initPopularVideoHover();
-        
+
     } catch (e) {
         console.error('Error loading recently played games:', e);
         section.style.display = 'none';
@@ -962,18 +962,18 @@ function initGameVideoHover(target = document) {
     const gameTiles = (root instanceof Element && root.matches && root.matches(selector))
         ? [root]
         : (root.querySelectorAll ? root.querySelectorAll(selector) : document.querySelectorAll(selector));
-    
+
     gameTiles.forEach(item => {
         const videoUrl = item.dataset.video;
         if (!videoUrl) return;
-        
+
         item.setAttribute('data-video-initialized', 'true');
         let videoCreated = false;
-        
-        item.addEventListener('mouseenter', function() {
+
+        item.addEventListener('mouseenter', function () {
             const currentVideoUrl = this.dataset.video;
             if (!currentVideoUrl) return;
-            
+
             if (!videoCreated) {
                 const mediaContainer = this.querySelector('.game-tile-media');
                 if (mediaContainer) {
@@ -984,16 +984,16 @@ function initGameVideoHover(target = document) {
                     video.playsInline = true;
                     video.preload = 'auto';
                     video.src = currentVideoUrl;
-                    
+
                     mediaContainer.appendChild(video);
-                    
+
                     const playPromise = video.play();
                     if (playPromise !== undefined) {
                         playPromise.catch(err => {
                             console.log('Video play failed:', err);
                         });
                     }
-                    
+
                     videoCreated = true;
                 }
             } else {
@@ -1008,8 +1008,8 @@ function initGameVideoHover(target = document) {
                 }
             }
         });
-        
-        item.addEventListener('mouseleave', function() {
+
+        item.addEventListener('mouseleave', function () {
             const video = this.querySelector('.game-video');
             if (video) {
                 video.pause();
@@ -1032,18 +1032,18 @@ async function syncGameHistory() {
     isSyncingHistory = true;
     try {
         console.log('🔄 Syncing game history with database...');
-        
+
         // Get localStorage data
         const localGames = JSON.parse(localStorage.getItem('recentlyPlayedGames') || '[]');
         console.log(`   Found ${localGames.length} games in localStorage:`, localGames);
-        
+
         if (localGames.length === 0) {
             console.log('📭 No local history to sync');
             // Load from database
             await loadGameHistoryFromDB();
             return;
         }
-        
+
         console.log('📤 Uploading to database...');
         // Upload localStorage to database
         const response = await fetch('/api/user/game-history', {
@@ -1051,9 +1051,9 @@ async function syncGameHistory() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ games: localGames })
         });
-        
+
         console.log('   Response status:', response.status);
-        
+
         if (response.ok) {
             const result = await response.json();
             console.log(`✅ Synced ${result.synced || localGames.length} games to database`);
@@ -1077,7 +1077,7 @@ async function loadGameHistoryFromDB() {
     try {
         const response = await fetch('/api/user/game-history');
         if (!response.ok) return;
-        
+
         const data = await response.json();
         if (data.success) {
             // Save server stats if returned
@@ -1085,7 +1085,7 @@ async function loadGameHistoryFromDB() {
                 window.currentUserStats = data.stats;
                 localStorage.setItem('userAccountStats', JSON.stringify(data.stats));
             }
-            
+
             if (data.history) {
                 // Save to localStorage with ID and slug
                 const dbGames = data.history.map(h => ({
@@ -1098,7 +1098,7 @@ async function loadGameHistoryFromDB() {
                     playedAt: new Date(h.played_at).getTime(),
                     playDuration: h.play_duration
                 }));
-                
+
                 localStorage.setItem('recentlyPlayedGames', JSON.stringify(dbGames));
                 console.log(`✅ Loaded ${dbGames.length} games from database`);
                 if (dbGames.length > 0 && dbGames[0].category_id) {
@@ -1127,10 +1127,10 @@ async function checkAuthStatus(force = false) {
     isCheckingAuth = true;
 
     // Detect if running on static host (GitHub Pages, localhost:8945, etc.)
-    const isStaticHost = window.location.hostname.includes('github.io') || 
-                         window.location.protocol === 'file:' ||
-                         window.__isStaticSite === true ||
-                         window.location.port === '8945';
+    const isStaticHost = window.location.hostname.includes('github.io') ||
+        window.location.protocol === 'file:' ||
+        window.__isStaticSite === true ||
+        window.location.port === '8945';
 
     try {
         let authenticated = false;
@@ -1185,16 +1185,16 @@ async function checkAuthStatus(force = false) {
         }
 
         window.__tapwapAuthChecked = true;
-        
+
         if (authenticated && user) {
             console.log('✅ User logged in:', user);
             updateUIForLoggedInUser(user);
-            
+
             // Sync game history with database only if backend API is available
             if (!isStaticHost) {
-                await syncGameHistory().catch(() => {});
+                await syncGameHistory().catch(() => { });
             }
-            
+
             populateAccountPanel();
         } else {
             window.currentUser = null;
@@ -1213,21 +1213,21 @@ function updateUIForLoggedInUser(user) {
     loginBtns.forEach(btn => {
         btn.setAttribute('data-logged-in', 'true');
         btn.setAttribute('title', user.name || 'Your Account');
-        
+
         // Ensure svg icon is displayed (turns pink via CSS)
         const svg = btn.querySelector('svg');
         if (svg) svg.style.display = 'block';
     });
-    
+
     // Store user data globally for account panel
     window.currentUser = user;
-    
+
     // Update login button click handlers to open account panel
     loginBtns.forEach(btn => {
         // Remove old click handlers
         const newBtn = btn.cloneNode(true);
         btn.parentNode.replaceChild(newBtn, btn);
-        
+
         newBtn.addEventListener('click', (e) => {
             e.preventDefault();
             console.log('Opening account panel for logged in user');
@@ -1242,25 +1242,25 @@ function openAccountPanel() {
     const panelSearch = document.getElementById('panel-search');
     const panelLogin = document.getElementById('panel-login');
     const panelAccount = document.getElementById('panel-account');
-    
+
     // Show account panel
     panelSearch.style.display = 'none';
     panelLogin.style.display = 'none';
     panelAccount.style.display = '';
-    
+
     // Open sidebar
     sidebar.classList.add('open');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
-    
+
     // Populate account data immediately from cache
     populateAccountPanel();
-    
+
     // Refresh stats from server in background
     syncGameHistory().then(() => {
         populateAccountPanel();
-    }).catch(() => {});
-    
+    }).catch(() => { });
+
     // Setup logout button
     const logoutBtn = document.getElementById('account-logout-btn');
     if (logoutBtn) {
@@ -1278,7 +1278,7 @@ function openAccountPanel() {
 function populateAccountPanel() {
     const user = window.currentUser;
     if (!user) return;
-    
+
     // Update subtitle with provider
     const subtitle = document.getElementById('account-subtitle');
     if (subtitle) {
@@ -1289,7 +1289,7 @@ function populateAccountPanel() {
             subtitle.textContent = `You are logged in with ${providerName}${user.role === 'administrator' ? ' (Admin)' : ''}`;
         }
     }
-    
+
     // Add admin link if user is administrator
     let adminBtn = document.getElementById('account-admin-btn');
     if (user.role === 'administrator') {
@@ -1311,14 +1311,14 @@ function populateAccountPanel() {
     } else if (adminBtn) {
         adminBtn.style.display = 'none';
     }
-    
+
     // Get recently played games from localStorage
     const recentGames = JSON.parse(localStorage.getItem('recentlyPlayedGames') || '[]');
-    
+
     // Accurate stats: prefer server stats, fallback to localStorage
     let gamesPlayed = 0;
     let totalTime = 0;
-    
+
     const savedStats = window.currentUserStats || JSON.parse(localStorage.getItem('userAccountStats') || 'null');
     if (savedStats && typeof savedStats.games_played === 'number') {
         gamesPlayed = savedStats.games_played;
@@ -1327,11 +1327,11 @@ function populateAccountPanel() {
         gamesPlayed = recentGames.length;
         totalTime = recentGames.reduce((sum, game) => sum + (game.playDuration || 0), 0);
     }
-    
+
     const hours = Math.floor(totalTime / 3600000);
     const minutes = Math.floor((totalTime % 3600000) / 60000);
     const seconds = Math.floor((totalTime % 60000) / 1000);
-    
+
     // Update stats DOM
     const gamesPlayedEl = document.getElementById('account-games-played');
     const timePlayedEl = document.getElementById('account-time-played');
@@ -1347,11 +1347,11 @@ function populateAccountPanel() {
             timePlayedEl.textContent = `0m`;
         }
     }
-    
+
     // Populate Recently Played (up to 12 games)
     const recentlyPlayedSection = document.getElementById('account-recently-played-section');
     const recentlyPlayedGrid = document.getElementById('account-recently-played-grid');
-    
+
     if (recentGames.length > 0) {
         recentlyPlayedSection.style.display = 'block';
         recentlyPlayedGrid.innerHTML = recentGames.slice(0, 12).map(game => `
@@ -1371,21 +1371,21 @@ function populateAccountPanel() {
                 </div>
             </a>
         `).join('');
-        
+
         // Initialize video hover
         initPopularVideoHover();
     } else {
         recentlyPlayedSection.style.display = 'none';
     }
-    
+
     // Populate Most Played (games with longest play time) + Category Tile based on top game
     const mostPlayedSection = document.getElementById('account-most-played-section');
     const mostPlayedGrid = document.getElementById('account-most-played-grid');
-    
+
     if (recentGames.length > 0) {
         const sortedByPlayTime = [...recentGames].sort((a, b) => (b.playDuration || 0) - (a.playDuration || 0));
         const topGame = sortedByPlayTime[0];
-        
+
         // Find category of the user's most played game
         const topCatIds = normalizeCategoryIds(topGame ? topGame.category_id : null);
         const topCatId = topCatIds.length > 0 ? topCatIds[0] : null;
@@ -1394,7 +1394,7 @@ function populateAccountPanel() {
         if (!topCategory && siteCats.length > 0) {
             topCategory = siteCats[0];
         }
-        
+
         // Helper to get category icon with SVG fallback
         const getCategoryIconSvg = (cat) => {
             if (cat && cat.icon && typeof cat.icon === 'string' && cat.icon.trim().startsWith('<svg')) {
@@ -1416,7 +1416,7 @@ function populateAccountPanel() {
         };
 
         const catIconSvg = getCategoryIconSvg(topCategory);
-        
+
         // Category tile (takes last 2 slots on desktop, wraps on mobile)
         const categoryTileHtml = topCategory ? `
             <a 
@@ -1433,10 +1433,10 @@ function populateAccountPanel() {
                 </div>
             </a>
         ` : '';
-        
+
         // Display up to 4 games alongside the 2-col category tile
         const mostPlayed = sortedByPlayTime.slice(0, 4);
-        
+
         if (mostPlayed.length > 0) {
             mostPlayedSection.style.display = 'block';
             const gamesHtml = mostPlayed.map(game => `
@@ -1456,16 +1456,16 @@ function populateAccountPanel() {
                     </div>
                 </a>
             `).join('');
-            
+
             mostPlayedGrid.innerHTML = gamesHtml + categoryTileHtml;
-            
+
             // Initialize video hover
             initPopularVideoHover();
         }
     } else {
         mostPlayedSection.style.display = 'none';
     }
-    
+
     const topCatSec = document.getElementById('account-top-category-section');
     if (topCatSec) topCatSec.style.display = 'none';
 }
