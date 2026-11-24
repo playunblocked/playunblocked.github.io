@@ -19,6 +19,18 @@ body::before {
     display: none !important;
 }
 
+.desktop-home-grid {
+    display: block;
+}
+.mobile-home-grid {
+    display: none !important;
+}
+
+/* Ẩn categories section trên desktop (chỉ hiện trên mobile) */
+.categories-section {
+    display: none !important;
+}
+
 /* ===== HEADER TILE (fixed) ===== */
 .header-tile {
     position: fixed;
@@ -195,16 +207,7 @@ body::before {
     justify-content: center;
 }
 
-.notif-dot {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 9px;
-    height: 9px;
-    background: #ff4d6a;
-    border-radius: 50%;
-    border: 2px solid white;
-}
+
 
 /* Game tile hover */
 .game-tile:hover {

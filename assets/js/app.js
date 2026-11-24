@@ -1155,8 +1155,12 @@ async function checkAuthStatus(force = false) {
                         authenticated = true;
                         user = data.user;
                     }
-                } else {
-                    // API not found -> static host fallback
+                } else if (response.status === 401) {
+                    // Guest user (not logged in)
+                    authenticated = false;
+                    user = null;
+                } else if (isStaticHost) {
+                    // Static host fallback
                     user = JSON.parse(localStorage.getItem('currentUser') || 'null') || {
                         id: 1,
                         name: 'Player',
@@ -1167,14 +1171,16 @@ async function checkAuthStatus(force = false) {
                     authenticated = true;
                 }
             } catch (_) {
-                user = JSON.parse(localStorage.getItem('currentUser') || 'null') || {
-                    id: 1,
-                    name: 'Player',
-                    email: 'player@tapwap.com',
-                    role: 'player',
-                    provider: 'local'
-                };
-                authenticated = true;
+                if (isStaticHost) {
+                    user = JSON.parse(localStorage.getItem('currentUser') || 'null') || {
+                        id: 1,
+                        name: 'Player',
+                        email: 'player@tapwap.com',
+                        role: 'player',
+                        provider: 'local'
+                    };
+                    authenticated = true;
+                }
             }
         }
 
@@ -1208,11 +1214,9 @@ function updateUIForLoggedInUser(user) {
         btn.setAttribute('data-logged-in', 'true');
         btn.setAttribute('title', user.name || 'Your Account');
         
-        // Toggle mobile icon: hide guest, show avatar
-        const guestIcon = btn.querySelector('.login-icon-guest');
-        const userIcon = btn.querySelector('.login-icon-user');
-        if (guestIcon) guestIcon.style.display = 'none';
-        if (userIcon) userIcon.style.display = 'block';
+        // Ensure svg icon is displayed (turns pink via CSS)
+        const svg = btn.querySelector('svg');
+        if (svg) svg.style.display = 'block';
     });
     
     // Store user data globally for account panel

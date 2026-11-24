@@ -251,10 +251,10 @@ img {
     cursor: default;
 }
 
-/* Mobile: 3x1 */
+/* Mobile: 2x1 (2 ô mỗi hàng trên lưới 4 cột) */
 @media (max-width: 768px) {
     .category-tile {
-        grid-column: span 3 !important;
+        grid-column: span 2 !important;
         grid-row: span 1 !important;
     }
 }

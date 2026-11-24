@@ -113,17 +113,6 @@
         position: relative;
     }
 
-    #btn-mobile-login .notif-dot {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        width: 10px;
-        height: 10px;
-        background: #ff8a9b;
-        border-radius: 50%;
-        border: 2px solid white;
-    }
-
     /* Change icon color based on login state */
     #btn-mobile-login[data-logged-in="true"] svg path {
         fill: #ec4899;
@@ -135,9 +124,10 @@
         /* Gray color when logged out */
     }
 
-    /* Always show guest icon, hide user icon */
-    .login-icon-user {
-        display: none !important;
+    /* Always show smiley face icon */
+    .login-icon-guest,
+    #btn-mobile-login svg {
+        display: block !important;
     }
 
     /* Play Again Banner */
@@ -252,13 +242,13 @@
         padding: 8px 0 32px;
     }
 
-    /* Mosaic grid mobile - 3 rows (9 ô) với padding 12px */
+    /* Mosaic grid mobile - show full grid without 3-row clipping */
     .mosaic-grid {
         gap: 8px;
         padding: 12px;
         grid-auto-rows: calc((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols));
-        max-height: calc(((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols)) * 3 + 8px * 2 + 12px);
-        overflow: hidden;
+        max-height: none !important;
+        overflow: visible !important;
     }
 
     /* Game page - show all games (no height limit) */
@@ -268,6 +258,8 @@
         overflow: visible !important;
     }
 
+    #search-default-content .mosaic-grid,
+    #search-results-grid,
     .account-section .mosaic-grid {
         padding: 0;
     }
@@ -411,8 +403,16 @@
         grid-template-rows: repeat(2, calc((100vw - 24px - (var(--cols) - 1)*8px) / var(--cols)));
     }
 
+    .desktop-home-grid {
+        display: none !important;
+    }
+    .mobile-home-grid {
+        display: block !important;
+    }
+
     /* Categories */
     .categories-section {
+        display: flex !important;
         padding: 0;
         gap: 0;
     }
