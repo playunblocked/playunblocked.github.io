@@ -99,19 +99,18 @@ function initInfiniteScroll() {
         return;
     }
 
-    // CDN Helper (supports localhost, LAN IP 192.168.x.x for mobile testing, and production)
-    const isLocalDev = window.location.hostname === 'localhost' || 
-                       window.location.hostname === '127.0.0.1' || 
-                       window.location.hostname.startsWith('192.168.') || 
-                       window.location.hostname.startsWith('10.') || 
-                       window.location.hostname.startsWith('172.') || 
-                       window.location.port === '4321';
-    const CDN_BASE_URL = isLocalDev ? `${window.location.origin}/games/` : 'https://cdn.tapwap.com/games/';
+    // CDN & Asset URL Helper (supports localhost, GitHub Pages, and production)
     const getCdnUrl = (url) => {
         if (!url) return '';
+        // If it points to cdn.tapwap.com or localhost, normalize to local /games/
+        if (url.includes('cdn.tapwap.com') || url.includes('localhost:4321')) {
+            const clean = url.replace(/^https?:\/\/[^/]+\/(?:games\/)?/, '');
+            return `/games/${clean}`;
+        }
+        if (url.startsWith('/games/')) return url;
         if (url.startsWith('http://') || url.startsWith('https://')) return url;
         const clean = url.replace(/^\/?(?:games\/)?/, '');
-        return CDN_BASE_URL + clean;
+        return `/games/${clean}`;
     };
     
     // Create game tile element

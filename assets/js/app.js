@@ -387,41 +387,25 @@ function ensureCdnUrl(url, type = 'image') {
         return url;
     }
 
+    // Normalize cdn.tapwap.com or localhost URLs to local /games/
+    if (url.includes('cdn.tapwap.com') || url.includes('localhost:4321')) {
+        const clean = url.replace(/^https?:\/\/[^/]+\/(?:games\/)?/, '');
+        return `/games/${clean}`;
+    }
+
     // If it already starts with /games/, return clean path or relative path
     if (url.startsWith('/games/')) {
         return url;
     }
 
-    // Already has CDN domain or full URL
-    if (url.includes('cdn.tapwap.com') || url.startsWith('http://') || url.startsWith('https://')) {
+    // Other external third-party full URL
+    if (url.startsWith('http://') || url.startsWith('https://')) {
         return url;
     }
 
     // Strip leading slashes and optional 'games/' prefix so it never duplicates
     const clean = url.replace(/^\/?(?:games\/)?/, '');
-
-    const isLocalDev = typeof window !== 'undefined' && (
-        window.location.hostname === 'localhost' || 
-        window.location.hostname === '127.0.0.1' || 
-        window.location.hostname.startsWith('192.168.') || 
-        window.location.hostname.startsWith('10.') || 
-        window.location.hostname.startsWith('172.') || 
-        window.location.port === '4321' ||
-        window.location.port === '8945'
-    );
-
-    const isStatic = typeof window !== 'undefined' && (
-        window.location.hostname.includes('github.io') ||
-        window.__isStaticSite === true
-    );
-
-    if (isStatic) {
-        return `/games/${clean}`;
-    }
-
-    // Add CDN / Local prefix
-    const CDN_BASE = isLocalDev ? `${window.location.origin}/games/` : 'https://cdn.tapwap.com/games/';
-    return CDN_BASE + clean;
+    return `/games/${clean}`;
 }
 
 // Helper to normalize category IDs to array (first item is primary)
