@@ -176,11 +176,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/lands-of-blight</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/chess-grandmaster</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -257,11 +252,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/block-the-pig</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/detective-lawrence</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -351,16 +341,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/moto-x3m-5-pool-party</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/moto-x3m-spooky-land</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/solitaire-ultimate</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -371,27 +351,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/swordtail</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/sudoku-hanko</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>http://[::1]:4321/game/bacon-survivor</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/cyber-cars-punk-racing</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/sharkosaurus-rampage</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -461,21 +426,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/level-devil</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/rocket-soccer-derby</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/monkey-mart</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/temple-run-2</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -487,16 +437,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/city-car-driving-stunt-master</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/basketball-stars</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/sushi-party-io</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -571,47 +511,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/football-legends</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/3d-car-simulator</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/rio-rex</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/vortellas-dress-up</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/moto-x3m-4-winter</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/idle-ants</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>http://[::1]:4321/game/red-ball-4</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/flying-car-simulator</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/super-bike-the-champion</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -676,27 +581,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/superhot-prototype</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/slice-master</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>http://[::1]:4321/game/count-control-legends</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/the-spear-stickman</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/blocky-blast-puzzle</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -746,11 +636,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/watermelon-drop</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/ducklings-io</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -791,11 +676,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/extreme-car-parking</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/become-a-fashion-designer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -812,11 +692,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/stick-fighter</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/punch-legend-simulator</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -896,17 +771,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/mechabots</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/bad-ice-cream-2</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/tennis-masters</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -996,11 +861,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/water-color-sort</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/dress-up-the-lovely-princess</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1026,27 +886,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/soldier-legend</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/like-a-king</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/duck-life</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>http://[::1]:4321/game/disaster-arena</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/perfect-peel</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1111,11 +956,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/cats-drop</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/cooking-fast</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1127,11 +967,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/johnny-trigger-action-shooter</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/gswitch-2</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1192,16 +1027,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/its-story-time</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/war-master</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/partytoons</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1326,11 +1151,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/super-mx-last-season</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/magikmon</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1346,22 +1166,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/funny-shooter-2</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/rowdy-city-wrestling</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>http://[::1]:4321/game/running-fred</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/idle-success</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1397,11 +1207,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/sky-mad</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/horse-shoeing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1456,11 +1261,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/ninja-mouse</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/hangman</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1481,11 +1281,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/dual-cat</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://[::1]:4321/game/school-escape-skip-games</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1497,11 +1292,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/power-wash-cleanup</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/woodcraft</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1527,11 +1317,6 @@
   </url>
   <url>
     <loc>http://[::1]:4321/game/the-superhero-league</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/stickman-war</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

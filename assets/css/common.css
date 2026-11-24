@@ -215,7 +215,7 @@ img {
     grid-auto-rows: calc((100vw - 2*var(--pad) - (var(--cols) - 1)*var(--grid-gap)) / var(--cols));
     gap: var(--grid-gap);
     width: 100%;
-    grid-auto-flow: row dense;
+    grid-auto-flow: row dense !important;
 }
 
 /* ===== GAME TILE ===== */
