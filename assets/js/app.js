@@ -1264,6 +1264,9 @@ function openAccountPanel() {
     // Setup logout button
     const logoutBtn = document.getElementById('account-logout-btn');
     if (logoutBtn) {
+        if (window.__isStaticSite) {
+            logoutBtn.style.display = 'none';
+        }
         logoutBtn.onclick = () => {
             if (confirm('Are you sure you want to logout?')) {
                 logout();
