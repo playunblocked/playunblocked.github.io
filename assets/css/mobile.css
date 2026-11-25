@@ -276,6 +276,52 @@
         overflow: visible !important;
     }
 
+    /* Game Info Bar on Mobile: Title full-width on row 1, actions/servers on row 2 */
+    .game-info-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        padding: 12px 14px !important;
+    }
+
+    .game-info-left {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
+    }
+
+    .game-info-title {
+        white-space: normal !important;
+        word-break: break-word !important;
+        line-height: 1.25 !important;
+        font-size: 17px !important;
+    }
+
+    .game-info-actions {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding-top: 2px !important;
+        border-top: none !important;
+    }
+
+    .game-servers-list {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        width: 100% !important;
+    }
+
+    .server-btn {
+        padding: 5px 12px !important;
+        font-size: 12px !important;
+    }
+
     /* Show More Button */
     .mosaic-show-more {
         display: flex;
@@ -406,6 +452,7 @@
     .desktop-home-grid {
         display: none !important;
     }
+
     .mobile-home-grid {
         display: block !important;
     }
