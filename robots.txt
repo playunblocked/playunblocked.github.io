@@ -1,2 +1,10 @@
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /twmanager
+Disallow: /api/
+Disallow: /settings
+Disallow: /decoy/
+Disallow: /embed
+Disallow: /test-home
+
+Sitemap: http://[::1]:4321/sitemap.xml
