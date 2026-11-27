@@ -131,7 +131,7 @@ function initInfiniteScroll() {
         const large = size === '3x3' ? ' tile-3x3' : (size === '2x2' ? ' tile-large' : '');
         
         tile.className = `game-tile${large}`;
-        tile.href = `/game/${game.slug}`;
+        tile.href = `/g/${game.slug}`;
         tile.style.gridColumn = `span ${colSpan}`;
         tile.style.gridRow = `span ${rowSpan}`;
         tile.title = game.name;

@@ -226,7 +226,7 @@ function initApp() {
                         resultsGrid.innerHTML = data.games.slice(0, 100).map(game => {
                             const imgUrl = ensureCdnUrl(game.cdn_image_url || game.image_url, 'image');
                             const videoUrl = ensureCdnUrl(game.cdn_video_url || game.video_url, 'video') || '';
-                            const gameHref = `/game/${game.slug || game.id}`;
+                            const gameHref = `/g/${game.slug || game.id}`;
                             return `
                             <a 
                                 class="game-tile"
@@ -487,7 +487,7 @@ function displayPlayAgainBanner(game) {
 
     // Click handler - navigate by game slug
     const playGame = () => {
-        window.location.href = `/game/${game.slug || game.id}`;
+        window.location.href = `/g/${game.slug || game.id}`;
     };
 
     btn.onclick = playGame;
@@ -703,15 +703,15 @@ function initGamePlayTracking() {
         currentGameTrackingCleanup = null;
     }
 
-    if (!window.location.pathname.includes('/game/')) return;
+    if (!window.location.pathname.includes('/g/') && !window.location.pathname.includes('/game/')) return;
 
     console.log('🎮 Game page detected, starting play tracking...');
     let lastSaveTime = Date.now();
     let cachedGameData = null;
 
-    // Extract slug from URL reliably (/game/thumb-fighter, /game/thumb-fighter/, /game/thumb-fighter.html)
+    // Extract slug from URL reliably (/g/thumb-fighter, /game/thumb-fighter)
     const pathParts = window.location.pathname.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '').split('/').filter(Boolean);
-    const gameIdx = pathParts.indexOf('game');
+    const gameIdx = pathParts.indexOf('g') !== -1 ? pathParts.indexOf('g') : pathParts.indexOf('game');
     const slug = (gameIdx >= 0 && pathParts[gameIdx + 1]) ? pathParts[gameIdx + 1] : (pathParts.pop() || '');
 
     const getGameData = async () => {
@@ -867,7 +867,7 @@ function markRecentlyPlayedGames() {
         // Find all game tiles and mark played ones
         document.querySelectorAll('.game-tile, .cat-game-tile').forEach(tile => {
             const tileGameId = tile.dataset.gameId ? parseInt(tile.dataset.gameId) : null;
-            const tileSlug = tile.dataset.slug || (tile.getAttribute('href') || '').replace(/^\/game\//, '').replace(/\/$/, '');
+            const tileSlug = tile.dataset.slug || (tile.getAttribute('href') || '').replace(/^\/(g|game)\//, '').replace(/\/$/, '');
             const isPlayed = (tileGameId && playedIds.has(tileGameId)) || (tileSlug && playedSlugs.has(tileSlug));
             if (isPlayed) {
                 // Add played marker if not already present
@@ -930,7 +930,7 @@ function initRecentlyPlayedSidebar() {
 
         grid.innerHTML = gamesToShow.map(game => `
             <a 
-                href="/game/${game.slug || game.id}" 
+                href="/g/${game.slug || game.id}" 
                 class="game-tile"
                 title="${game.name}"
                 data-video="${ensureCdnUrl(game.video_url, 'video')}"
@@ -1356,7 +1356,7 @@ function populateAccountPanel() {
         recentlyPlayedSection.style.display = 'block';
         recentlyPlayedGrid.innerHTML = recentGames.slice(0, 12).map(game => `
             <a 
-                href="/game/${game.slug || game.id}" 
+                href="/g/${game.slug || game.id}" 
                 class="game-tile"
                 title="${game.name}"
                 data-video="${ensureCdnUrl(game.video_url, 'video')}"
@@ -1441,7 +1441,7 @@ function populateAccountPanel() {
             mostPlayedSection.style.display = 'block';
             const gamesHtml = mostPlayed.map(game => `
                 <a 
-                    href="/game/${game.slug || game.id}" 
+                    href="/g/${game.slug || game.id}" 
                     class="game-tile"
                     title="${game.name}"
                     data-video="${ensureCdnUrl(game.video_url, 'video')}"
