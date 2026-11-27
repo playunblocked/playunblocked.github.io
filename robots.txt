@@ -7,4 +7,4 @@ Disallow: /decoy/
 Disallow: /embed
 Disallow: /test-home
 
-Sitemap: http://[::1]:4321/sitemap.xml
+Sitemap: https://playunblocked.github.io/sitemap.xml

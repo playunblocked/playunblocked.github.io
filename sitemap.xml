@@ -1,1303 +1,1569 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://[::1]:4321/</loc>
+    <loc>https://playunblocked.github.io/</loc>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/new-games</loc>
+    <loc>https://playunblocked.github.io/new-games</loc>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/hot-games</loc>
+    <loc>https://playunblocked.github.io/hot-games</loc>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/about</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://playunblocked.github.io/games-to-play-at-work</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/about</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/contact</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/privacy</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/contact</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://playunblocked.github.io/terms</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://playunblocked.github.io/category/2-player</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://playunblocked.github.io/category/animal</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/2-player</loc>
+    <loc>https://playunblocked.github.io/category/board</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/card</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/cooking</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/drawing</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/driving</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/escape</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/fashion</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/fighting</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/horror</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/idle</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/kids</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/matching</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/merge</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/platform</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/puzzle</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/racing</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/restaurant</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/shooter</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/simulation</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/soccer</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/sports</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/stickman</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/survival</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/category/word</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://playunblocked.github.io/game/phone-case-diy</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/animal</loc>
+    <loc>https://playunblocked.github.io/game/goose-taxi</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/board</loc>
+    <loc>https://playunblocked.github.io/game/rail-in-the-air</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/card</loc>
+    <loc>https://playunblocked.github.io/game/kaiju-rumble</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/cooking</loc>
+    <loc>https://playunblocked.github.io/game/voxel-wreck</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/drawing</loc>
+    <loc>https://playunblocked.github.io/game/build-league</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/driving</loc>
+    <loc>https://playunblocked.github.io/game/free-kick-shooter</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/escape</loc>
+    <loc>https://playunblocked.github.io/game/drive-mad</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/fashion</loc>
+    <loc>https://playunblocked.github.io/game/earth-aura-sweeper</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/fighting</loc>
+    <loc>https://playunblocked.github.io/game/dna-divers</loc>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/horror</loc>
+    <loc>https://playunblocked.github.io/game/lumatopia</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/idle</loc>
+    <loc>https://playunblocked.github.io/game/vacuum-vendetta</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/kids</loc>
+    <loc>https://playunblocked.github.io/game/ninja-slash</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/matching</loc>
+    <loc>https://playunblocked.github.io/game/ragdoll-shooter</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/merge</loc>
+    <loc>https://playunblocked.github.io/game/pass-or-blast</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/platform</loc>
+    <loc>https://playunblocked.github.io/game/critters-evolution</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/puzzle</loc>
+    <loc>https://playunblocked.github.io/game/toonex-battleground</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/racing</loc>
+    <loc>https://playunblocked.github.io/game/cars-racing-masters</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/restaurant</loc>
+    <loc>https://playunblocked.github.io/game/city-destruction</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/shooter</loc>
+    <loc>https://playunblocked.github.io/game/ragdoll-battle</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/simulation</loc>
+    <loc>https://playunblocked.github.io/game/rat-haul</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/soccer</loc>
+    <loc>https://playunblocked.github.io/game/frost-and-fire-idle-game</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/sports</loc>
+    <loc>https://playunblocked.github.io/game/dark-horizon</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/stickman</loc>
+    <loc>https://playunblocked.github.io/game/tidy-up</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/survival</loc>
+    <loc>https://playunblocked.github.io/game/pet-lab</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/category/word</loc>
+    <loc>https://playunblocked.github.io/game/tnt-sandbox</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/minecraft-1-5-2</loc>
+    <loc>https://playunblocked.github.io/game/aquaparkio</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tic-tac-toe-3</loc>
+    <loc>https://playunblocked.github.io/game/minecraft-1-5-2</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/chess-grandmaster</loc>
+    <loc>https://playunblocked.github.io/game/escape-from-spider</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/classic-chess</loc>
+    <loc>https://playunblocked.github.io/game/backrooms-recovery</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/nine-mens-morris</loc>
+    <loc>https://playunblocked.github.io/game/forgotten-hill-memento-buried-things</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/polygon-master</loc>
+    <loc>https://playunblocked.github.io/game/forgotten-hill-the-wardrobe-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/goose-game</loc>
+    <loc>https://playunblocked.github.io/game/forgotten-hill-the-wardrobe</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/backrooms-recovery</loc>
+    <loc>https://playunblocked.github.io/game/solitaire-reverse</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/gobattle2</loc>
+    <loc>https://playunblocked.github.io/game/one-hundred-castles-solitaire</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/fear-response</loc>
+    <loc>https://playunblocked.github.io/game/spider-solitaire-ctl</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/chess-pro</loc>
+    <loc>https://playunblocked.github.io/game/spider-solitaire</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/escape-from-spider</loc>
+    <loc>https://playunblocked.github.io/game/klondike-solitaire-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/chessformer</loc>
+    <loc>https://playunblocked.github.io/game/merge-solitaire</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/temple-of-boom</loc>
+    <loc>https://playunblocked.github.io/game/royal-card-clash</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/forgotten-hill-the-wardrobe</loc>
+    <loc>https://playunblocked.github.io/game/card-hog</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/ragdoll-hit</loc>
+    <loc>https://playunblocked.github.io/game/tri-peaks</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/forgotten-hill-the-wardrobe-2</loc>
+    <loc>https://playunblocked.github.io/game/solitaire-golf</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/forgotten-hill-memento-buried-things</loc>
+    <loc>https://playunblocked.github.io/game/spades</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/mine-sweeper-3</loc>
+    <loc>https://playunblocked.github.io/game/rummy</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/rummy</loc>
+    <loc>https://playunblocked.github.io/game/sudoku-hanko</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/spades</loc>
+    <loc>https://playunblocked.github.io/game/solitaire-ultimate</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/solitaire-golf</loc>
+    <loc>https://playunblocked.github.io/game/polygon-master</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tri-peaks</loc>
+    <loc>https://playunblocked.github.io/game/chess-grandmaster</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/card-hog</loc>
+    <loc>https://playunblocked.github.io/game/mine-sweeper-3</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/royal-card-clash</loc>
+    <loc>https://playunblocked.github.io/game/chessformer</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/merge-solitaire</loc>
+    <loc>https://playunblocked.github.io/game/nine-mens-morris</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/klondike-solitaire-2</loc>
+    <loc>https://playunblocked.github.io/game/dominoes-lofi</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/spider-solitaire</loc>
+    <loc>https://playunblocked.github.io/game/classic-chess</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/spider-solitaire-ctl</loc>
+    <loc>https://playunblocked.github.io/game/tic-tac-toe-3</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/one-hundred-castles-solitaire</loc>
+    <loc>https://playunblocked.github.io/game/goose-game</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/solitaire-reverse</loc>
+    <loc>https://playunblocked.github.io/game/chess-pro</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/solitaire-ultimate</loc>
+    <loc>https://playunblocked.github.io/game/bacon-survivor</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/dominoes-lofi</loc>
+    <loc>https://playunblocked.github.io/game/gobattle2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sudoku-hanko</loc>
+    <loc>https://playunblocked.github.io/game/ragdoll-hit</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/bacon-survivor</loc>
+    <loc>https://playunblocked.github.io/game/temple-of-boom</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/house-of-hazards</loc>
+    <loc>https://playunblocked.github.io/game/the-superhero-league</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/blumgi-slime</loc>
+    <loc>https://playunblocked.github.io/game/truck-loader-4</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/dreadhead-parkour</loc>
+    <loc>https://playunblocked.github.io/game/plactions</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/karate-fighter</loc>
+    <loc>https://playunblocked.github.io/game/heist-io</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/minibattles</loc>
+    <loc>https://playunblocked.github.io/game/power-wash-cleanup</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/zoobits-animal-puzzle</loc>
+    <loc>https://playunblocked.github.io/game/boxrob-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/2048</loc>
+    <loc>https://playunblocked.github.io/game/school-escape-skip-games</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/subway-surfers</loc>
+    <loc>https://playunblocked.github.io/game/perfect-landing-plane-pilot</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/hole-io</loc>
+    <loc>https://playunblocked.github.io/game/princess-room-cleaning</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/soccer-real</loc>
+    <loc>https://playunblocked.github.io/game/panda-bubble-shooter</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/murder</loc>
+    <loc>https://playunblocked.github.io/game/hangman</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stickman-hook</loc>
+    <loc>https://playunblocked.github.io/game/puffy-cat</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/moto-x3m</loc>
+    <loc>https://playunblocked.github.io/game/clash-of-armour</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/temple-run-2</loc>
+    <loc>https://playunblocked.github.io/game/blumgi-merge</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/we-become-what-we-behold</loc>
+    <loc>https://playunblocked.github.io/game/bring-me-cakes</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/master-chess</loc>
+    <loc>https://playunblocked.github.io/game/dunkers-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/iron-snout</loc>
+    <loc>https://playunblocked.github.io/game/minimissions</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/12-minibattles</loc>
+    <loc>https://playunblocked.github.io/game/moto-maniac</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/parkour-race</loc>
+    <loc>https://playunblocked.github.io/game/stickman-kingdom-clash</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/crazy-cars</loc>
+    <loc>https://playunblocked.github.io/game/base-defense</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/mr-racer-car-racing</loc>
+    <loc>https://playunblocked.github.io/game/sky-mad</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/duo-survival</loc>
+    <loc>https://playunblocked.github.io/game/foosball</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/scary-teacher-3d</loc>
+    <loc>https://playunblocked.github.io/game/arithmetica</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tunnel-rush</loc>
+    <loc>https://playunblocked.github.io/game/tear-blocks-down</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/dragon-simulator-3d</loc>
+    <loc>https://playunblocked.github.io/game/max-and-mink</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/soccer-skills-champions-league</loc>
+    <loc>https://playunblocked.github.io/game/ragdoll-drop</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/idle-ants</loc>
+    <loc>https://playunblocked.github.io/game/rowdy-city-wrestling</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/red-ball-4</loc>
+    <loc>https://playunblocked.github.io/game/duo-vikings</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/short-life</loc>
+    <loc>https://playunblocked.github.io/game/sweet-ball-sprint</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/superhero-look-alike-contest</loc>
+    <loc>https://playunblocked.github.io/game/magikmon</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/getaway-shootout</loc>
+    <loc>https://playunblocked.github.io/game/beach-boxing-simulator</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/snapstyle-dress-up</loc>
+    <loc>https://playunblocked.github.io/game/clash-of-skulls</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/fruit-ninja</loc>
+    <loc>https://playunblocked.github.io/game/stickman-parkour-skyland</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/life-the-game</loc>
+    <loc>https://playunblocked.github.io/game/burger-bounty</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stickman-fighter-epic-battle</loc>
+    <loc>https://playunblocked.github.io/game/stickman-crazy-box</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/thumb-fighter</loc>
+    <loc>https://playunblocked.github.io/game/sharkio</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/bacon-may-die</loc>
+    <loc>https://playunblocked.github.io/game/bearsus</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/slice-master</loc>
+    <loc>https://playunblocked.github.io/game/energy</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/count-control-legends</loc>
+    <loc>https://playunblocked.github.io/game/foot-chinko</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/jumping-shell</loc>
+    <loc>https://playunblocked.github.io/game/castle-pals</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tiny-fishing</loc>
+    <loc>https://playunblocked.github.io/game/sweet-run</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/pool-club</loc>
+    <loc>https://playunblocked.github.io/game/cow-bay</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/rodeo-stampede-savannah</loc>
+    <loc>https://playunblocked.github.io/game/slime-laboratory</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/rooftop-snipers</loc>
+    <loc>https://playunblocked.github.io/game/sprunki</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/eliza-mall-mania</loc>
+    <loc>https://playunblocked.github.io/game/sausage-flip</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/ducklings-io</loc>
+    <loc>https://playunblocked.github.io/game/thumb-fighter-christmas</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/zoom-be</loc>
+    <loc>https://playunblocked.github.io/game/super-tunnel-rush</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/big-shot-boxing</loc>
+    <loc>https://playunblocked.github.io/game/hide-and-paint</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/raft-wars</loc>
+    <loc>https://playunblocked.github.io/game/stickman-fighter-epic-battle-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/wrassling</loc>
+    <loc>https://playunblocked.github.io/game/color-artist</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/pop-it-master</loc>
+    <loc>https://playunblocked.github.io/game/its-story-time</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/become-a-fashion-designer</loc>
+    <loc>https://playunblocked.github.io/game/boxrob</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/maze-path-of-light</loc>
+    <loc>https://playunblocked.github.io/game/bubble-shooter-lak</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stick-fighter</loc>
+    <loc>https://playunblocked.github.io/game/barbershop-inc</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/there-is-no-game</loc>
+    <loc>https://playunblocked.github.io/game/ant-art-tycoon</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/glam-girl-dress-up-and-makeover</loc>
+    <loc>https://playunblocked.github.io/game/cats-love-cake</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/subway-clash-3d</loc>
+    <loc>https://playunblocked.github.io/game/apple-worm</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/huggy-wuggy-shooter</loc>
+    <loc>https://playunblocked.github.io/game/two-button-bounce</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/prankster-3d</loc>
+    <loc>https://playunblocked.github.io/game/factory-balls-forever</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/world-soccer-champions</loc>
+    <loc>https://playunblocked.github.io/game/free-kick-screamers</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/vortellis-pizza</loc>
+    <loc>https://playunblocked.github.io/game/free-the-key</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/kawaii-dressup</loc>
+    <loc>https://playunblocked.github.io/game/blacktop-police-chase</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/super-liquid-soccer</loc>
+    <loc>https://playunblocked.github.io/game/johnny-trigger-action-shooter</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stickman-parkour-2-lucky-block</loc>
+    <loc>https://playunblocked.github.io/game/heart-star-html5</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sprint-league</loc>
+    <loc>https://playunblocked.github.io/game/cooking-fast</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/the-sniper-code</loc>
+    <loc>https://playunblocked.github.io/game/eugenes-life</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/raft-wars-2</loc>
+    <loc>https://playunblocked.github.io/game/afterlife-the-game</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/escape-from-school</loc>
+    <loc>https://playunblocked.github.io/game/tag-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/adventure-drivers</loc>
+    <loc>https://playunblocked.github.io/game/smash-it</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/short-life-2</loc>
+    <loc>https://playunblocked.github.io/game/game-of-farmers</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/zoom-be-2</loc>
+    <loc>https://playunblocked.github.io/game/stunt-car-extreme</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/rowdy-wrestling</loc>
+    <loc>https://playunblocked.github.io/game/gladihoppers</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/planet-destruction</loc>
+    <loc>https://playunblocked.github.io/game/idle-lumber-inc</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tank-stars</loc>
+    <loc>https://playunblocked.github.io/game/unicycle-hero</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/cat-pizza</loc>
+    <loc>https://playunblocked.github.io/game/tag</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/cozy-room-design</loc>
+    <loc>https://playunblocked.github.io/game/disaster-arena</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/marble-run-3d</loc>
+    <loc>https://playunblocked.github.io/game/duck-life</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/ping-pong-go</loc>
+    <loc>https://playunblocked.github.io/game/cave-blast</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/12-mini-battles-2</loc>
+    <loc>https://playunblocked.github.io/game/fancy-pants-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/mr-bullet</loc>
+    <loc>https://playunblocked.github.io/game/clash-of-tanks</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/steal-a-brainrot</loc>
+    <loc>https://playunblocked.github.io/game/four-in-a-row</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/harvest-simulator</loc>
+    <loc>https://playunblocked.github.io/game/dress-up-the-lovely-princess</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/merge-cakes</loc>
+    <loc>https://playunblocked.github.io/game/merge-cakes</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/dress-up-the-lovely-princess</loc>
+    <loc>https://playunblocked.github.io/game/harvest-simulator</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/four-in-a-row</loc>
+    <loc>https://playunblocked.github.io/game/steal-a-brainrot</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/clash-of-tanks</loc>
+    <loc>https://playunblocked.github.io/game/mr-bullet</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/fancy-pants-2</loc>
+    <loc>https://playunblocked.github.io/game/12-mini-battles-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/cave-blast</loc>
+    <loc>https://playunblocked.github.io/game/ping-pong-go</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/duck-life</loc>
+    <loc>https://playunblocked.github.io/game/marble-run-3d</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/disaster-arena</loc>
+    <loc>https://playunblocked.github.io/game/cozy-room-design</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tag</loc>
+    <loc>https://playunblocked.github.io/game/cat-pizza</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/unicycle-hero</loc>
+    <loc>https://playunblocked.github.io/game/tank-stars</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/idle-lumber-inc</loc>
+    <loc>https://playunblocked.github.io/game/planet-destruction</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/gladihoppers</loc>
+    <loc>https://playunblocked.github.io/game/rowdy-wrestling</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stunt-car-extreme</loc>
+    <loc>https://playunblocked.github.io/game/zoom-be-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/game-of-farmers</loc>
+    <loc>https://playunblocked.github.io/game/short-life-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/smash-it</loc>
+    <loc>https://playunblocked.github.io/game/fear-response</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tag-2</loc>
+    <loc>https://playunblocked.github.io/game/adventure-drivers</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/afterlife-the-game</loc>
+    <loc>https://playunblocked.github.io/game/escape-from-school</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/eugenes-life</loc>
+    <loc>https://playunblocked.github.io/game/raft-wars-2</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/cooking-fast</loc>
+    <loc>https://playunblocked.github.io/game/the-sniper-code</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/heart-star-html5</loc>
+    <loc>https://playunblocked.github.io/game/sprint-league</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/johnny-trigger-action-shooter</loc>
+    <loc>https://playunblocked.github.io/game/stickman-parkour-2-lucky-block</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/blacktop-police-chase</loc>
+    <loc>https://playunblocked.github.io/game/super-liquid-soccer</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/free-the-key</loc>
+    <loc>https://playunblocked.github.io/game/kawaii-dressup</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/free-kick-screamers</loc>
+    <loc>https://playunblocked.github.io/game/vortellis-pizza</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/factory-balls-forever</loc>
+    <loc>https://playunblocked.github.io/game/world-soccer-champions</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/two-button-bounce</loc>
+    <loc>https://playunblocked.github.io/game/prankster-3d</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/apple-worm</loc>
+    <loc>https://playunblocked.github.io/game/huggy-wuggy-shooter</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/cats-love-cake</loc>
+    <loc>https://playunblocked.github.io/game/subway-clash-3d</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/ant-art-tycoon</loc>
+    <loc>https://playunblocked.github.io/game/glam-girl-dress-up-and-makeover</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/barbershop-inc</loc>
+    <loc>https://playunblocked.github.io/game/there-is-no-game</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/bubble-shooter-lak</loc>
+    <loc>https://playunblocked.github.io/game/stick-fighter</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/boxrob</loc>
+    <loc>https://playunblocked.github.io/game/maze-path-of-light</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/its-story-time</loc>
+    <loc>https://playunblocked.github.io/game/become-a-fashion-designer</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/color-artist</loc>
+    <loc>https://playunblocked.github.io/game/pop-it-master</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stickman-fighter-epic-battle-2</loc>
+    <loc>https://playunblocked.github.io/game/wrassling</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/hide-and-paint</loc>
+    <loc>https://playunblocked.github.io/game/raft-wars</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/super-tunnel-rush</loc>
+    <loc>https://playunblocked.github.io/game/big-shot-boxing</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/thumb-fighter-christmas</loc>
+    <loc>https://playunblocked.github.io/game/zoom-be</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sausage-flip</loc>
+    <loc>https://playunblocked.github.io/game/ducklings-io</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sprunki</loc>
+    <loc>https://playunblocked.github.io/game/eliza-mall-mania</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/slime-laboratory</loc>
+    <loc>https://playunblocked.github.io/game/rooftop-snipers</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/cow-bay</loc>
+    <loc>https://playunblocked.github.io/game/rodeo-stampede-savannah</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sweet-run</loc>
+    <loc>https://playunblocked.github.io/game/pool-club</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/castle-pals</loc>
+    <loc>https://playunblocked.github.io/game/tiny-fishing</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/foot-chinko</loc>
+    <loc>https://playunblocked.github.io/game/jumping-shell</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/energy</loc>
+    <loc>https://playunblocked.github.io/game/count-control-legends</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/bearsus</loc>
+    <loc>https://playunblocked.github.io/game/slice-master</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sharkio</loc>
+    <loc>https://playunblocked.github.io/game/bacon-may-die</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stickman-crazy-box</loc>
+    <loc>https://playunblocked.github.io/game/thumb-fighter</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/burger-bounty</loc>
+    <loc>https://playunblocked.github.io/game/stickman-fighter-epic-battle</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stickman-parkour-skyland</loc>
+    <loc>https://playunblocked.github.io/game/house-of-hazards</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/clash-of-skulls</loc>
+    <loc>https://playunblocked.github.io/game/minibattles</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/beach-boxing-simulator</loc>
+    <loc>https://playunblocked.github.io/game/dreadhead-parkour</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/magikmon</loc>
+    <loc>https://playunblocked.github.io/game/blumgi-slime</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sweet-ball-sprint</loc>
+    <loc>https://playunblocked.github.io/game/karate-fighter</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/duo-vikings</loc>
+    <loc>https://playunblocked.github.io/game/life-the-game</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/rowdy-city-wrestling</loc>
+    <loc>https://playunblocked.github.io/game/fruit-ninja</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/ragdoll-drop</loc>
+    <loc>https://playunblocked.github.io/game/snapstyle-dress-up</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/max-and-mink</loc>
+    <loc>https://playunblocked.github.io/game/getaway-shootout</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/tear-blocks-down</loc>
+    <loc>https://playunblocked.github.io/game/superhero-look-alike-contest</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/arithmetica</loc>
+    <loc>https://playunblocked.github.io/game/short-life</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/foosball</loc>
+    <loc>https://playunblocked.github.io/game/red-ball-4</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/sky-mad</loc>
+    <loc>https://playunblocked.github.io/game/idle-ants</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/base-defense</loc>
+    <loc>https://playunblocked.github.io/game/soccer-skills-champions-league</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/stickman-kingdom-clash</loc>
+    <loc>https://playunblocked.github.io/game/dragon-simulator-3d</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/moto-maniac</loc>
+    <loc>https://playunblocked.github.io/game/tunnel-rush</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/minimissions</loc>
+    <loc>https://playunblocked.github.io/game/scary-teacher-3d</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/dunkers-2</loc>
+    <loc>https://playunblocked.github.io/game/duo-survival</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/bring-me-cakes</loc>
+    <loc>https://playunblocked.github.io/game/mr-racer-car-racing</loc>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/blumgi-merge</loc>
+    <loc>https://playunblocked.github.io/game/crazy-cars</loc>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/clash-of-armour</loc>
+    <loc>https://playunblocked.github.io/game/parkour-race</loc>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/puffy-cat</loc>
+    <loc>https://playunblocked.github.io/game/12-minibattles</loc>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/hangman</loc>
+    <loc>https://playunblocked.github.io/game/iron-snout</loc>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/panda-bubble-shooter</loc>
+    <loc>https://playunblocked.github.io/game/master-chess</loc>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/princess-room-cleaning</loc>
+    <loc>https://playunblocked.github.io/game/we-become-what-we-behold</loc>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/perfect-landing-plane-pilot</loc>
+    <loc>https://playunblocked.github.io/game/temple-run-2</loc>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/school-escape-skip-games</loc>
+    <loc>https://playunblocked.github.io/game/moto-x3m</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/boxrob-2</loc>
+    <loc>https://playunblocked.github.io/game/stickman-hook</loc>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/power-wash-cleanup</loc>
+    <loc>https://playunblocked.github.io/game/murder</loc>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/heist-io</loc>
+    <loc>https://playunblocked.github.io/game/soccer-real</loc>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/plactions</loc>
+    <loc>https://playunblocked.github.io/game/hole-io</loc>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/truck-loader-4</loc>
+    <loc>https://playunblocked.github.io/game/subway-surfers</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/the-superhero-league</loc>
+    <loc>https://playunblocked.github.io/game/2048</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://[::1]:4321/game/aquaparkio</loc>
+    <loc>https://playunblocked.github.io/game/zoobits-animal-puzzle</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/tnt-sandbox</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/pet-lab</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/tidy-up</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/dark-horizon</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/frost-and-fire-idle-game</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/rat-haul</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/ragdoll-battle</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/city-destruction</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/cars-racing-masters</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/toonex-battleground</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/critters-evolution</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/pass-or-blast</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/ragdoll-shooter</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/ninja-slash</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/vacuum-vendetta</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/lumatopia</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/dna-divers</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/earth-aura-sweeper</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/drive-mad</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/free-kick-shooter</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/build-league</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/voxel-wreck</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/kaiju-rumble</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/rail-in-the-air</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/goose-taxi</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://[::1]:4321/game/phone-case-diy</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 </urlset>
